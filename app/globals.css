@@ -1,0 +1,105 @@
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  color: #111827;
+}
+
+a {
+  color: #1d4ed8;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.title {
+  margin: 0 0 12px;
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  color: #4b5563;
+}
+
+.laptop-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.laptop-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.laptop-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  margin: 0 0 10px;
+}
+
+.laptop-name {
+  margin: 0;
+}
+
+.price {
+  font-weight: 700;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.laptop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+  margin: 0 0 12px;
+}
+
+.detail {
+  margin: 0;
+  font-size: 14px;
+}
+
+.desc {
+  margin: 0 0 12px;
+  color: #374151;
+}
+
+.media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.laptop-image {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+}
+
+@media (max-width: 640px) {
+  .laptop-grid {
+    grid-template-columns: 1fr;
+  }
+}
