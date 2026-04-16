@@ -18,7 +18,7 @@ a {
 }
 
 .container {
-  max-width: 980px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 24px 16px 48px;
 }
@@ -37,69 +37,130 @@ a {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 18px;
+}
+
+.catalog-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 20px;
+  align-items: start;
 }
 
 .laptop-card {
   background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 16px;
-}
-
-.laptop-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: baseline;
-  margin: 0 0 10px;
+  border-bottom: 1px solid #d1d5db;
+  padding: 0 0 16px;
 }
 
 .laptop-name {
-  margin: 0;
-}
-
-.price {
+  margin: 0 0 8px;
+  color: #1f74b7;
+  font-size: 34px;
+  line-height: 1.15;
   font-weight: 700;
-  color: #111827;
-  white-space: nowrap;
-}
-
-.laptop-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 16px;
-  margin: 0 0 12px;
 }
 
 .detail {
-  margin: 0;
+  margin: 0 0 6px;
   font-size: 14px;
+  line-height: 1.45;
+}
+
+.meta-line {
+  margin: 0 0 10px;
+  color: #6b7280;
+  font-size: 13px;
 }
 
 .desc {
-  margin: 0 0 12px;
+  margin: 10px 0;
   color: #374151;
 }
 
-.media {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
+.laptop-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
 }
 
-.laptop-image {
-  width: 120px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 6px;
+.sidebar {
+  position: sticky;
+  top: 16px;
+}
+
+.widget {
+  background: #fff;
   border: 1px solid #d1d5db;
-  background: #f3f4f6;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.widget-title {
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #2a2a2a;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.side-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.side-list-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.thumb {
+  width: 56px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px solid #d1d5db;
+}
+
+.faq {
+  margin-top: 30px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+}
+
+.faq details {
+  margin-bottom: 10px;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .catalog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  .laptop-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
-  .laptop-grid {
-    grid-template-columns: 1fr;
+  .laptop-name {
+    font-size: 28px;
   }
 }
