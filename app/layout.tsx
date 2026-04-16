@@ -17,10 +17,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body>
         {children}
         <script
-          src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
-          data-site-id="site_3e03b230d268a93d69a409f48e05785a"
-          data-token="llmafftm_61fb21da17acb1fae067cc377b2ccdd6360df137cc50a0186378023f57f70a84"
-        ></script>
+  src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
+  data-site-id="site_e45e2036e821719bc224d1d700eece37"
+  data-token="llmafftm_f2111ab7420870a119ee788842ab2702374ad196cf7da1832967ca3df61ddc79">
+</script>
       </body>
     </html>
   );
