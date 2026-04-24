@@ -1,334 +1,335 @@
+import Link from 'next/link';
+import { laptops, categories, type Laptop } from '../data/laptops';
+
 export const runtime = 'edge';
 
-type Laptop = {
-  category: string;
-  company: string;
-  model: string;
-  cpu: string;
-  ram: string;
-  storage: string;
-  screen: string;
-  gpu: string;
-  os: string;
-  price: string;
-  availability: string;
-  rating: string;
-  description: string;
-  image: string;
+export const metadata = {
+  title: 'Shop Laptops — AISneer',
+  description:
+    'Browse every laptop on AISneer: ultrabooks, gaming laptops, MacBooks, ThinkPads, EliteBooks, Surface, Chromebooks, and mobile workstations. Compare real specs and jump to the current deal.',
+  alternates: { canonical: 'https://aisneer.com/laptops' }
 };
 
-const laptops: Laptop[] = [
-  {
-    category: 'Ultrabook',
-    company: 'Dell',
-    model: 'XPS 13 9340',
-    cpu: 'Intel Core Ultra 7 155H (Meteor Lake, Intel Arc Graphics) — option on XPS 13 9340',
-    ram: '16GB LPDDR5x (soldered; other capacities offered)',
-    storage: '512GB PCIe Gen4 NVMe SSD (other capacities offered)',
-    screen: '13.4" FHD+ 1920×1200 non-touch (QHD+ / OLED options on other SKUs)',
-    gpu: 'Intel Arc Graphics (integrated)',
-    os: 'Windows 11 Home or Pro (SKU-dependent)',
-    price: 'From ~$1,199 (MSRP varies by config; Dell USA)',
-    availability: 'Sold by Dell and partners (region-dependent)',
-    rating: 'Review scores vary by outlet',
-    description:
-      'Dell XPS 13 9340 is a current-generation XPS ultrabook line with Core Ultra processors; exact ports, battery, and panel depend on the SKU you configure.',
-    image:
-      'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: 'Gaming',
-    company: 'Lenovo',
-    model: 'Legion Slim 5 Gen 9 (16")',
-    cpu: 'AMD Ryzen 7 8845HS (8C/16T) — widely listed on retail configs of this generation',
-    ram: '32GB DDR5 (capacity varies by SKU)',
-    storage: '1TB PCIe SSD (capacity varies by SKU)',
-    screen: '16" WQXGA 2560×1600 high-refresh IPS-class (exact Hz varies by panel SKU)',
-    gpu: 'NVIDIA GeForce RTX 4070 Laptop GPU 8GB GDDR6',
-    os: 'Windows 11 Home',
-    price: 'Typical street pricing $1,500–$1,900+ (varies)',
-    availability: 'Retail / Lenovo (region-dependent)',
-    rating: 'Review scores vary by outlet',
-    description:
-      'Named to match commonly sold “Legion Slim 5 Gen 9 16” configs pairing Ryzen 7 8845HS with RTX 4070. “Legion 5 Pro” is a different chassis line—always verify the exact MTM on Lenovo PSREF or the listing.',
-    image:
-      'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: 'Business',
-    company: 'HP',
-    model: 'EliteBook 840 14 inch G11',
-    cpu: 'Intel Core Ultra 5 125U (MTL) — CPU option documented by HP for this series',
-    ram: '16GB DDR5 (max varies by SKU)',
-    storage: '512GB SSD (up to 1TB+ on other SKUs)',
-    screen: '14" WUXGA 1920×1200 IPS anti-glare (touch / higher-res options on other SKUs)',
-    gpu: 'Intel Arc Graphics (integrated) on many Core Ultra EliteBook configs (verify SKU)',
-    os: 'Windows 11 Pro',
-    price: 'Business / channel pricing (request quote)',
-    availability: 'HP and enterprise resellers',
-    rating: 'Review scores vary by outlet',
-    description:
-      'HP EliteBook 840 G11 is a current business-class 14" notebook with Core Ultra options and enterprise manageability features; vPro and graphics branding depend on the exact part number.',
-    image:
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: 'Creator',
-    company: 'Apple',
-    model: 'MacBook Pro 14-inch (M3 Pro, Nov 2023)',
-    cpu: 'Apple M3 Pro — 11-core CPU (per Apple tech specs for this tier)',
-    ram: '18GB unified memory',
-    storage: '512GB SSD',
-    screen: '14.2" Liquid Retina XDR — 3024×1964, ProMotion up to 120Hz',
-    gpu: 'Apple M3 Pro with 14-core GPU (base config; 18-core GPU on higher tiers)',
-    os: 'macOS (ships current OS; updates via Software Update)',
-    price: 'From $1,999 (USA Apple Store MSRP for 18GB / 512GB M3 Pro config when introduced)',
-    availability: 'Apple and authorized resellers',
-    rating: 'Review scores vary by outlet',
-    description:
-      'Specifications follow Apple’s published tech specs for the 14-inch MacBook Pro with M3 Pro (introduced November 2023). Higher-end M3 Pro/Max configs change CPU/GPU core counts and memory options.',
-    image:
-      'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: 'Student',
-    company: 'Acer',
-    model: 'Aspire 5 (A515 series)',
-    cpu: 'Intel Core i5-13420H',
-    ram: '16GB (DDR4 or LPDDR5 depending on sub-model)',
-    storage: '512GB PCIe NVMe SSD',
-    screen: '15.6" FHD 1920×1080 IPS',
-    gpu: 'Intel UHD Graphics (integrated)',
-    os: 'Windows 11 Home',
-    price: 'From ~$500–$750+ street (model-dependent)',
-    availability: 'Major retailers (region-dependent)',
-    rating: 'Review scores vary by outlet',
-    description:
-      'Aspire 5 is a long-running Acer family; the i5-13420H + 16GB + 512GB + FHD pattern matches multiple current A515 listings—confirm exact model code (e.g. A515-xxxxx) on Acer’s product page before buying.',
-    image:
-      'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: '2-in-1',
-    company: 'Microsoft',
-    model: 'Surface Laptop Studio 2',
-    cpu: '13th Gen Intel Core i7-13700H',
-    ram: '32GB LPDDR5x (soldered; 64GB on other configs)',
-    storage: '1TB SSD (other capacities offered)',
-    screen: '14.4" PixelSense Flow touch — 2400×1600, 120Hz, 3:2',
-    gpu: 'NVIDIA GeForce RTX 4060 Laptop GPU 8GB GDDR6',
-    os: 'Windows 11 Home or Pro (SKU-dependent)',
-    price: 'From ~$2,100+ (MSRP varies widely by RAM/storage bundle)',
-    availability: 'Microsoft Store and partners',
-    rating: 'Review scores vary by outlet',
-    description:
-      'Microsoft’s convertible “studio” form factor with discrete RTX graphics; exact weight, battery, and bundle vary—see Microsoft’s official spec page for the precise configuration you select.',
-    image:
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: 'Gaming',
-    company: 'ASUS',
-    model: 'ROG Zephyrus G14 (2024) GA403',
-    cpu: 'AMD Ryzen 9 8945HS',
-    ram: '32GB LPDDR5X onboard (non-upgradable)',
-    storage: '1TB PCIe 4.0 NVMe SSD',
-    screen: '14" 3K OLED 2880×1800, 120Hz (panel varies by SKU; ROG lists 3K OLED configs)',
-    gpu: 'NVIDIA GeForce RTX 4070 Laptop GPU 8GB GDDR6 (TGP varies by profile)',
-    os: 'Windows 11 Home',
-    price: 'From ~$2,199 (MSRP band per ASUS US product pages; promos vary)',
-    availability: 'ASUS and retailers',
-    rating: 'Review scores vary by outlet',
-    description:
-      '2024 Zephyrus G14 uses AMD Ryzen 8000-class HS processors and RTX 40-series GPUs; display and TGP can differ—check the exact GA403xx model on ASUS / PSREF.',
-    image:
-      'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: 'Business',
-    company: 'Lenovo',
-    model: 'ThinkPad X1 Carbon Gen 12 (14")',
-    cpu: 'Intel Core Ultra 7 165U (offered on Gen 12 configs)',
-    ram: '32GB LPDDR5x-6400 (soldered; other sizes offered)',
-    storage: '1TB PCIe 4.0 SSD',
-    screen: '14" 2.8K OLED 120Hz (other panel options exist)',
-    gpu: 'Intel integrated graphics (Arc branding on many Core Ultra configs)',
-    os: 'Windows 11 Pro',
-    price: 'Enterprise / retail pricing (varies)',
-    availability: 'Lenovo and business partners',
-    rating: 'Review scores vary by outlet',
-    description:
-      'Lenovo documents Core Ultra U/H series choices, LPDDR5x memory, and multiple 14" display options for X1 Carbon Gen 12; WWAN, vPro, and exact panel are SKU-specific.',
-    image:
-      'https://images.unsplash.com/photo-1484788984921-03950022c9ef?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: 'Budget Gaming',
-    company: 'MSI',
-    model: 'Katana 15 B13VFK',
-    cpu: 'Intel Core i7-13620H',
-    ram: '16GB DDR5 (two SODIMM slots on many units)',
-    storage: '1TB NVMe SSD (512GB on some SKUs)',
-    screen: '15.6" FHD 1920×1080 144Hz IPS-level',
-    gpu: 'NVIDIA GeForce RTX 4060 Laptop GPU 8GB GDDR6',
-    os: 'Windows 11 Home',
-    price: 'Street pricing often ~$999–$1,299 (region/promo dependent)',
-    availability: 'Retailers globally',
-    rating: 'Review scores vary by outlet',
-    description:
-      'MSI publishes Katana 15 B13 family specs including i7-13620H and RTX 4060 combinations; panel may be FHD 144Hz or QHD on different part numbers—confirm the full model suffix.',
-    image:
-      'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: 'Chromebook',
-    company: 'Samsung',
-    model: 'Galaxy Chromebook Plus (15.6")',
-    cpu: 'Intel Core 3 processor — as listed on Samsung product pages for recent Galaxy Chromebook Plus 15.6" models',
-    ram: '8GB',
-    storage: '256GB',
-    screen: '15.6" AMOLED FHD (per Samsung Chromebook Plus product pages)',
-    gpu: 'Intel processor graphics (integrated)',
-    os: 'ChromeOS',
-    price: 'From ~$775 (Samsung USA starting price band; sales vary)',
-    availability: 'Samsung and retailers',
-    rating: 'Review scores vary by outlet',
-    description:
-      'Samsung’s “Galaxy Chromebook Plus” line has been updated; memory/storage and CPU branding differ by region—always verify the exact XE… model number on samsung.com for your country.',
-    image:
-      'https://images.unsplash.com/photo-1611078489935-0cb964de46d6?auto=format&fit=crop&w=640&q=80'
-  },
-  {
-    category: 'Workstation',
-    company: 'Dell',
-    model: 'Precision 5680',
-    cpu: 'Intel Core i9-13900H (up to; other CPUs offered)',
-    ram: '64GB LPDDR5 (up to; speed per Dell workstation documentation)',
-    storage: '2TB PCIe Gen4 SSD (up to 8TB across slots on some configs)',
-    screen: '16" 16:10 UHD+ / QHD+ / FHD+ options — up to UHD+ OLED on premium SKUs',
-    gpu: 'NVIDIA RTX 5000 Ada Generation Laptop GPU (up to 16GB VRAM)',
-    os: 'Windows 11 Pro for Workstations (SKU-dependent)',
-    price: 'Workstation pricing (build-to-order; request quote)',
-    availability: 'Dell Precision sales channels',
-    rating: 'Review scores vary by outlet',
-    description:
-      'Dell’s Precision 5680 tech materials document Core i9 H-class CPUs, ISV certifications, and professional RTX Ada/B-series GPUs; exact TGP, display, and VRAM depend on the selected configuration.',
-    image:
-      'https://images.unsplash.com/photo-1511385348-a52b4a160dc2?auto=format&fit=crop&w=640&q=80'
-  }
-];
+type SearchParams = {
+  category?: string;
+  sort?: string;
+};
 
-export default function LaptopsPage() {
+function Stars({ value }: { value: number }) {
+  const full = Math.floor(value);
+  const half = value - full >= 0.25 && value - full < 0.75;
+  const empty = 5 - full - (half ? 1 : 0);
   return (
-    <main className="container">
-      <h1 className="title">Laptop Archive</h1>
-      <p className="subtitle">
-        Discover top laptop picks for work, gaming, study, and business, all in one place and ready to compare at a
-        glance.
-      </p>
+    <span className="stars" aria-label={`${value} out of 5 stars`} title={`${value} / 5`}>
+      {'★'.repeat(full)}
+      {half ? '☆' : ''}
+      {'·'.repeat(empty)}
+    </span>
+  );
+}
 
-      <section className="catalog-layout">
-        <div>
-          <ul className="laptop-list">
-            {laptops.map((laptop) => (
-              <li key={`${laptop.company}-${laptop.model}`} className="laptop-card">
-                <h2 className="laptop-name">
-                  {laptop.company} {laptop.model}
-                </h2>
-                <p className="meta-line">
-                  <strong>Category:</strong> {laptop.category} | <strong>Price:</strong> {laptop.price}
-                </p>
-                <img
-                  className="laptop-image"
-                  src={laptop.image}
-                  alt={`${laptop.company} ${laptop.model}`}
-                  loading="lazy"
-                />
-                <p className="desc">{laptop.description}</p>
-                <p className="detail">
-                  <strong>Company:</strong> {laptop.company}
-                </p>
-                <p className="detail">
-                  <strong>CPU:</strong> {laptop.cpu}
-                </p>
-                <p className="detail">
-                  <strong>RAM:</strong> {laptop.ram}
-                </p>
-                <p className="detail">
-                  <strong>Storage:</strong> {laptop.storage}
-                </p>
-                <p className="detail">
-                  <strong>Screen:</strong> {laptop.screen}
-                </p>
-                <p className="detail">
-                  <strong>GPU:</strong> {laptop.gpu}
-                </p>
-                <p className="detail">
-                  <strong>OS:</strong> {laptop.os}
-                </p>
-                <p className="detail">
-                  <strong>Availability:</strong> {laptop.availability}
-                </p>
-                <p className="detail">
-                  <strong>Rating:</strong> {laptop.rating}
-                </p>
-              </li>
-            ))}
-          </ul>
+function ProductCard({ laptop }: { laptop: Laptop }) {
+  return (
+    <article id={laptop.slug} className="product-card product-card-lg">
+      <div className="product-media">
+        <img src={laptop.image} alt={`${laptop.company} ${laptop.model}`} loading="lazy" />
+        <span className="product-badge">{laptop.category}</span>
+      </div>
+
+      <div className="product-body">
+        <div className="product-title">
+          <span className="product-brand">{laptop.company}</span>
+          <h2>{laptop.model}</h2>
         </div>
 
-        <aside className="sidebar">
-          <section className="widget">
-            <h3 className="widget-title">Upcoming Events</h3>
-            <p className="detail">APRIL: No launch event</p>
-            <p className="detail">MAY: New models expected</p>
-          </section>
-          <section className="widget">
-            <h3 className="widget-title">Popular</h3>
-            <ul className="side-list">
-              {laptops.slice(0, 6).map((item) => (
-                <li key={`${item.company}-${item.model}-popular`} className="side-list-item">
-                  <img src={item.image} alt={item.model} className="thumb" loading="lazy" />
-                  <span>
-                    {item.company} {item.model}
-                  </span>
+        <div className="product-rating">
+          <Stars value={laptop.ratingStars} />
+          <span className="muted">{laptop.rating}</span>
+        </div>
+
+        <ul className="product-highlights">
+          {laptop.highlights.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
+
+        <p className="product-desc">{laptop.description}</p>
+
+        <details className="spec-toggle">
+          <summary>Full specifications</summary>
+          <dl className="spec-list">
+            <div><dt>CPU</dt><dd>{laptop.cpu}</dd></div>
+            <div><dt>RAM</dt><dd>{laptop.ram}</dd></div>
+            <div><dt>Storage</dt><dd>{laptop.storage}</dd></div>
+            <div><dt>GPU</dt><dd>{laptop.gpu}</dd></div>
+            <div><dt>Display</dt><dd>{laptop.screen}</dd></div>
+            <div><dt>OS</dt><dd>{laptop.os}</dd></div>
+            <div><dt>Availability</dt><dd>{laptop.availability}</dd></div>
+            <div><dt>Price</dt><dd>{laptop.price}</dd></div>
+          </dl>
+        </details>
+
+        <div className="product-foot">
+          <div className="product-price">
+            <span className="price-label">From</span>
+            <span className="price">{laptop.priceFrom}</span>
+          </div>
+          <a
+            className="btn btn-primary"
+            href={laptop.buyUrl}
+            target="_blank"
+            rel="nofollow sponsored noopener"
+          >
+            View deal →
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default async function LaptopsPage({
+  searchParams
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const params = (await searchParams) ?? {};
+  const activeCategory = params.category && categories.includes(params.category)
+    ? params.category
+    : null;
+  const sort = params.sort ?? 'featured';
+
+  let visible = activeCategory
+    ? laptops.filter((l) => l.category === activeCategory)
+    : laptops;
+
+  const parsePrice = (p: string) => Number(p.replace(/[^0-9.]/g, '')) || 0;
+  if (sort === 'price-asc') {
+    visible = [...visible].sort((a, b) => parsePrice(a.priceFrom) - parsePrice(b.priceFrom));
+  } else if (sort === 'price-desc') {
+    visible = [...visible].sort((a, b) => parsePrice(b.priceFrom) - parsePrice(a.priceFrom));
+  } else if (sort === 'rating') {
+    visible = [...visible].sort((a, b) => b.ratingStars - a.ratingStars);
+  }
+
+  // JSON-LD: ItemList + individual Product entries for rich crawling
+  const productListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: activeCategory ? `${activeCategory} laptops on AISneer` : 'All laptops on AISneer',
+    numberOfItems: visible.length,
+    itemListElement: visible.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Product',
+        name: `${l.company} ${l.model}`,
+        brand: { '@type': 'Brand', name: l.company },
+        category: l.category,
+        description: l.description,
+        image: l.image,
+        url: `https://aisneer.com/laptops#${l.slug}`,
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: l.ratingStars,
+          bestRating: 5,
+          ratingCount: 1
+        },
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'USD',
+          price: parsePrice(l.priceFrom),
+          availability: 'https://schema.org/InStock',
+          url: l.buyUrl
+        }
+      }
+    }))
+  };
+
+  return (
+    <>
+      {/* Catalog hero */}
+      <section className="catalog-hero">
+        <div className="container">
+          <nav className="breadcrumbs" aria-label="Breadcrumb">
+            <Link href="/">Home</Link>
+            <span aria-hidden>/</span>
+            <span>Laptops</span>
+            {activeCategory ? (
+              <>
+                <span aria-hidden>/</span>
+                <span>{activeCategory}</span>
+              </>
+            ) : null}
+          </nav>
+          <h1 className="catalog-title">
+            {activeCategory ? `${activeCategory} laptops` : 'Shop all laptops'}
+          </h1>
+          <p className="catalog-sub">
+            {activeCategory
+              ? `Curated ${activeCategory.toLowerCase()} laptops, verified against manufacturer spec pages.`
+              : 'Every laptop we recommend, across ultrabooks, gaming, business, creator, student, and workstation categories. Compare real specs and jump to the current deal.'}
+          </p>
+
+          <div className="catalog-meta">
+            <span><strong>{visible.length}</strong> {visible.length === 1 ? 'laptop' : 'laptops'}</span>
+            <span aria-hidden>·</span>
+            <span>Spec-verified</span>
+            <span aria-hidden>·</span>
+            <span>Updated regularly</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Category filter bar */}
+      <section className="filter-bar">
+        <div className="container filter-bar-inner">
+          <div className="chip-row" role="tablist" aria-label="Filter by category">
+            <Link
+              href="/laptops"
+              className={`chip ${!activeCategory ? 'chip-active' : ''}`}
+            >
+              All ({laptops.length})
+            </Link>
+            {categories.map((cat) => {
+              const count = laptops.filter((l) => l.category === cat).length;
+              const active = activeCategory === cat;
+              return (
+                <Link
+                  key={cat}
+                  href={`/laptops?category=${encodeURIComponent(cat)}`}
+                  className={`chip ${active ? 'chip-active' : ''}`}
+                >
+                  {cat} ({count})
+                </Link>
+              );
+            })}
+          </div>
+
+          <form className="sort-form" method="get">
+            {activeCategory ? (
+              <input type="hidden" name="category" value={activeCategory} />
+            ) : null}
+            <label htmlFor="sort" className="muted">Sort:</label>
+            <select id="sort" name="sort" defaultValue={sort}>
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: low → high</option>
+              <option value="price-desc">Price: high → low</option>
+              <option value="rating">Top rated</option>
+            </select>
+            <button type="submit" className="btn btn-ghost btn-sm">Apply</button>
+          </form>
+        </div>
+      </section>
+
+      <div className="container catalog-layout">
+        {/* Product grid */}
+        <div>
+          {visible.length === 0 ? (
+            <p className="empty">No laptops match this filter yet. <Link href="/laptops">See all laptops</Link>.</p>
+          ) : (
+            <ul className="product-grid">
+              {visible.map((laptop) => (
+                <li key={laptop.slug}>
+                  <ProductCard laptop={laptop} />
                 </li>
               ))}
             </ul>
+          )}
+        </div>
+
+        {/* Sidebar */}
+        <aside className="sidebar">
+          <section className="widget">
+            <h3 className="widget-title">Need help choosing?</h3>
+            <p className="widget-body">
+              Not sure which laptop fits you best? Our quick buying guide matches your use case to
+              the right category and specs.
+            </p>
+            <Link href="/#buying-guide" className="btn btn-ghost btn-sm widget-cta">
+              Open buying guide →
+            </Link>
+          </section>
+
+          <section className="widget">
+            <h3 className="widget-title">Top rated this week</h3>
+            <ul className="side-list">
+              {[...laptops]
+                .sort((a, b) => b.ratingStars - a.ratingStars)
+                .slice(0, 5)
+                .map((item) => (
+                  <li key={`${item.slug}-top`} className="side-list-item">
+                    <img src={item.image} alt="" className="thumb" loading="lazy" />
+                    <span className="side-list-text">
+                      <span className="side-list-name">{item.company} {item.model}</span>
+                      <span className="side-list-meta">
+                        {item.priceFrom} · <Stars value={item.ratingStars} />
+                      </span>
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </section>
+
+          <section className="widget widget-cta-card">
+            <h3 className="widget-title">Why AISneer</h3>
+            <ul className="bullet-list">
+              <li>Hand-picked, spec-verified</li>
+              <li>Direct links to retailer deals</li>
+              <li>No click-bait review filler</li>
+            </ul>
+            <Link href="/#about" className="btn btn-primary btn-sm widget-cta">
+              About us →
+            </Link>
           </section>
         </aside>
-      </section>
+      </div>
 
-      <section className="faq">
-        <h2 className="title">Frequently Asked Questions</h2>
-        <details>
-          <summary>Which laptop is best overall for beginners?</summary>
-          <p>
-            For mainstream ease of use, Apple’s 14-inch MacBook Pro with M3 Pro includes long battery life and strong
-            performance for everyday work (see Apple’s published battery and tech specs for the configuration you choose).
-          </p>
-        </details>
-        <details>
-          <summary>What is the best budget laptop in this list?</summary>
-          <p>
-            In this list, the Acer Aspire 5 (A515 family) is typically the lowest-cost Windows option with a current
-            Core i5 H-class CPU—compare exact model numbers and RAM type (DDR4 vs LPDDR5) on Acer’s site.
-          </p>
-        </details>
-        <details>
-          <summary>Is HP EliteBook 840 G11 good for business use?</summary>
-          <p>
-            Yes, HP EliteBook 840 G11 is a solid business laptop with dependable performance,
-            professional build quality, and useful security features.
-          </p>
-        </details>
+      {/* FAQ */}
+      <section className="container section">
+        <div className="section-head">
+          <h2 className="section-title">Laptop buying FAQ</h2>
+        </div>
+        <div className="faq">
+          <details>
+            <summary>Which laptop is best overall for beginners?</summary>
+            <p>
+              For mainstream ease of use, Apple&apos;s 14-inch MacBook Pro with M3 Pro combines
+              long battery life and strong performance for everyday work — see Apple&apos;s
+              published battery and tech specs for the configuration you choose.
+            </p>
+          </details>
+          <details>
+            <summary>What&apos;s the best budget laptop in this list?</summary>
+            <p>
+              The Acer Aspire 5 (A515 family) is typically the lowest-cost Windows option with a
+              current Core i5 H-class CPU — compare exact model numbers and RAM type (DDR4 vs
+              LPDDR5) on Acer&apos;s site.
+            </p>
+          </details>
+          <details>
+            <summary>Is the HP EliteBook 840 G11 good for business use?</summary>
+            <p>
+              Yes. HP EliteBook 840 G11 offers dependable performance, professional build quality,
+              and enterprise-grade security features. Verify vPro and graphics branding on the
+              specific SKU you configure.
+            </p>
+          </details>
+          <details>
+            <summary>Do I need an RTX 4070 for gaming?</summary>
+            <p>
+              Not necessarily. RTX 4060 handles 1080p/1440p high-refresh gaming very well. RTX 4070
+              is the better pick if you want QHD+ high-refresh or heavier creative workloads on the
+              same machine.
+            </p>
+          </details>
+        </div>
       </section>
 
       <script
-        type="application/json"
-        id="laptop-data"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(laptops) }}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productListJsonLd) }}
       />
-    </main>
+    </>
   );
 }
