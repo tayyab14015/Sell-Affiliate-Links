@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const SITE_NAME = 'AISneer';
 const SITE_TAGLINE = 'Curated laptop picks and honest deals';
-const SITE_URL = 'https://aisneer.com';
+const SITE_URL = 'https://www.aisneer.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

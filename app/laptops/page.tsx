@@ -1,12 +1,32 @@
 export const dynamic = 'force-static';
 export const revalidate = false;
 
+const PAGE_URL = 'https://www.aisneer.com/laptops';
+const PAGE_TITLE = 'Shop Laptops — AISneer';
+const PAGE_DESCRIPTION =
+  'AISneer curated laptop catalog with visible laptop products, prices, specifications, and Amazon purchase links.';
+
 export const metadata = {
-  title: 'Shop Laptops — AISneer',
-  description:
-    'AISneer curated laptop catalog with visible laptop products, prices, specifications, and Amazon purchase links.',
-  alternates: { canonical: 'https://www.aisneer.com/laptops' },
-  robots: { index: true, follow: true, 'max-image-preview': 'large' }
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  alternates: { canonical: PAGE_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' }
+  },
+  openGraph: {
+    type: 'website',
+    url: PAGE_URL,
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    siteName: 'AISneer'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION
+  }
 };
 
 type LaptopProduct = {

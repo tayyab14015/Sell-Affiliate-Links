@@ -1,13 +1,24 @@
 import Link from 'next/link';
 import { laptops, categories } from './data/laptops';
 
-export const runtime = 'edge';
+export const dynamic = 'force-static';
+export const revalidate = false;
+
+const SITE_URL = 'https://www.aisneer.com';
 
 export const metadata = {
   title: 'AISneer — Curated Laptop Deals for Work, Gaming, Study & Creators',
   description:
     'AISneer is a curated laptop store. Compare hand-picked ultrabooks, gaming laptops, business notebooks, MacBooks, and student laptops with real specs and direct deal links.',
-  alternates: { canonical: 'https://aisneer.com/' }
+  alternates: { canonical: `${SITE_URL}/` },
+  openGraph: {
+    type: 'website',
+    url: `${SITE_URL}/`,
+    siteName: 'AISneer',
+    title: 'AISneer — Curated Laptop Deals for Work, Gaming, Study & Creators',
+    description:
+      'AISneer is a curated laptop store. Compare hand-picked ultrabooks, gaming laptops, business notebooks, MacBooks, and student laptops with real specs and direct deal links.'
+  }
 };
 
 const categoryMeta: Record<string, { blurb: string; icon: string }> = {
@@ -37,7 +48,7 @@ export default function HomePage() {
     itemListElement: featured.map((l, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `https://aisneer.com/laptops#${l.slug}`,
+      url: `${SITE_URL}/laptops#${l.slug}`,
       name: `${l.company} ${l.model}`
     }))
   };
