@@ -42,7 +42,10 @@ export const metadata: Metadata = {
     description:
       'Hand-picked laptops for work, play, study, and creators. Compare real specs and jump straight to the best current deal.'
   },
-  robots: { index: true, follow: true }
+  robots: { index: true, follow: true },
+  verification: {
+    google: 'u4uq49w4y5cRTzan2E7hzIw9Kq7E2pUIcS9_tUyXKbs'
+  }
 };
 
 type RootLayoutProps = {
