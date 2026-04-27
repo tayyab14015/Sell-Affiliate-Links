@@ -1,406 +1,334 @@
-export const dynamic = 'force-static';
-export const revalidate = false;
+import Link from 'next/link';
+import { laptops, categories, type Laptop } from '../data/laptops';
 
-const PAGE_URL = 'https://www.aisneer.com/laptops';
-const PAGE_TITLE = 'Shop Laptops — AISneer';
-const PAGE_DESCRIPTION =
-  'AISneer curated laptop catalog with visible laptop products, prices, specifications, and Amazon purchase links.';
+export const runtime = 'edge';
 
 export const metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  alternates: { canonical: PAGE_URL },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' }
-  },
-  openGraph: {
-    type: 'website',
-    url: PAGE_URL,
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    siteName: 'AISneer'
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION
+  title: 'Shop Laptops — AISneer',
+  description:
+    'Browse every laptop on AISneer: ultrabooks, gaming laptops, MacBooks, ThinkPads, EliteBooks, Surface, Chromebooks, and mobile workstations. Compare real specs and jump to the current deal.',
+  alternates: { canonical: 'https://aisneer.com/laptops' }
+};
+
+type SearchParams = {
+  category?: string;
+  sort?: string;
+};
+
+function Stars({ value }: { value: number }) {
+  const full = Math.floor(value);
+  const half = value - full >= 0.25 && value - full < 0.75;
+  const empty = 5 - full - (half ? 1 : 0);
+  return (
+    <span className="stars" aria-label={`${value} out of 5 stars`} title={`${value} / 5`}>
+      {'★'.repeat(full)}
+      {half ? '☆' : ''}
+      {'·'.repeat(empty)}
+    </span>
+  );
+}
+
+function ProductCard({ laptop }: { laptop: Laptop }) {
+  return (
+    <article id={laptop.slug} className="product-card product-card-lg">
+      <div className="product-media">
+        <img src={laptop.image} alt={`${laptop.company} ${laptop.model}`} loading="lazy" />
+        <span className="product-badge">{laptop.category}</span>
+      </div>
+
+      <div className="product-body">
+        <div className="product-title">
+          <span className="product-brand">{laptop.company}</span>
+          <h2>{laptop.model}</h2>
+        </div>
+
+        <div className="product-rating">
+          <Stars value={laptop.ratingStars} />
+          <span className="muted">{laptop.rating}</span>
+        </div>
+
+        <ul className="product-highlights">
+          {laptop.highlights.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
+
+        <p className="product-desc">{laptop.description}</p>
+
+        <details className="spec-toggle">
+          <summary>Full specifications</summary>
+          <dl className="spec-list">
+            <div><dt>CPU</dt><dd>{laptop.cpu}</dd></div>
+            <div><dt>RAM</dt><dd>{laptop.ram}</dd></div>
+            <div><dt>Storage</dt><dd>{laptop.storage}</dd></div>
+            <div><dt>GPU</dt><dd>{laptop.gpu}</dd></div>
+            <div><dt>Display</dt><dd>{laptop.screen}</dd></div>
+            <div><dt>OS</dt><dd>{laptop.os}</dd></div>
+            <div><dt>Availability</dt><dd>{laptop.availability}</dd></div>
+            <div><dt>Price</dt><dd>{laptop.price}</dd></div>
+          </dl>
+        </details>
+
+        <div className="product-foot">
+          <div className="product-price">
+            <span className="price-label">From</span>
+            <span className="price">{laptop.priceFrom}</span>
+          </div>
+          <a
+            className="btn btn-primary"
+            href={laptop.buyUrl}
+            target="_blank"
+            rel="nofollow sponsored noopener"
+          >
+            View deal →
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default async function LaptopsPage({
+  searchParams
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const params = (await searchParams) ?? {};
+  const activeCategory = params.category && categories.includes(params.category)
+    ? params.category
+    : null;
+  const sort = params.sort ?? 'featured';
+
+  let visible = activeCategory
+    ? laptops.filter((l) => l.category === activeCategory)
+    : laptops;
+
+  const parsePrice = (p: string) => Number(p.replace(/[^0-9.]/g, '')) || 0;
+  if (sort === 'price-asc') {
+    visible = [...visible].sort((a, b) => parsePrice(a.priceFrom) - parsePrice(b.priceFrom));
+  } else if (sort === 'price-desc') {
+    visible = [...visible].sort((a, b) => parsePrice(b.priceFrom) - parsePrice(a.priceFrom));
+  } else if (sort === 'rating') {
+    visible = [...visible].sort((a, b) => b.ratingStars - a.ratingStars);
   }
-};
 
-type LaptopProduct = {
-  category: string;
-  name: string;
-  description: string;
-  price: string;
-  specs: string[];
-  searchQuery: string;
-  buyLabel: string;
-};
-
-const laptops: LaptopProduct[] = [
-  {
-    category: 'Ultrabook',
-    name: 'Dell XPS 13 9340',
-    description:
-      'Dell premium ultrabook with Intel Core Ultra performance and compact 13.4 inch design.',
-    price: 'From $1,199',
-    specs: [
-      'Intel Core Ultra 7 155H',
-      '16GB LPDDR5x RAM',
-      '512GB NVMe SSD',
-      '13.4 inch FHD+ display'
-    ],
-    searchQuery: 'Dell+XPS+13+9340',
-    buyLabel: 'Buy Dell XPS 13 9340 on Amazon'
-  },
-  {
-    category: 'Gaming',
-    name: 'Lenovo Legion Slim 5 Gen 9 16 inch',
-    description:
-      'Gaming laptop with Ryzen 7 performance, RTX graphics, and a large high-refresh display.',
-    price: 'From $1,499',
-    specs: [
-      'AMD Ryzen 7 8845HS',
-      'NVIDIA GeForce RTX 4070',
-      '32GB DDR5 RAM',
-      '1TB NVMe SSD'
-    ],
-    searchQuery: 'Lenovo+Legion+Slim+5+Gen+9+16',
-    buyLabel: 'Buy Lenovo Legion Slim 5 on Amazon'
-  },
-  {
-    category: 'Business',
-    name: 'HP EliteBook 840 14 inch G11',
-    description:
-      'Business-class laptop designed for professional work, security, and manageability.',
-    price: 'From $1,399',
-    specs: [
-      'Intel Core Ultra 5 125U',
-      '16GB DDR5 RAM',
-      '512GB SSD',
-      '14 inch WUXGA display'
-    ],
-    searchQuery: 'HP+EliteBook+840+14+inch+G11',
-    buyLabel: 'Buy HP EliteBook 840 G11 on Amazon'
-  },
-  {
-    category: 'Creator',
-    name: 'Apple MacBook Pro 14-inch M3 Pro',
-    description:
-      'Creator-focused MacBook with Apple Silicon performance and Liquid Retina XDR display.',
-    price: 'From $1,999',
-    specs: [
-      'Apple M3 Pro chip',
-      '18GB unified memory',
-      '512GB SSD',
-      '14.2 inch Liquid Retina XDR display'
-    ],
-    searchQuery: 'Apple+MacBook+Pro+14+M3+Pro',
-    buyLabel: 'Buy MacBook Pro 14 M3 Pro on Amazon'
-  },
-  {
-    category: 'Student',
-    name: 'Acer Aspire 5 A515 Series',
-    description:
-      'Affordable everyday Windows laptop suitable for students, browsing, office work, and study.',
-    price: 'From $499',
-    specs: [
-      'Intel Core i5-13420H',
-      '16GB RAM',
-      '512GB NVMe SSD',
-      '15.6 inch FHD display'
-    ],
-    searchQuery: 'Acer+Aspire+5+A515',
-    buyLabel: 'Buy Acer Aspire 5 on Amazon'
-  },
-  {
-    category: '2-in-1',
-    name: 'Microsoft Surface Laptop Studio 2',
-    description:
-      'Flexible Surface laptop for creators, drawing, productivity, and premium Windows workflows.',
-    price: 'From $2,099',
-    specs: [
-      'Intel Core i7-13700H',
-      'NVIDIA RTX 4060',
-      '32GB LPDDR5x RAM',
-      '14.4 inch PixelSense Flow touch display'
-    ],
-    searchQuery: 'Microsoft+Surface+Laptop+Studio+2',
-    buyLabel: 'Buy Surface Laptop Studio 2 on Amazon'
-  },
-  {
-    category: 'Gaming',
-    name: 'ASUS ROG Zephyrus G14 2024 GA403',
-    description:
-      'Compact gaming and creator laptop with Ryzen 9 performance and RTX 4070 graphics.',
-    price: 'From $2,199',
-    specs: [
-      'AMD Ryzen 9 8945HS',
-      'NVIDIA RTX 4070',
-      '32GB LPDDR5X RAM',
-      '14 inch 3K OLED 120Hz display'
-    ],
-    searchQuery: 'ASUS+ROG+Zephyrus+G14+2024+GA403',
-    buyLabel: 'Buy ASUS ROG Zephyrus G14 on Amazon'
-  },
-  {
-    category: 'Business',
-    name: 'Lenovo ThinkPad X1 Carbon Gen 12 14 inch',
-    description:
-      'Premium business ultrabook with lightweight design, strong keyboard, and enterprise features.',
-    price: 'From $1,699',
-    specs: [
-      'Intel Core Ultra 7 165U',
-      '32GB LPDDR5x RAM',
-      '1TB PCIe SSD',
-      '14 inch 2.8K OLED display'
-    ],
-    searchQuery: 'Lenovo+ThinkPad+X1+Carbon+Gen+12',
-    buyLabel: 'Buy ThinkPad X1 Carbon Gen 12 on Amazon'
-  },
-  {
-    category: 'Budget Gaming',
-    name: 'MSI Katana 15 B13VFK',
-    description:
-      'Budget gaming laptop with Intel Core i7 processor and RTX 4060 graphics.',
-    price: 'From $999',
-    specs: [
-      'Intel Core i7-13620H',
-      'NVIDIA RTX 4060',
-      '16GB DDR5 RAM',
-      '15.6 inch FHD 144Hz display'
-    ],
-    searchQuery: 'MSI+Katana+15+B13VFK',
-    buyLabel: 'Buy MSI Katana 15 on Amazon'
-  },
-  {
-    category: 'Chromebook',
-    name: 'Samsung Galaxy Chromebook Plus 15.6 inch',
-    description:
-      'Large-screen Chromebook for browser-based productivity, study, and lightweight work.',
-    price: 'From $775',
-    specs: [
-      'Intel Core 3 processor',
-      '8GB RAM',
-      '256GB storage',
-      '15.6 inch AMOLED FHD display'
-    ],
-    searchQuery: 'Samsung+Galaxy+Chromebook+Plus+15.6',
-    buyLabel: 'Buy Galaxy Chromebook Plus on Amazon'
-  },
-  {
-    category: 'Workstation',
-    name: 'Dell Precision 5680',
-    description:
-      'Mobile workstation for professional creative, engineering, and high-performance workflows.',
-    price: 'From $2,899',
-    specs: [
-      'Intel Core i9-13900H',
-      'Up to 64GB LPDDR5 RAM',
-      'Up to 2TB NVMe SSD',
-      'NVIDIA RTX 5000 Ada graphics'
-    ],
-    searchQuery: 'Dell+Precision+5680',
-    buyLabel: 'Buy Dell Precision 5680 on Amazon'
-  }
-];
-
-const AFFILIATE_TAG = 'llmaffiliat0f-20';
-
-const buildAmazonUrl = (query: string) =>
-  `https://www.amazon.com/s?k=${query}&tag=${AFFILIATE_TAG}`;
-
-const parsePriceToNumber = (price: string) => {
-  const match = price.match(/[\d,]+/);
-  if (!match) return '0';
-  return match[0].replace(/,/g, '');
-};
-
-const itemListJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'AISneer Laptop Catalog',
-  numberOfItems: laptops.length,
-  itemListElement: laptops.map((l, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    item: {
-      '@type': 'Product',
-      name: l.name,
-      brand: { '@type': 'Brand', name: l.name.split(' ')[0] },
-      category: l.category,
-      offers: {
-        '@type': 'Offer',
-        price: parsePriceToNumber(l.price),
-        priceCurrency: 'USD',
-        availability: 'https://schema.org/InStock',
-        url: buildAmazonUrl(l.searchQuery)
+  // JSON-LD: ItemList + individual Product entries for rich crawling
+  const productListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: activeCategory ? `${activeCategory} laptops on AISneer` : 'All laptops on AISneer',
+    numberOfItems: visible.length,
+    itemListElement: visible.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Product',
+        name: `${l.company} ${l.model}`,
+        brand: { '@type': 'Brand', name: l.company },
+        category: l.category,
+        description: l.description,
+        image: l.image,
+        url: `https://aisneer.com/laptops#${l.slug}`,
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: l.ratingStars,
+          bestRating: 5,
+          ratingCount: 1
+        },
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'USD',
+          price: parsePrice(l.priceFrom),
+          availability: 'https://schema.org/InStock',
+          url: l.buyUrl
+        }
       }
-    }
-  }))
-};
+    }))
+  };
 
-const pageStyles = `
-  .aisneer-laptops {
-    font-family: Arial, sans-serif;
-    background: #f7f7f7;
-    color: #222;
-    line-height: 1.5;
-  }
-  .aisneer-laptops .page-header {
-    background: #111827;
-    color: #fff;
-    padding: 28px 20px;
-  }
-  .aisneer-laptops .page-main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 24px 20px;
-  }
-  .aisneer-laptops h1 {
-    margin: 0 0 8px;
-    font-size: 32px;
-  }
-  .aisneer-laptops .intro {
-    max-width: 800px;
-    color: #e5e7eb;
-  }
-  .aisneer-laptops .live-version {
-    background: #ecfdf5;
-    border: 1px solid #10b981;
-    color: #065f46;
-    padding: 10px 14px;
-    border-radius: 6px;
-    margin: 20px 0;
-    font-size: 14px;
-  }
-  .aisneer-laptops .summary {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 16px;
-    border-radius: 8px;
-    margin-bottom: 24px;
-  }
-  .aisneer-laptops .products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-  }
-  .aisneer-laptops .product {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 18px;
-  }
-  .aisneer-laptops .product h2 {
-    margin: 0 0 8px;
-    font-size: 20px;
-    color: #111827;
-  }
-  .aisneer-laptops .category {
-    display: inline-block;
-    background: #eef2ff;
-    color: #3730a3;
-    font-size: 13px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    margin-bottom: 10px;
-  }
-  .aisneer-laptops .price {
-    font-weight: bold;
-    color: #b45309;
-    margin: 8px 0;
-  }
-  .aisneer-laptops .specs {
-    padding-left: 18px;
-    margin: 10px 0;
-  }
-  .aisneer-laptops .buy-link {
-    display: inline-block;
-    background: #f59e0b;
-    color: #111;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 14px;
-    border-radius: 6px;
-    margin-top: 10px;
-  }
-  .aisneer-laptops .buy-link:hover {
-    background: #d97706;
-  }
-  .aisneer-laptops .page-footer {
-    margin-top: 32px;
-    padding: 20px;
-    background: #fff;
-    border-top: 1px solid #ddd;
-    color: #555;
-    font-size: 14px;
-  }
-`;
-
-export default function LaptopsPage() {
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: pageStyles }} />
-
-      <div className="aisneer-laptops">
-        <header className="page-header">
-          <h1>Shop all laptops</h1>
-          <p className="intro">
-            AISneer is an independent laptop catalog. We curate laptops across ultrabook,
-            gaming, business, creator, student, Chromebook, 2-in-1, and workstation categories.
-            Every product below includes visible specifications and an Amazon purchase link.
+      {/* Catalog hero */}
+      <section className="catalog-hero">
+        <div className="container">
+          <nav className="breadcrumbs" aria-label="Breadcrumb">
+            <Link href="/">Home</Link>
+            <span aria-hidden>/</span>
+            <span>Laptops</span>
+            {activeCategory ? (
+              <>
+                <span aria-hidden>/</span>
+                <span>{activeCategory}</span>
+              </>
+            ) : null}
+          </nav>
+          <h1 className="catalog-title">
+            {activeCategory ? `${activeCategory} laptops` : 'Shop all laptops'}
+          </h1>
+          <p className="catalog-sub">
+            {activeCategory
+              ? `Curated ${activeCategory.toLowerCase()} laptops, verified against manufacturer spec pages.`
+              : 'Every laptop we recommend, across ultrabooks, gaming, business, creator, student, and workstation categories. Compare real specs and jump to the current deal.'}
           </p>
-        </header>
 
-        <main className="page-main">
-          <p id="live-version" className="live-version">
-            Live catalog version: AISNEER-LAPTOPS-20260424-AMAZON-001
-          </p>
+          <div className="catalog-meta">
+            <span><strong>{visible.length}</strong> {visible.length === 1 ? 'laptop' : 'laptops'}</span>
+            <span aria-hidden>·</span>
+            <span>Spec-verified</span>
+            <span aria-hidden>·</span>
+            <span>Updated regularly</span>
+          </div>
+        </div>
+      </section>
 
-          <section className="summary">
-            <strong>Catalog summary:</strong> {laptops.length} laptops, spec-verified, updated regularly.
-            Purchases are completed on Amazon. Product prices and availability may change on Amazon.
-          </section>
-
-          <section className="products" aria-label="Laptop product listings">
-            {laptops.map((laptop) => (
-              <article key={laptop.name} className="product">
-                <span className="category">{laptop.category}</span>
-                <h2>{laptop.name}</h2>
-                <p>{laptop.description}</p>
-                <p className="price">{laptop.price}</p>
-                <ul className="specs">
-                  {laptop.specs.map((spec) => (
-                    <li key={spec}>{spec}</li>
-                  ))}
-                </ul>
-                <a
-                  className="buy-link"
-                  href={buildAmazonUrl(laptop.searchQuery)}
-                  rel="sponsored nofollow noopener"
-                  target="_blank"
+      {/* Category filter bar */}
+      <section className="filter-bar">
+        <div className="container filter-bar-inner">
+          <div className="chip-row" role="tablist" aria-label="Filter by category">
+            <Link
+              href="/laptops"
+              className={`chip ${!activeCategory ? 'chip-active' : ''}`}
+            >
+              All ({laptops.length})
+            </Link>
+            {categories.map((cat) => {
+              const count = laptops.filter((l) => l.category === cat).length;
+              const active = activeCategory === cat;
+              return (
+                <Link
+                  key={cat}
+                  href={`/laptops?category=${encodeURIComponent(cat)}`}
+                  className={`chip ${active ? 'chip-active' : ''}`}
                 >
-                  {laptop.buyLabel}
-                </a>
-              </article>
-            ))}
-          </section>
-        </main>
+                  {cat} ({count})
+                </Link>
+              );
+            })}
+          </div>
 
-        <footer className="page-footer">
-          <p>
-            Disclosure: AISneer may earn a commission from qualifying purchases made through product links.
-            Prices and availability are checked on Amazon at the time of purchase.
-          </p>
-        </footer>
+          <form className="sort-form" method="get">
+            {activeCategory ? (
+              <input type="hidden" name="category" value={activeCategory} />
+            ) : null}
+            <label htmlFor="sort" className="muted">Sort:</label>
+            <select id="sort" name="sort" defaultValue={sort}>
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: low → high</option>
+              <option value="price-desc">Price: high → low</option>
+              <option value="rating">Top rated</option>
+            </select>
+            <button type="submit" className="btn btn-ghost btn-sm">Apply</button>
+          </form>
+        </div>
+      </section>
+
+      <div className="container catalog-layout">
+        {/* Product grid */}
+        <div>
+          {visible.length === 0 ? (
+            <p className="empty">No laptops match this filter yet. <Link href="/laptops">See all laptops</Link>.</p>
+          ) : (
+            <ul className="product-grid">
+              {visible.map((laptop) => (
+                <li key={laptop.slug}>
+                  <ProductCard laptop={laptop} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Sidebar */}
+        <aside className="sidebar">
+          <section className="widget">
+            <h3 className="widget-title">Need help choosing?</h3>
+            <p className="widget-body">
+              Not sure which laptop fits you best? Our quick buying guide matches your use case to
+              the right category and specs.
+            </p>
+            <Link href="/#buying-guide" className="btn btn-ghost btn-sm widget-cta">
+              Open buying guide →
+            </Link>
+          </section>
+
+          <section className="widget">
+            <h3 className="widget-title">Top rated this week</h3>
+            <ul className="side-list">
+              {[...laptops]
+                .sort((a, b) => b.ratingStars - a.ratingStars)
+                .slice(0, 5)
+                .map((item) => (
+                  <li key={`${item.slug}-top`} className="side-list-item">
+                    <img src={item.image} alt="" className="thumb" loading="lazy" />
+                    <span className="side-list-text">
+                      <span className="side-list-name">{item.company} {item.model}</span>
+                      <span className="side-list-meta">
+                        {item.priceFrom} · <Stars value={item.ratingStars} />
+                      </span>
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </section>
+
+          <section className="widget widget-cta-card">
+            <h3 className="widget-title">Why AISneer</h3>
+            <ul className="bullet-list">
+              <li>Hand-picked, spec-verified</li>
+              <li>Direct links to retailer deals</li>
+              <li>No click-bait review filler</li>
+            </ul>
+            <Link href="/#about" className="btn btn-primary btn-sm widget-cta">
+              About us →
+            </Link>
+          </section>
+        </aside>
       </div>
+
+      {/* FAQ */}
+      <section className="container section">
+        <div className="section-head">
+          <h2 className="section-title">Laptop buying FAQ</h2>
+        </div>
+        <div className="faq">
+          <details>
+            <summary>Which laptop is best overall for beginners?</summary>
+            <p>
+              For mainstream ease of use, Apple&apos;s 14-inch MacBook Pro with M3 Pro combines
+              long battery life and strong performance for everyday work — see Apple&apos;s
+              published battery and tech specs for the configuration you choose.
+            </p>
+          </details>
+          <details>
+            <summary>What&apos;s the best budget laptop in this list?</summary>
+            <p>
+              The Acer Aspire 5 (A515 family) is typically the lowest-cost Windows option with a
+              current Core i5 H-class CPU — compare exact model numbers and RAM type (DDR4 vs
+              LPDDR5) on Acer&apos;s site.
+            </p>
+          </details>
+          <details>
+            <summary>Is the HP EliteBook 840 G11 good for business use?</summary>
+            <p>
+              Yes. HP EliteBook 840 G11 offers dependable performance, professional build quality,
+              and enterprise-grade security features. Verify vPro and graphics branding on the
+              specific SKU you configure.
+            </p>
+          </details>
+          <details>
+            <summary>Do I need an RTX 4070 for gaming?</summary>
+            <p>
+              Not necessarily. RTX 4060 handles 1080p/1440p high-refresh gaming very well. RTX 4070
+              is the better pick if you want QHD+ high-refresh or heavier creative workloads on the
+              same machine.
+            </p>
+          </details>
+        </div>
+      </section>
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productListJsonLd) }}
       />
     </>
   );
