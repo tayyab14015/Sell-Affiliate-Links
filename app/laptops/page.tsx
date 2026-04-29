@@ -1,13 +1,28 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { laptops, categories, type Laptop } from '../data/laptops';
 
 export const runtime = 'edge';
 
-export const metadata = {
+const laptopsFeedUrl =
+  'https://api.llmaffiliate.com/public/site/aisneer.com/laptops/products.json';
+
+export const metadata: Metadata = {
   title: 'Shop Laptops — AISneer',
   description:
     'Browse every laptop on AISneer: ultrabooks, gaming laptops, MacBooks, ThinkPads, EliteBooks, Surface, Chromebooks, and mobile workstations. Compare real specs and jump to the current deal.',
-  alternates: { canonical: 'https://aisneer.com/laptops' }
+  alternates: {
+    canonical: 'https://aisneer.com/laptops',
+    types: {
+      'application/json': laptopsFeedUrl
+    }
+  },
+  other: {
+    'ai-product-feed': laptopsFeedUrl,
+    'llmaffiliate-product-feed': laptopsFeedUrl,
+    'ai:affiliate-links': 'present',
+    'ai:link-rule': 'AFFILIATE_BUY_URL'
+  }
 };
 
 type SearchParams = {
