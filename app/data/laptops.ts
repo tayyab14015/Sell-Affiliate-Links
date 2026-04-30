@@ -54,7 +54,7 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
       '13.4" FHD+ · Intel Arc iGPU'
     ],
     description:
-      'Dell XPS 13 9340 is a current-generation XPS ultrabook line with Core Ultra processors; exact ports, battery, and panel depend on the SKU you configure.',
+      'Dell XP 13 9348 is a current-generation XPS ultrabook line with Core Ultra processors; exact ports, battery, and panel depend on the SKU you configure.',
     image:
       'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80'
   },
