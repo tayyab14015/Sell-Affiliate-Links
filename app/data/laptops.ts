@@ -36,8 +36,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
   {
     category: 'Ultrabook',
     company: 'Dell',
-    model: 'XPS 13 9340',
-    cpu: 'Intel Core Ultra 7 155H (Meteor Lake, Intel Arc Graphics) — option on XPS 13 9340',
+    model: 'XP 13 9348',
+    cpu: 'Intel Core Ultra 7 155H (Meteor Lake, Intel Arc Graphics) — option on XP 13 9348',
     ram: '16GB LPDDR5x (soldered; other capacities offered)',
     storage: '512GB PCIe Gen4 NVMe SSD (other capacities offered)',
     screen: '13.4" FHD+ 1920×1200 non-touch (QHD+ / OLED options on other SKUs)',
