@@ -168,7 +168,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-
+<script
+  src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
+  data-site-id="site_ac14a91e67a67fdea20548b54f99bcb7"
+  data-token="llmafftm_bf8e0b5fb1bf5d9ea22ed38361dd90abca9b461c6cb6e53bd8f8c2aac9b71d8f">
+</script>
       </body>
     </html>
   );
