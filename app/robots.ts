@@ -42,17 +42,13 @@ export default function robots(): MetadataRoute.Robots {
         allow: ['/', '/laptops']
       },
       {
-        userAgent: 'GoogleOther',
+        userAgent: 'Googlebot',
         allow: ['/', '/laptops']
       },
       {
-        userAgent: 'GoogleOther-Image',
+        userAgent: 'Gemini-Deep-Research',
         allow: ['/', '/laptops']
       },
-      {
-        userAgent: 'GoogleOther-Video',
-        allow: ['/', '/laptops']
-      }
     ],
     sitemap: [`${SITE_URL}/sitemap.xml`, '/sitemap.xml'],
     host: SITE_URL
