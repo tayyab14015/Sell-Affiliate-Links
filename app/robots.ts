@@ -7,47 +7,47 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'GPTBot',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'OAI-SearchBot',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'ChatGPT-User',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'PerplexityBot',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'Perplexity-User',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'ClaudeBot',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'Google-Extended',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'Gemini',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'Googlebot',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'Gemini-Deep-Research',
-        allow: ['/', '/laptops']
+        allow: ['/', '/laptops', '/usb-hubs']
       },
     ],
     sitemap: [`${SITE_URL}/sitemap.xml`, '/sitemap.xml'],

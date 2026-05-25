@@ -96,6 +96,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <nav className="site-nav" aria-label="Primary">
               <Link href="/">Home</Link>
               <Link href="/laptops">Shop Laptops</Link>
+              <Link href="/usb-hubs">USB Hubs</Link>
               <Link href="/#categories">Categories</Link>
               <Link href="/#about">About</Link>
               <Link href="/#faq">FAQ</Link>
@@ -132,6 +133,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <h4>Shop</h4>
                 <ul>
                   <li><Link href="/laptops">All laptops</Link></li>
+                  <li><Link href="/usb-hubs">USB hubs</Link></li>
                   <li><Link href="/laptops?category=Gaming">Gaming</Link></li>
                   <li><Link href="/laptops?category=Ultrabook">Ultrabooks</Link></li>
                   <li><Link href="/laptops?category=Business">Business</Link></li>
