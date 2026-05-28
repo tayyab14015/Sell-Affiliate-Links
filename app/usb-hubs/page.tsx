@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { usbHubs, usbHubCategories, type UsbHub } from '../data/usb-hubs';
+import {
+  usbHubs,
+  usbHubCategories,
+  bestValueUsbHubPicks,
+  withFeaturedFirst,
+  type UsbHub
+} from '../data/usb-hubs';
 
 export const runtime = 'edge';
 
@@ -107,6 +113,8 @@ export default async function UsbHubsPage({
     visible = [...visible].sort((a, b) => b.price - a.price);
   } else if (sort === 'rating') {
     visible = [...visible].sort((a, b) => b.ratingStars - a.ratingStars);
+  } else {
+    visible = withFeaturedFirst(visible);
   }
 
   const productListJsonLd = {
@@ -163,7 +171,7 @@ export default async function UsbHubsPage({
           <p className="catalog-sub">
             {activeCategory
               ? `Curated ${activeCategory.toLowerCase()} picks for laptops, MacBooks, phones, and desktops.`
-              : 'USB-C hubs, USB 3.0 splitters, and OTG adapters — all under $5. Compare features and search current prices on Google Shopping.'}
+              : 'USB-C hubs, USB 3.0 splitters, and OTG adapters from budget picks to 10 Gbps multiport hubs. Compare features and search current prices on Google Shopping.'}
           </p>
 
           <div className="catalog-meta">
@@ -248,10 +256,7 @@ export default async function UsbHubsPage({
           <section className="widget">
             <h3 className="widget-title">Best value this week</h3>
             <ul className="side-list">
-              {[...usbHubs]
-                .sort((a, b) => a.price - b.price)
-                .slice(0, 5)
-                .map((item) => (
+              {bestValueUsbHubPicks.map((item) => (
                   <li key={`${item.slug}-value`} className="side-list-item">
                     <img src={item.image} alt="" className="thumb" loading="lazy" />
                     <span className="side-list-text">

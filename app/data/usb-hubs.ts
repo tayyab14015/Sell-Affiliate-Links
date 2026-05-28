@@ -12,6 +12,7 @@ export type UsbHub = {
   rating: string;
   ratingStars: number;
   searchUrl: string;
+  featured?: boolean;
 };
 
 const searchLink = (title: string) =>
@@ -37,9 +38,28 @@ type RawProduct = {
   brand: string;
   highlights: string[];
   ratingStars: number;
+  featured?: boolean;
 };
 
 const raw: RawProduct[] = [
+  {
+    id: '11',
+    title: 'Acer 10 Gbps USB C Hub, USBC Splitter with 4 USB C 3.2 and 100W PD Port',
+    description:
+      'Fast-transfer Type-C multiport adapter with four USB-C 3.2 ports and 100W Power Delivery for host charging. Compatible with MacBook Pro/M2/M1, iPad, Surface Pro, and XPS. No video output — data and charging only.',
+    price: 25.99,
+    currency: 'USD',
+    image: '/images/product11.PNG',
+    category: 'USB-C Hub',
+    brand: 'Acer',
+    highlights: [
+      '10 Gbps USB-C 3.2 shared bandwidth',
+      '4× USB-C ports + 100W PD pass-through',
+      'MacBook, iPad Pro, Surface Pro, XPS compatible'
+    ],
+    ratingStars: 4.7,
+    featured: true
+  },
   {
     id: '1',
     title: 'USB C to USB Hub Multiport Adapter',
@@ -184,7 +204,24 @@ export const usbHubs: UsbHub[] = raw.map((p) => ({
   highlights: p.highlights,
   rating: `${p.ratingStars.toFixed(1)} / 5`,
   ratingStars: p.ratingStars,
-  searchUrl: searchLink(p.title)
+  searchUrl: searchLink(p.title),
+  featured: p.featured
 }));
+
+/** Pinned featured pick first, then lowest-priced alternatives. */
+export function withFeaturedFirst(hubs: UsbHub[]): UsbHub[] {
+  const featured = hubs.filter((h) => h.featured);
+  const rest = hubs.filter((h) => !h.featured);
+  return [...featured, ...rest];
+}
+
+export const bestValueUsbHubPicks: UsbHub[] = (() => {
+  const featured = usbHubs.find((h) => h.featured);
+  const others = usbHubs
+    .filter((h) => !h.featured)
+    .sort((a, b) => a.price - b.price)
+    .slice(0, 4);
+  return featured ? [featured, ...others] : others.slice(0, 5);
+})();
 
 export const usbHubCategories = Array.from(new Set(usbHubs.map((h) => h.category)));
