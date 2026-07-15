@@ -170,12 +170,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-<script
-  src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
-  data-site-id="site_71bf11c3704756303f1ad00c8054e196"
-  data-token="llmafftm_4e2976c380e5e7dbba309a47bcaca6561352436ca4d67cac18186d33d701201d">
-</script>
       </body>
+      <script
+  src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
+  data-site-id="site_b3dbc3bb77f38f717ba015c17ec8f0af"
+  data-token="llmafftm_4e12e5f3621c997e30e0dfac645ae24ba3a0942c200c52a62948e9b19d61cc6c">
+</script>
     </html>
   );
 }
