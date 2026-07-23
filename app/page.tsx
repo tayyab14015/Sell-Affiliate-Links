@@ -7,17 +7,17 @@ export const revalidate = false;
 const SITE_URL = 'https://www.aisneer.com';
 
 export const metadata = {
-  title: 'AISneer — Curated Laptop Deals for Work, Gaming, Study & Creators',
+  title: 'AISneer — Curated Laptops, Accessories & Specialist Books',
   description:
-    'AISneer is a curated laptop store. Compare hand-picked ultrabooks, gaming laptops, business notebooks, MacBooks, and student laptops with real specs and direct deal links.',
+    'AISneer curates laptops, USB hubs, and specialist books — including Fusion 360 AI workflow guides — with real specs and direct deal links.',
   alternates: { canonical: `${SITE_URL}/` },
   openGraph: {
     type: 'website',
     url: `${SITE_URL}/`,
     siteName: 'AISneer',
-    title: 'AISneer — Curated Laptop Deals for Work, Gaming, Study & Creators',
+    title: 'AISneer — Curated Laptops, Accessories & Specialist Books',
     description:
-      'AISneer is a curated laptop store. Compare hand-picked ultrabooks, gaming laptops, business notebooks, MacBooks, and student laptops with real specs and direct deal links.'
+      'AISneer curates laptops, USB hubs, and specialist books — including Fusion 360 AI workflow guides — with real specs and direct deal links.'
   }
 };
 
@@ -59,22 +59,23 @@ export default function HomePage() {
       <section className="hero">
         <div className="container hero-inner">
           <div className="hero-copy">
-            <span className="eyebrow">Independent laptop store · est. 2026</span>
+            <span className="eyebrow">Laptops · accessories · specialist books · est. 2026</span>
             <h1 className="hero-title">
               Buy your next laptop with <span className="accent">confidence</span>.
             </h1>
             <p className="hero-sub">
               AISneer hand-picks the best laptops across every category — ultrabooks, gaming rigs,
               MacBooks, business ThinkPads, creator machines, and budget student picks — then links
-              you straight to the current deal. No noise, no clickbait, just real specs and honest
-              recommendations.
+              you straight to the current deal. We also curate USB hubs and specialist books (like
+              Fusion 360 + AI workflow guides), not only hardware. No noise, no clickbait, just real
+              specs and honest recommendations.
             </p>
             <div className="hero-cta">
               <Link href="/laptops" className="btn btn-primary">
                 Shop all laptops →
               </Link>
-              <Link href="#featured" className="btn btn-ghost">
-                See featured picks
+              <Link href="#books" className="btn btn-ghost">
+                Browse books
               </Link>
             </div>
             <ul className="hero-badges" aria-label="Trust highlights">
@@ -147,6 +148,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* BOOKS */}
+      <section id="books" className="container section">
+        <div className="section-head">
+          <h2 className="section-title">Not only laptops — specialist books too</h2>
+          <p className="section-sub">
+            Beyond notebooks and hubs, we recommend focused technical books for creators and
+            freelancers who want sharper CAD-to-production workflows.
+          </p>
+        </div>
+        <article className="book-home-card">
+          <div className="book-home-card-body">
+            <span className="product-badge">German Edition · Paperback</span>
+            <h3>
+              MASTER FUSION 360 MIT KI 2026: CAD, CAM, CNC, 3D-Druck- und Produktdesign Workflows
+              (German Edition)
+            </h3>
+            <p>
+              For German-speaking freelancers speeding up CAD-to-CNC workflows with AI in Fusion
+              360 — by STEPHEN DAVE. One dedicated product page, no catalog clutter.
+            </p>
+            <Link
+              href="/master-fusion-360-mit-ki-2026-german-edition"
+              className="btn btn-primary"
+            >
+              View book page →
+            </Link>
+          </div>
+        </article>
+      </section>
+
       {/* FEATURED PRODUCTS */}
       <section id="featured" className="container section">
         <div className="section-head">
@@ -217,8 +248,8 @@ export default function HomePage() {
             </p>
             <p>
               We cover ultrabooks, gaming laptops, MacBooks, ThinkPads, EliteBooks, Surface devices,
-              Chromebooks, and mobile workstations — with new picks added as they become worth
-              recommending.
+              Chromebooks, and mobile workstations — plus accessories and specialist books when they
+              clearly help the same audience. New picks are added as they become worth recommending.
             </p>
             <div className="hero-cta">
               <Link href="/laptops" className="btn btn-primary">Start shopping</Link>

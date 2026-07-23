@@ -1149,3 +1149,112 @@ h1, h2, h3, h4 {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- Single book product page ---------- */
+
+.book-product {
+  max-width: 760px;
+  padding-top: 28px;
+}
+
+.book-product-header {
+  margin: 18px 0 36px;
+}
+
+.book-product-title {
+  margin: 10px 0 16px;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.book-product-lead {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 62ch;
+}
+
+.book-product-block {
+  margin-bottom: 32px;
+}
+
+.book-product-block h2 {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+}
+
+.book-product-block p {
+  margin: 0 0 12px;
+  color: var(--text-muted);
+  max-width: 62ch;
+}
+
+.book-benefits {
+  font-size: 15px;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+.book-facts {
+  margin-top: 8px;
+}
+
+.book-product-cta {
+  margin: 40px 0 16px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.book-product-cta h2 {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+}
+
+.book-product-cta p {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+}
+
+.book-product-extractor {
+  margin: 18px 0 0 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  color: var(--text-faint);
+  word-break: break-word;
+  line-height: 1.45;
+}
+
+.book-home-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.book-home-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 72ch;
+}
+
+.book-home-card-body .product-badge {
+  position: static;
+}
+
+.book-home-card-body h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.book-home-card-body p {
+  margin: 0;
+  color: var(--text-muted);
+}

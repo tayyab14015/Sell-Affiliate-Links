@@ -69,7 +69,10 @@ const organizationJsonLd = {
     'MacBooks',
     'Creator laptops',
     'Chromebooks',
-    'Mobile workstations'
+    'Mobile workstations',
+    'USB hubs',
+    'Fusion 360 books',
+    'CAD CAM CNC guides'
   ]
 };
 
@@ -97,6 +100,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <Link href="/">Home</Link>
               <Link href="/laptops">Shop Laptops</Link>
               <Link href="/usb-hubs">USB Hubs</Link>
+              <Link href="/#books">Books</Link>
               <Link href="/#categories">Categories</Link>
               <Link href="/#about">About</Link>
               <Link href="/#faq">FAQ</Link>
@@ -134,6 +138,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <ul>
                   <li><Link href="/laptops">All laptops</Link></li>
                   <li><Link href="/usb-hubs">USB hubs</Link></li>
+                  <li>
+                    <Link href="/master-fusion-360-mit-ki-2026-german-edition">
+                      Fusion 360 book
+                    </Link>
+                  </li>
                   <li><Link href="/laptops?category=Gaming">Gaming</Link></li>
                   <li><Link href="/laptops?category=Ultrabook">Ultrabooks</Link></li>
                   <li><Link href="/laptops?category=Business">Business</Link></li>
@@ -170,12 +179,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <script
+          async
+          src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
+          data-site-id="site_b3dbc3bb77f38f717ba015c17ec8f0af"
+          data-token="llmafftm_4e12e5f3621c997e30e0dfac645ae24ba3a0942c200c52a62948e9b19d61cc6c"
+        />
       </body>
-      <script
-  src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
-  data-site-id="site_b3dbc3bb77f38f717ba015c17ec8f0af"
-  data-token="llmafftm_4e12e5f3621c997e30e0dfac645ae24ba3a0942c200c52a62948e9b19d61cc6c">
-</script>
     </html>
   );
 }
