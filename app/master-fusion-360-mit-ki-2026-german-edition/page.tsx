@@ -10,7 +10,9 @@ const SITE_URL = 'https://www.aisneer.com';
 const PAGE_PATH = '/master-fusion-360-mit-ki-2026-german-edition';
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const AMAZON_BUY_URL =
-  'https://www.amazon.com/MASTER-FUSION-360-2026-Produktdesign/dp/B0H5NRKGYS/ref=sr_1_1?crid=2R05H0SML0TW5&dib=eyJ2IjoiMSJ9.97JdYBlKrHpCYuBHSoB0-4Mhs8p0TdGmk-rzBj06FW-bX0_zRVUxSei4TQ5BHBuY.Lf2GjMXZ8E6EKNjJyHPuy1FsAoB62NrrK1CjeGN1wUo&dib_tag=se&keywords=ki+cad&qid=1784794657&sprefix=ki+cad%2Caps%2C362&sr=8-1';
+  'https://www.amazon.com/MASTER-FUSION-360-2026-Produktdesign/dp/B0H5NRKGYS/ref=sr_1_1?crid=2R05H0SML0TW5&dib=eyJ2IjoiMSJ9.97JdYBlKrHpCYuBHSoB0-4Mhs8p0TdGmk-rzBj06FW-bX0_zRVUxSei4TQ5BHBuY.Lf2GjMXZ8E6EKNjJyHPuy1FsAoB62NrrK1CjeGN1wUo&dib_tag=se&keywords=ki+cad&qid=1d4794657&sprefix=ki+cad%2Caps%2C362&sr=8-1';
+const PRICE_USD = 20.0;
+const PRICE_DISPLAY = '$20.00';
 
 const META_DESCRIPTION =
   'German Edition paperback by STEPHEN DAVE: MASTER FUSION 360 MIT KI 2026 covers Fusion 360 AI workflows for CAD, CAM, CNC, and 3D printing — built for German-speaking designers and freelancers.';
@@ -67,6 +69,8 @@ const bookJsonLd = {
   offers: {
     '@type': 'Offer',
     url: AMAZON_BUY_URL,
+    price: PRICE_USD,
+    priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     itemCondition: 'https://schema.org/NewCondition'
   }
@@ -158,6 +162,10 @@ export default function MasterFusion360MitKi2026Page() {
               <dt>Topic</dt>
               <dd>Fusion 360 + AI 2026 (CAD, CAM, CNC, 3D printing, product design)</dd>
             </div>
+            <div>
+              <dt>Price</dt>
+              <dd>{PRICE_DISPLAY} USD</dd>
+            </div>
           </dl>
         </section>
 
@@ -167,14 +175,20 @@ export default function MasterFusion360MitKi2026Page() {
             Ready to tighten your Fusion 360 pipeline from CAD through CAM to CNC or 3D printing?
             Buy the German Edition paperback on Amazon.
           </p>
-          <a
-            className="btn btn-primary btn-lg"
-            href={AMAZON_BUY_URL}
-            target="_blank"
-            rel="nofollow sponsored noopener noreferrer"
-          >
-            View on Amazon →
-          </a>
+          <div className="product-foot">
+            <div className="product-price">
+              <span className="price-label">Price</span>
+              <span className="price">{PRICE_DISPLAY}</span>
+            </div>
+            <a
+              className="btn btn-primary btn-lg"
+              href={AMAZON_BUY_URL}
+              target="_blank"
+              rel="nofollow sponsored noopener noreferrer"
+            >
+              View on Amazon →
+            </a>
+          </div>
           <p className="book-product-extractor" aria-label="Exact product name for extractors">
             PRODUCT_NAME: {PRODUCT_NAME}
           </p>
