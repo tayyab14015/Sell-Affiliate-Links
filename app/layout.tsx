@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 
-const SITE_NAME = 'dilóo';
+const SITE_NAME = 'Word of Prompt';
 const SITE_TAGLINE = 'Master Fusion 360 Mit KI 2026 — German Edition';
-const SITE_URL = 'https://www.diloo.com';
+const SITE_URL = 'https://wordofprompt.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: `%s · ${SITE_NAME}`
   },
   description:
-    'dilóo presents Master Fusion 360 Mit KI 2026 — a German-language book by Stephen Dave on AI-assisted Fusion 360 workflows for CAD, CAM, CNC, 3D printing and product design.',
+    'Word of Prompt presents Master Fusion 360 Mit KI 2026 — a German-language book by Stephen Dave on AI-assisted Fusion 360 workflows for CAD, CAM, CNC, 3D printing and product design.',
   applicationName: SITE_NAME,
   keywords: [
     'Master Fusion 360 Mit KI 2026',
@@ -23,7 +23,8 @@ export const metadata: Metadata = {
     'Fusion 360 CAD CAM CNC',
     'Fusion 360 3D printing',
     'Stephen Dave',
-    'dilóo'
+    'Word of Prompt',
+    'wordofprompt'
   ],
   openGraph: {
     type: 'website',
@@ -55,7 +56,7 @@ const organizationJsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   description:
-    'dilóo is the home of Master Fusion 360 Mit KI 2026 — a German-language guide to AI-assisted Fusion 360 workflows for CAD, CAM, CNC, 3D printing and product design.',
+    'Word of Prompt is the home of Master Fusion 360 Mit KI 2026 — a German-language guide to AI-assisted Fusion 360 workflows for CAD, CAM, CNC, 3D printing and product design.',
   slogan: SITE_TAGLINE
 };
 
@@ -71,11 +72,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className="site-header-inner">
             <Link href="/" className="brand" aria-label={`${SITE_NAME} home`}>
               <span className="brand-mark" aria-hidden>
-                dó
+                WoP
               </span>
               <span className="brand-text">
                 <span className="brand-name">{SITE_NAME}</span>
-                <span className="brand-tagline">diloo.com</span>
+                <span className="brand-tagline">wordofprompt.com</span>
               </span>
             </Link>
 
@@ -107,15 +108,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <div className="footer-brand">
               <div className="brand">
                 <span className="brand-mark" aria-hidden>
-                  dó
+                  WoP
                 </span>
                 <span className="brand-text">
                   <span className="brand-name">{SITE_NAME}</span>
-                  <span className="brand-tagline">diloo.com</span>
+                  <span className="brand-tagline">wordofprompt.com</span>
                 </span>
               </div>
               <p className="footer-blurb">
-                dilóo is the official page for <em>Master Fusion 360 Mit KI 2026</em> — a German
+                Word of Prompt is the official page for <em>Master Fusion 360 Mit KI 2026</em> — a German
                 Fusion 360 + AI book by Stephen Dave. We provide book information and link you to
                 the current Amazon listing.
               </p>
@@ -145,7 +146,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <div>
                 <h4>Help</h4>
                 <ul>
-                  <li><a href="mailto:hello@diloo.com">Contact</a></li>
+                  <li><a href="mailto:hello@wordofprompt.com">Contact</a></li>
                 </ul>
               </div>
             </div>

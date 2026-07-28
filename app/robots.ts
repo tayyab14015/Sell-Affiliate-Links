@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const SITE_URL = 'https://www.diloo.com';
+const SITE_URL = 'https://wordofprompt.com';
 
 export default function robots(): MetadataRoute.Robots {
   return {

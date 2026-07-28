@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const runtime = 'edge';
 
-const SITE_NAME = 'dilóo';
+const SITE_NAME = 'Word of Prompt';
 const PRODUCT_NAME =
   'MASTER FUSION 360 MIT KI 2026: CAD, CAM, CNC, 3D-Druck- und Produktdesign Workflows (German Edition)';
 
@@ -16,7 +16,7 @@ const PAGE_COUNT = 464;
 const DATE_PUBLISHED = '2026-06-16';
 const DATE_PUBLISHED_DISPLAY = 'June 16, 2026';
 
-const SITE_URL = 'https://www.diloo.com';
+const SITE_URL = 'https://wordofprompt.com';
 const PAGE_URL = `${SITE_URL}/`;
 const AMAZON_BUY_URL =
   'https://www.amazon.com/MASTER-FUSION-360-2026-Produktdesign/dp/B0H5NRKGYS/ref=sr_1_1?crid=2R05H0SML0TW5&dib=eyJ2IjoiMSJ9.97JdYBlKrHpCYuBHSoB0-4Mhs8p0TdGmk-rzBj06FW-bX0_zRVUxSei4TQ5BHBuY.Lf2GjMXZ8E6EKNjJyHPuy1FsAoB62NrrK1CjeGN1wUo&dib_tag=se&keywords=ki+cad&qid=1d4794657&sprefix=ki+cad%2Caps%2C362&sr=8-1';
@@ -109,7 +109,8 @@ export const metadata: Metadata = {
     'Fusion 360 3D printing',
     'Stephen Dave',
     'German Edition',
-    'dilóo'
+    'Word of Prompt',
+    'wordofprompt'
   ],
   alternates: {
     canonical: PAGE_URL
