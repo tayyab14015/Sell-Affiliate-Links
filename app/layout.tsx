@@ -154,9 +154,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} {SITE_NAME}. All prices and availability subject to change.</span>
-            <span className="muted">
-              Disclosure: Product links may be affiliate links. We may earn a commission on qualifying purchases.
-            </span>
+            
           </div>
         </footer>
 
