@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   verification: {
-    google: 'HUflqUM_F5ZMMR88OX7mZNeO6ZUc5I1w61uy9DO_E4E'
+    google: 'l1nzt9zC9_A6l_8xie7En1eSVp6npD-BR5am40MbGiA'
   }
 };
 
@@ -162,11 +162,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <script
-          src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
-          data-site-id="site_1e645af912028b4d95dbe006c2446612"
-          data-token="llmafftm_5ff8f479e1c6bd61a6b97b385a7d8d717450f55e4567f64b6a303d9e176044a0"
-        />
+<script
+  src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
+  data-site-id="site_6d8a78c89052c4c934d843d32abae344"
+  data-token="llmafftm_a7628ccece354cbb5c08d75896688b9c670c6d7c4fc451cc11c4b774e8022893">
+</script>
       </body>
     </html>
   );
