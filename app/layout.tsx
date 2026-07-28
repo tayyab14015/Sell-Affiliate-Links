@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   verification: {
-    google: 'l1nzt9zC9_A6l_8xie7En1eSVp6npD-BR5am40MbGiA'
+    google: 'pSxlVbGF0TBfU05Vq1pV4BMS_3nFR38zfDTiQTDUjOI'
   }
 };
 
@@ -165,8 +165,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 <script
   src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
-  data-site-id="site_6d8a78c89052c4c934d843d32abae344"
-  data-token="llmafftm_a7628ccece354cbb5c08d75896688b9c670c6d7c4fc451cc11c4b774e8022893">
+  data-site-id="site_7978413879c126f9256445e3e482cc70"
+  data-token="llmafftm_72290862ef6b4742f86f4e796a92c13d9f49e65e8fa90332a781b3d6d64a4050">
 </script>
       </body>
     </html>
