@@ -1,54 +1,56 @@
 import type { MetadataRoute } from 'next';
 
-const SITE_URL = 'https://www.aisneer.com';
+const SITE_URL = 'https://www.diloo.com';
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: '*',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
+        // ARCHIVED — laptop & USB hub routes disabled; site is book-only
+        // allow: ['/', '/laptops', '/usb-hubs']
       },
       {
         userAgent: 'GPTBot',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
       },
       {
         userAgent: 'OAI-SearchBot',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
       },
       {
         userAgent: 'ChatGPT-User',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
       },
       {
         userAgent: 'PerplexityBot',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
       },
       {
         userAgent: 'Perplexity-User',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
       },
       {
         userAgent: 'ClaudeBot',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
       },
       {
         userAgent: 'Google-Extended',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
       },
       {
         userAgent: 'Gemini',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
       },
       {
         userAgent: 'Googlebot',
-        allow: ['/', '/laptops', '/usb-hubs']
+        allow: ['/']
       },
       {
         userAgent: 'Gemini-Deep-Research',
-        allow: ['/', '/laptops', '/usb-hubs']
-      },
+        allow: ['/']
+      }
     ],
     sitemap: [`${SITE_URL}/sitemap.xml`, '/sitemap.xml'],
     host: SITE_URL

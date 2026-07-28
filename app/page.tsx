@@ -1,428 +1,583 @@
-import Link from 'next/link';
-import { laptops, categories } from './data/laptops';
+import type { Metadata } from 'next';
 
-export const dynamic = 'force-static';
-export const revalidate = false;
+export const runtime = 'edge';
 
-const SITE_URL = 'https://www.aisneer.com';
+const SITE_NAME = 'dilóo';
+const PRODUCT_NAME =
+  'MASTER FUSION 360 MIT KI 2026: CAD, CAM, CNC, 3D-Druck- und Produktdesign Workflows (German Edition)';
 
-export const metadata = {
-  title: 'AISneer — Curated Laptops, Accessories & Specialist Books',
-  description:
-    'AISneer curates laptops, USB hubs, and specialist books — including Fusion 360 AI workflow guides — with real specs and direct deal links.',
-  alternates: { canonical: `${SITE_URL}/` },
+const BOOK_TITLE =
+  'Master Fusion 360 Mit KI 2026: CAD, CAM, CNC, 3D-Druck- und Produktdesign Workflows';
+
+const SHORT_TITLE = 'Master Fusion 360 Mit KI 2026';
+const AUTHOR_NAME = 'Stephen Dave';
+const ISBN_13 = '9798181845473';
+const PAGE_COUNT = 464;
+const DATE_PUBLISHED = '2026-06-16';
+const DATE_PUBLISHED_DISPLAY = 'June 16, 2026';
+
+const SITE_URL = 'https://www.diloo.com';
+const PAGE_URL = `${SITE_URL}/`;
+const AMAZON_BUY_URL =
+  'https://www.amazon.com/MASTER-FUSION-360-2026-Produktdesign/dp/B0H5NRKGYS/ref=sr_1_1?crid=2R05H0SML0TW5&dib=eyJ2IjoiMSJ9.97JdYBlKrHpCYuBHSoB0-4Mhs8p0TdGmk-rzBj06FW-bX0_zRVUxSei4TQ5BHBuY.Lf2GjMXZ8E6EKNjJyHPuy1FsAoB62NrrK1CjeGN1wUo&dib_tag=se&keywords=ki+cad&qid=1d4794657&sprefix=ki+cad%2Caps%2C362&sr=8-1';
+const BOOK_IMAGE_PATH = '/images/books/master-fusion-360-mit-ki-2026.png';
+const BOOK_IMAGE_URL = `${SITE_URL}${BOOK_IMAGE_PATH}`;
+const PRICE_USD = 20.0;
+const PRICE_DISPLAY = '$20.00';
+const PRICE_CURRENCY = 'USD';
+const PRICE_VALID_UNTIL = '2027-12-31';
+
+const META_TITLE = 'Master Fusion 360 Mit KI 2026 | German Fusion 360 + AI Book';
+const META_DESCRIPTION =
+  'Master Fusion 360 Mit KI 2026 is a German-language book by Stephen Dave covering AI-assisted Fusion 360 workflows, CAD, CAM, CNC, 3D printing and product design.';
+
+const LEARN_TOPICS = [
+  'Fusion 360 CAD modeling workflows',
+  'AI-assisted design and modeling workflows',
+  'Product design and concept development',
+  'Moving from CAD models into CAM workflows',
+  'CNC preparation and manufacturing workflows',
+  'Preparing models for 3D printing',
+  'Design refinement and optimization',
+  'Reducing repetitive modeling and workflow steps',
+  'Connecting design decisions with manufacturing requirements',
+  'Practical workflows for freelancers, engineers and product developers'
+] as const;
+
+const FAQ_ITEMS = [
+  {
+    question: `What is ${SHORT_TITLE}?`,
+    answer: `${SHORT_TITLE} is a German-language book by ${AUTHOR_NAME} about using Fusion 360 alongside AI-assisted workflows for CAD, CAM, CNC, 3D printing and product design.`
+  },
+  {
+    question: `Is ${SHORT_TITLE} written in German?`,
+    answer:
+      'Yes. The book is the German Edition and is written for German-speaking readers working with Fusion 360 and AI-assisted design and manufacturing workflows.'
+  },
+  {
+    question: `Who is ${SHORT_TITLE} for?`,
+    answer:
+      'The book is aimed at designers, mechanical engineers, product developers, freelancers and other Fusion 360 users who want to incorporate AI-assisted workflows into CAD and manufacturing-related projects.'
+  },
+  {
+    question: 'Does the book cover Fusion 360 CAD?',
+    answer: 'Yes. CAD modeling and 3D design workflows are central topics of the book.'
+  },
+  {
+    question: 'Does the book cover CAM and CNC?',
+    answer:
+      'Yes. The book covers workflows connecting Fusion 360 CAD work with CAM and CNC-oriented manufacturing processes.'
+  },
+  {
+    question: 'Does the book cover 3D printing?',
+    answer:
+      'Yes. 3D printing is one of the major topics covered alongside CAD, CAM, CNC and product design.'
+  },
+  {
+    question: 'Does the book cover AI?',
+    answer:
+      'Yes. The book focuses specifically on AI-assisted workflows used alongside Fusion 360 for planning, modeling, design refinement and related tasks.'
+  },
+  {
+    question: 'Who is the author?',
+    answer: `The author is ${AUTHOR_NAME}.`
+  },
+  {
+    question: 'How many pages does the book have?',
+    answer: `The paperback has ${PAGE_COUNT} pages.`
+  },
+  {
+    question: 'What is the ISBN?',
+    answer: `The ISBN-13 is ${ISBN_13}.`
+  },
+  {
+    question: `Where can I buy ${SHORT_TITLE}?`,
+    answer: `${SITE_NAME} provides information about the book and directs readers to the current Amazon retailer listing, where the German Edition paperback can be purchased. Price and availability are set by the retailer.`
+  }
+] as const;
+
+export const metadata: Metadata = {
+  title: {
+    absolute: META_TITLE
+  },
+  description: META_DESCRIPTION,
+  keywords: [
+    'Master Fusion 360 Mit KI 2026',
+    'German Fusion 360 book',
+    'Fusion 360 AI book',
+    'Fusion 360 CAD CAM CNC',
+    'Fusion 360 3D printing',
+    'Stephen Dave',
+    'German Edition',
+    'dilóo'
+  ],
+  alternates: {
+    canonical: PAGE_URL
+  },
   openGraph: {
-    type: 'website',
-    url: `${SITE_URL}/`,
-    siteName: 'AISneer',
-    title: 'AISneer — Curated Laptops, Accessories & Specialist Books',
-    description:
-      'AISneer curates laptops, USB hubs, and specialist books — including Fusion 360 AI workflow guides — with real specs and direct deal links.'
+    type: 'book',
+    url: PAGE_URL,
+    siteName: SITE_NAME,
+    title: META_TITLE,
+    description: META_DESCRIPTION,
+    locale: 'en_US',
+    authors: [AUTHOR_NAME],
+    isbn: ISBN_13,
+    releaseDate: DATE_PUBLISHED,
+    images: [
+      {
+        url: BOOK_IMAGE_URL,
+        width: 800,
+        height: 1200,
+        alt: `${SHORT_TITLE} German Edition by ${AUTHOR_NAME} book cover`
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: META_TITLE,
+    description: META_DESCRIPTION,
+    images: [BOOK_IMAGE_URL]
   }
 };
 
-const categoryMeta: Record<string, { blurb: string; icon: string }> = {
-  Ultrabook: { blurb: 'Thin, light, all-day battery', icon: '✦' },
-  Gaming: { blurb: 'High-refresh displays, RTX GPUs', icon: '◆' },
-  Business: { blurb: 'Secure, serviceable, enterprise-ready', icon: '■' },
-  Creator: { blurb: 'Color-accurate displays, pro GPUs', icon: '◈' },
-  Student: { blurb: 'Affordable everyday workhorses', icon: '●' },
-  '2-in-1': { blurb: 'Convertibles and touch-first designs', icon: '◉' },
-  'Budget Gaming': { blurb: 'Great fps-per-dollar rigs', icon: '◆' },
-  Chromebook: { blurb: 'Fast, simple, web-first', icon: '◇' },
-  Workstation: { blurb: 'ISV-certified, pro-grade power', icon: '▲' }
+const productOfferJsonLd = {
+  '@type': 'Offer',
+  url: AMAZON_BUY_URL,
+  price: PRICE_USD.toFixed(2),
+  priceCurrency: PRICE_CURRENCY,
+  priceValidUntil: PRICE_VALID_UNTIL,
+  availability: 'https://schema.org/InStock',
+  itemCondition: 'https://schema.org/NewCondition',
+  seller: {
+    '@type': 'Organization',
+    name: 'Amazon'
+  },
+  shippingDetails: {
+    '@type': 'OfferShippingDetails',
+    shippingRate: {
+      '@type': 'MonetaryAmount',
+      value: '0',
+      currency: PRICE_CURRENCY
+    },
+    shippingDestination: {
+      '@type': 'DefinedRegion',
+      addressCountry: 'US'
+    },
+    deliveryTime: {
+      '@type': 'ShippingDeliveryTime',
+      handlingTime: {
+        '@type': 'QuantitativeValue',
+        minValue: 0,
+        maxValue: 2,
+        unitCode: 'DAY'
+      },
+      transitTime: {
+        '@type': 'QuantitativeValue',
+        minValue: 1,
+        maxValue: 7,
+        unitCode: 'DAY'
+      }
+    }
+  },
+  hasMerchantReturnPolicy: {
+    '@type': 'MerchantReturnPolicy',
+    applicableCountry: 'US',
+    returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+    merchantReturnDays: 30,
+    returnMethod: 'https://schema.org/ReturnByMail',
+    returnFees: 'https://schema.org/FreeReturn',
+    merchantReturnLink:
+      'https://www.amazon.com/gp/help/customer/display.html?nodeId=GKM69DUUYKQWKWX7'
+  }
+};
+
+const bookJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['Book', 'Product'],
+  '@id': `${PAGE_URL}#book`,
+  name: PRODUCT_NAME,
+  alternateName: [SHORT_TITLE, BOOK_TITLE],
+  image: [BOOK_IMAGE_URL],
+  author: {
+    '@type': 'Person',
+    name: AUTHOR_NAME
+  },
+  brand: {
+    '@type': 'Brand',
+    name: AUTHOR_NAME
+  },
+  inLanguage: 'de',
+  bookFormat: 'https://schema.org/Paperback',
+  numberOfPages: PAGE_COUNT,
+  isbn: ISBN_13,
+  gtin13: ISBN_13,
+  datePublished: DATE_PUBLISHED,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Amazon Digital Services LLC - Kdp'
+  },
+  description: META_DESCRIPTION,
+  genre: [
+    'CAD',
+    'Computer-Aided Design',
+    'CAM',
+    'CNC',
+    '3D Printing',
+    'Product Design',
+    'Artificial Intelligence'
+  ],
+  about: [
+    { '@type': 'Thing', name: 'Autodesk Fusion 360' },
+    { '@type': 'Thing', name: 'Artificial Intelligence' },
+    { '@type': 'Thing', name: 'CAD' },
+    { '@type': 'Thing', name: 'CAM' },
+    { '@type': 'Thing', name: 'CNC' },
+    { '@type': 'Thing', name: '3D Printing' },
+    { '@type': 'Thing', name: 'Product Design' }
+  ],
+  url: PAGE_URL,
+  sameAs: [AMAZON_BUY_URL],
+  offers: productOfferJsonLd
+};
+
+const webPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${PAGE_URL}#webpage`,
+  url: PAGE_URL,
+  name: META_TITLE,
+  description: META_DESCRIPTION,
+  inLanguage: 'en',
+  isPartOf: {
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL
+  },
+  about: { '@id': `${PAGE_URL}#book` },
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: BOOK_IMAGE_URL
+  },
+  mainEntity: { '@id': `${PAGE_URL}#book` }
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: SITE_NAME,
+      item: PAGE_URL
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: SHORT_TITLE,
+      item: PAGE_URL
+    }
+  ]
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer
+    }
+  }))
 };
 
 export default function HomePage() {
-  const featured = [
-    laptops.find((l) => l.model.includes('MacBook Pro 14')),
-    laptops.find((l) => l.model.includes('Legion Slim 5')),
-    laptops.find((l) => l.model.includes('XPS 13')),
-    laptops.find((l) => l.model.includes('Zephyrus G14'))
-  ].filter((l): l is NonNullable<typeof l> => Boolean(l));
-
-  const itemListJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Featured Laptops on AISneer',
-    itemListElement: featured.map((l, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      url: `${SITE_URL}/laptops#${l.slug}`,
-      name: `${l.company} ${l.model}`
-    }))
-  };
-
   return (
     <>
-      {/* HERO */}
-      <section className="hero">
-        <div className="container hero-inner">
-          <div className="hero-copy">
-            <span className="eyebrow">Laptops · accessories · specialist books · est. 2026</span>
-            <h1 className="hero-title">
-              Buy your next laptop with <span className="accent">confidence</span>.
-            </h1>
-            <p className="hero-sub">
-              AISneer hand-picks the best laptops across every category — ultrabooks, gaming rigs,
-              MacBooks, business ThinkPads, creator machines, and budget student picks — then links
-              you straight to the current deal. We also curate USB hubs and specialist books (like
-              Fusion 360 + AI workflow guides), not only hardware. No noise, no clickbait, just real
-              specs and honest recommendations.
-            </p>
-            <div className="hero-cta">
-              <Link href="/laptops" className="btn btn-primary">
-                Shop all laptops →
-              </Link>
-              <Link href="#books" className="btn btn-ghost">
-                Browse books
-              </Link>
-            </div>
-            <ul className="hero-badges" aria-label="Trust highlights">
-              <li><strong>{laptops.length}+</strong> models curated</li>
-              <li><strong>9</strong> categories covered</li>
-              <li><strong>100%</strong> spec-verified</li>
-            </ul>
-          </div>
-          <div className="hero-visual" aria-hidden>
-            <div className="hero-card hero-card-1">
-              <img
-                src={featured[0]?.image}
-                alt=""
-                loading="eager"
-              />
-              <div className="hero-card-body">
-                <span className="badge">{featured[0]?.category}</span>
-                <p>{featured[0]?.company} {featured[0]?.model}</p>
-                <span className="price">{featured[0]?.priceFrom}</span>
+      <article className="container section book-product">
+        <header className="book-product-header">
+          <div className="book-product-hero">
+            <img
+              className="book-cover"
+              src={BOOK_IMAGE_PATH}
+              alt={`${SHORT_TITLE} German Edition by ${AUTHOR_NAME} book cover`}
+              width={800}
+              height={1200}
+            />
+            <div className="book-product-hero-copy">
+              <p className="eyebrow">German Fusion 360 + AI · Paperback · {PAGE_COUNT} pages</p>
+              <h1 className="book-product-title">{PRODUCT_NAME}</h1>
+              <p className="book-product-lead">
+                A German-language Fusion 360 and AI book by {AUTHOR_NAME} covering CAD modeling,
+                CAM, CNC manufacturing, 3D printing, and product-design workflows.
+              </p>
+              <p className="book-product-lead">
+                For German-speaking freelancers speeding up CAD-to-CNC workflows with AI —{' '}
+                <strong>{SHORT_TITLE}</strong> connects Autodesk Fusion 360 with AI-assisted
+                methods across design and manufacturing.
+              </p>
+              <div className="product-foot book-product-price-row">
+                <div className="product-price">
+                  <span className="price-label">Listed price</span>
+                  <span className="price">{PRICE_DISPLAY}</span>
+                </div>
+                <a
+                  className="btn btn-primary"
+                  href={AMAZON_BUY_URL}
+                  target="_blank"
+                  rel="nofollow sponsored noopener noreferrer"
+                >
+                  Check current availability and price on Amazon →
+                </a>
               </div>
-            </div>
-            <div className="hero-card hero-card-2">
-              <img src={featured[1]?.image} alt="" loading="eager" />
-              <div className="hero-card-body">
-                <span className="badge">{featured[1]?.category}</span>
-                <p>{featured[1]?.company} {featured[1]?.model}</p>
-                <span className="price">{featured[1]?.priceFrom}</span>
-              </div>
+              <p className="muted book-price-note">
+                Retailer price on Amazon may vary. Shipping and returns follow Amazon&apos;s
+                policies.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </header>
 
-      {/* VALUE STRIP */}
-      <section className="value-strip">
-        <div className="container value-strip-inner">
-          <div><strong>Spec-verified</strong><span>Every laptop cross-checked against official product pages.</span></div>
-          <div><strong>Always current</strong><span>Prices and availability reviewed regularly.</span></div>
-          <div><strong>Direct deal links</strong><span>One click to the best retailer listing we can find.</span></div>
-          <div><strong>No SEO filler</strong><span>Real recommendations, not keyword-stuffed reviews.</span></div>
-        </div>
-      </section>
-
-      {/* CATEGORIES */}
-      <section id="categories" className="container section">
-        <div className="section-head">
-          <h2 className="section-title">Shop by category</h2>
-          <p className="section-sub">
-            Every laptop we list fits one of these use cases. Pick the category closest to how
-            you&apos;ll actually use the machine.
+        <section className="book-product-block" aria-labelledby="about-book">
+          <h2 id="about-book">About the Book</h2>
+          <p>
+            <strong>{SHORT_TITLE}</strong> is a German-language practical guide by{' '}
+            <strong>{AUTHOR_NAME}</strong> for readers who want to combine Autodesk Fusion 360 with
+            modern AI-assisted workflows.
           </p>
-        </div>
-        <div className="category-grid">
-          {categories.map((cat) => {
-            const meta = categoryMeta[cat] ?? { blurb: 'Curated picks', icon: '◆' };
-            const count = laptops.filter((l) => l.category === cat).length;
-            return (
-              <Link
-                key={cat}
-                href={`/laptops?category=${encodeURIComponent(cat)}`}
-                className="category-card"
-              >
-                <span className="category-icon" aria-hidden>{meta.icon}</span>
-                <span className="category-name">{cat}</span>
-                <span className="category-blurb">{meta.blurb}</span>
-                <span className="category-count">{count} laptop{count === 1 ? '' : 's'} →</span>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* BOOKS */}
-      <section id="books" className="container section">
-        <div className="section-head">
-          <h2 className="section-title">Not only laptops — specialist books too</h2>
-          <p className="section-sub">
-            Beyond notebooks and hubs, we recommend focused technical books for creators and
-            freelancers who want sharper CAD-to-production workflows.
+          <p>
+            The book connects CAD modeling and product design with manufacturing-oriented workflows
+            including CAM, CNC and 3D printing. It is intended for designers, engineers, product
+            developers, freelancers and other technical users who want to move from design concepts
+            toward manufacturing-ready results.
           </p>
-        </div>
-        <article className="book-home-card">
-          <div className="book-home-card-body">
-            <span className="product-badge">German Edition · Paperback · 464 pages</span>
-            <h3>
-              <Link href="/master-fusion-360-mit-ki-2026-german-edition">
-                Master Fusion 360 Mit KI 2026
-              </Link>
-            </h3>
-            <p>
-              A{' '}
-              <Link href="/master-fusion-360-mit-ki-2026-german-edition">
-                German Fusion 360 + AI book
-              </Link>{' '}
-              by Stephen Dave — CAD, CAM, CNC, 3D printing and product-design workflows for
-              German-speaking designers, engineers and freelancers.
-            </p>
-            <Link
-              href="/master-fusion-360-mit-ki-2026-german-edition"
-              className="btn btn-primary"
+          <p>
+            Rather than focusing only on individual Fusion 360 tools, the book emphasizes practical
+            workflows for planning, modeling, refining designs and preparing projects for
+            manufacturing or 3D printing. That entity relationship — book, author, language, Fusion
+            360, AI, CAD, CAM, CNC, 3D printing and product design — is the core of what this
+            German Edition paperback teaches.
+          </p>
+          <p>
+            Published in {DATE_PUBLISHED_DISPLAY} as a {PAGE_COUNT}-page paperback (ISBN-13{' '}
+            {ISBN_13}), {SHORT_TITLE} sits in the 2026 landscape of German Fusion 360 resources for
+            people who need clearer CAD-to-production habits, not only isolated software tips.
+          </p>
+        </section>
+
+        <section className="book-product-block" aria-labelledby="what-you-learn">
+          <h2 id="what-you-learn">What You Will Learn</h2>
+          <p>
+            Concrete topics covered by this German Fusion 360 + AI book include the skills and
+            workflow transitions most readers look for when searching for CAD, CAM, CNC and 3D
+            printing guidance:
+          </p>
+          <ul className="bullet-list book-benefits">
+            {LEARN_TOPICS.map((topic) => (
+              <li key={topic}>{topic}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="book-product-block" aria-labelledby="fusion-ai">
+          <h2 id="fusion-ai">Fusion 360 + AI Workflows</h2>
+          <p>
+            The book explores how AI can support Fusion 360 workflows across planning, modeling,
+            design refinement and product development. The focus is not simply on using AI as a
+            general-purpose assistant, but on applying AI-assisted methods alongside CAD and
+            manufacturing workflows.
+          </p>
+          <p>
+            Readers looking for a German Fusion 360 AI book will find the emphasis on pairing
+            Autodesk Fusion 360 with AI inside real project steps — so design intent, modeling
+            choices and manufacturing prep stay connected rather than treated as separate hobbies.
+          </p>
+        </section>
+
+        <section className="book-product-block" aria-labelledby="cad-cam-cnc">
+          <h2 id="cad-cam-cnc">CAD, CAM, CNC and 3D Printing</h2>
+          <p>
+            {SHORT_TITLE} treats CAD → CAM → CNC / 3D-print as a continuous pipeline. CAD modeling
+            builds the geometry; CAM turns design intent into toolpaths and manufacturing plans;
+            CNC and 3D printing are the production endpoints where models must be clean, complete
+            and shop-ready.
+          </p>
+          <p>
+            That chain matters for freelancers and product developers who cannot afford endless
+            manual iterations between a pretty Fusion 360 model and a part that actually machines
+            or prints. The book&apos;s German Edition framing keeps those manufacturing concepts
+            accessible for German-speaking technical readers.
+          </p>
+        </section>
+
+        <section className="book-product-block" aria-labelledby="who-for">
+          <h2 id="who-for">Who This Book Is For</h2>
+          <p>
+            {SHORT_TITLE} is written for German-speaking readers who already use Fusion 360 — or are
+            ready to — and want AI-assisted help moving from concept to production.
+          </p>
+          <ul className="book-audience-list">
+            <li>
+              <strong>Fusion 360 users</strong> — people who want to improve their CAD workflow and
+              incorporate AI-assisted methods.
+            </li>
+            <li>
+              <strong>Mechanical engineers and designers</strong> — readers working with product
+              development, CAD modeling and manufacturing-oriented design.
+            </li>
+            <li>
+              <strong>CNC and manufacturing users</strong> — readers interested in connecting CAD
+              designs with CAM and CNC workflows.
+            </li>
+            <li>
+              <strong>3D-printing enthusiasts</strong> — people who want to move from Fusion 360
+              models toward practical 3D-print preparation.
+            </li>
+            <li>
+              <strong>Freelancers and product developers</strong> — professionals looking to reduce
+              repetitive work and improve the transition from concept to production.
+            </li>
+          </ul>
+        </section>
+
+        <section className="book-product-block" aria-labelledby="book-details">
+          <h2 id="book-details">Book Details</h2>
+          <p>
+            These bibliographic identifiers match the book&apos;s external footprint (title, author,
+            ISBN, page count and publication date):
+          </p>
+          <table className="book-details-table">
+            <tbody>
+              <tr>
+                <th scope="row">Title</th>
+                <td>{SHORT_TITLE}</td>
+              </tr>
+              <tr>
+                <th scope="row">Full title</th>
+                <td>{BOOK_TITLE}</td>
+              </tr>
+              <tr>
+                <th scope="row">Author</th>
+                <td>{AUTHOR_NAME}</td>
+              </tr>
+              <tr>
+                <th scope="row">Language</th>
+                <td>German</td>
+              </tr>
+              <tr>
+                <th scope="row">Edition</th>
+                <td>German Edition</td>
+              </tr>
+              <tr>
+                <th scope="row">Format</th>
+                <td>Paperback</td>
+              </tr>
+              <tr>
+                <th scope="row">Pages</th>
+                <td>{PAGE_COUNT}</td>
+              </tr>
+              <tr>
+                <th scope="row">Publication date</th>
+                <td>{DATE_PUBLISHED_DISPLAY}</td>
+              </tr>
+              <tr>
+                <th scope="row">ISBN-13</th>
+                <td>{ISBN_13}</td>
+              </tr>
+              <tr>
+                <th scope="row">Topics</th>
+                <td>Fusion 360, AI, CAD, CAM, CNC, 3D printing, product design</td>
+              </tr>
+              <tr>
+                <th scope="row">Listed price</th>
+                <td>
+                  {PRICE_DISPLAY} {PRICE_CURRENCY} (confirm live Amazon price)
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Price and availability</th>
+                <td>See the current retailer listing on Amazon</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section className="book-product-block" aria-labelledby="about-author">
+          <h2 id="about-author">About the Author</h2>
+          <h3 className="book-author-name">About {AUTHOR_NAME}</h3>
+          <p>
+            <strong>{AUTHOR_NAME}</strong> is the author of <em>{SHORT_TITLE}</em>, a practical
+            guide focused on Fusion 360, AI-assisted workflows, CAD, CAM, CNC, 3D printing and
+            product design.
+          </p>
+          <p>
+            His technical books focus on practical workflows that help readers apply modern software
+            and AI-assisted techniques to specialized creative, engineering and production tasks.
+          </p>
+        </section>
+
+        <section className="book-product-cta" aria-labelledby="where-to-buy">
+          <h2 id="where-to-buy">Where to Buy the Book</h2>
+          <p>
+            {SITE_NAME} does not sell or ship the book directly. We provide information about{' '}
+            <em>{SHORT_TITLE}</em> and link you to the current retailer listing, where you can check
+            the latest price, availability and shipping options.
+          </p>
+          <p>
+            Buy the German Edition paperback on Amazon when you are ready to compare the live offer.
+            Our listed reference price is {PRICE_DISPLAY} {PRICE_CURRENCY}; Amazon may show a
+            different current price.
+          </p>
+          <div className="product-foot book-product-price-row">
+            <div className="product-price">
+              <span className="price-label">Listed price</span>
+              <span className="price">{PRICE_DISPLAY}</span>
+            </div>
+            <a
+              className="btn btn-primary btn-lg"
+              href={AMAZON_BUY_URL}
+              target="_blank"
+              rel="nofollow sponsored noopener noreferrer"
             >
-              Read the Fusion 360 CAD, CAM, CNC and 3D printing guide →
-            </Link>
+              Check current availability and price → Amazon
+            </a>
           </div>
-        </article>
-      </section>
-
-      {/* FEATURED PRODUCTS */}
-      <section id="featured" className="container section">
-        <div className="section-head">
-          <h2 className="section-title">This week&apos;s featured picks</h2>
-          <p className="section-sub">
-            Four machines we&apos;d recommend right now — one MacBook, one gaming rig, one
-            ultrabook, and one creator laptop.
+          <p className="book-product-extractor" aria-label="Exact product name for extractors">
+            PRODUCT_NAME: {PRODUCT_NAME}
           </p>
-        </div>
-        <div className="featured-grid">
-          {featured.map((l) => (
-            <article key={l.slug} className="product-card">
-              <div className="product-media">
-                <img src={l.image} alt={`${l.company} ${l.model}`} loading="lazy" />
-                <span className="product-badge">{l.category}</span>
-              </div>
-              <div className="product-body">
-                <div className="product-title">
-                  <span className="product-brand">{l.company}</span>
-                  <h3>{l.model}</h3>
-                </div>
-                <ul className="product-highlights">
-                  {l.highlights.map((h) => (
-                    <li key={h}>{h}</li>
-                  ))}
-                </ul>
-                <div className="product-foot">
-                  <div className="product-price">
-                    <span className="price-label">From</span>
-                    <span className="price">{l.priceFrom}</span>
-                  </div>
-                  <a
-                    className="btn btn-primary btn-sm"
-                    href={l.buyUrl}
-                    target="_blank"
-                    rel="nofollow sponsored noopener"
-                  >
-                    View deal
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div className="section-foot">
-          <Link href="/laptops" className="btn btn-ghost">
-            See all {laptops.length} laptops →
-          </Link>
-        </div>
-      </section>
+        </section>
 
-      {/* ABOUT */}
-      <section id="about" className="about">
-        <div className="container about-inner">
-          <div className="about-copy">
-            <span className="eyebrow">About AISneer</span>
-            <h2 className="section-title">We help people buy the right laptop — not the loudest one.</h2>
-            <p>
-              AISneer started because shopping for a laptop online is genuinely painful. Every
-              search returns a wall of identical-looking listings, affiliate review sites rank by SEO
-              instead of quality, and the specs you actually need are buried under marketing.
-            </p>
-            <p>
-              We&apos;re a small, independent team that does the boring work for you: we read the
-              official product pages, verify the CPU / GPU / RAM / panel specs, and only list
-              machines we&apos;d recommend to a friend. When you click a product, you go straight
-              to a retailer where you can buy it today.
-            </p>
-            <p>
-              We cover ultrabooks, gaming laptops, MacBooks, ThinkPads, EliteBooks, Surface devices,
-              Chromebooks, and mobile workstations — plus accessories and specialist technical books
-              when they clearly help the same audience. For example, we maintain a dedicated page for{' '}
-              <Link href="/master-fusion-360-mit-ki-2026-german-edition">
-                Master Fusion 360 Mit KI 2026
-              </Link>
-              , a German Fusion 360 + AI guide. New picks are added as they become worth recommending.
-            </p>
-            <div className="hero-cta">
-              <Link href="/laptops" className="btn btn-primary">Start shopping</Link>
-              <a href="mailto:hello@aisneer.com" className="btn btn-ghost">Contact us</a>
-            </div>
+        <section className="book-product-block" aria-labelledby="faq">
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <div className="faq">
+            {FAQ_ITEMS.map((item) => (
+              <details key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
           </div>
-          <aside id="why-us" className="about-stats">
-            <h3>Why shop with AISneer</h3>
-            <ul>
-              <li>
-                <strong>Spec-accurate listings.</strong> We pull specs from manufacturer product
-                pages, not aggregators.
-              </li>
-              <li>
-                <strong>Honest scope.</strong> We tell you when a price band, panel, or GPU depends
-                on the SKU — no &quot;up to&quot; bait.
-              </li>
-              <li>
-                <strong>Direct-to-retailer links.</strong> You buy from the manufacturer or a major
-                retailer, never from us.
-              </li>
-              <li>
-                <strong>Independent curation.</strong> We only list laptops we&apos;d actually
-                recommend. Our catalog stays small on purpose.
-              </li>
-            </ul>
-          </aside>
-        </div>
-      </section>
-
-      {/* BUYING GUIDE */}
-      <section id="buying-guide" className="container section">
-        <div className="section-head">
-          <h2 className="section-title">Quick buying guide</h2>
-          <p className="section-sub">
-            Not sure where to start? Match your primary use case to the right category below.
-          </p>
-        </div>
-        <div className="guide-grid">
-          <div className="guide-card">
-            <h3>For work &amp; productivity</h3>
-            <p>
-              Prioritize a comfortable 14" WUXGA+ panel, 16GB+ RAM, Intel Core Ultra or Apple
-              Silicon, and all-day battery. Look at the <Link href="/laptops?category=Ultrabook">Ultrabook</Link>,
-              {' '}<Link href="/laptops?category=Business">Business</Link>, and Creator categories.
-            </p>
-          </div>
-          <div className="guide-card">
-            <h3>For gaming</h3>
-            <p>
-              RTX 4060 is the sweet spot; RTX 4070 if you want QHD+ high-refresh. 16GB DDR5 minimum,
-              1TB NVMe strongly recommended. Browse our <Link href="/laptops?category=Gaming">Gaming</Link> and
-              {' '}<Link href="/laptops?category=Budget%20Gaming">Budget Gaming</Link> picks.
-            </p>
-          </div>
-          <div className="guide-card">
-            <h3>For students</h3>
-            <p>
-              15.6" FHD IPS with Core i5 / Ryzen 5, 16GB RAM, 512GB SSD is the comfort zone under
-              $800. See our <Link href="/laptops?category=Student">Student</Link> and
-              {' '}<Link href="/laptops?category=Chromebook">Chromebook</Link> picks.
-            </p>
-          </div>
-          <div className="guide-card">
-            <h3>For creators &amp; pros</h3>
-            <p>
-              Color-accurate displays (OLED or mini-LED), 32GB+ RAM, and a discrete GPU or Apple
-              M-series Pro/Max. See our <Link href="/laptops?category=Creator">Creator</Link> and
-              {' '}<Link href="/laptops?category=Workstation">Workstation</Link> picks.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="container section">
-        <div className="section-head">
-          <h2 className="section-title">Frequently asked questions</h2>
-        </div>
-        <div className="faq">
-          <details>
-            <summary>Do you recommend any specialist books for Fusion 360 and AI?</summary>
-            <p>
-              Yes. We recommend{' '}
-              <Link href="/master-fusion-360-mit-ki-2026-german-edition">
-                Master Fusion 360 Mit KI 2026
-              </Link>
-              , a German-language paperback by Stephen Dave covering AI-assisted Fusion 360
-              workflows for CAD, CAM, CNC, 3D printing and product design. AISneer provides book
-              information and a retailer link; we do not sell or ship books ourselves.
-            </p>
-          </details>
-          <details>
-            <summary>Do you actually sell laptops, or do you just link to other stores?</summary>
-            <p>
-              AISneer is a curation store. We hand-pick laptops we&apos;d recommend, then link you
-              to the manufacturer (Apple, Dell, Lenovo, HP, ASUS, MSI, Microsoft, Samsung, Acer) or
-              a major retailer where you complete the purchase. We may earn a commission, at no
-              extra cost to you.
-            </p>
-          </details>
-          <details>
-            <summary>How do you choose which laptops to list?</summary>
-            <p>
-              We only list laptops that (a) have current, verifiable manufacturer spec pages, (b)
-              compete strongly in their category on price/performance/build, and (c) we&apos;d
-              recommend to a friend. When a newer generation replaces a model, we update or retire
-              the listing.
-            </p>
-          </details>
-          <details>
-            <summary>Are the specs on your listings accurate?</summary>
-            <p>
-              Specs are pulled directly from manufacturer product pages. Because laptop models ship
-              in many SKUs, we note where the CPU tier, panel, GPU TGP, or memory depends on the
-              exact configuration — always double-check the specific part number before you buy.
-            </p>
-          </details>
-          <details>
-            <summary>Which laptop is best overall for beginners?</summary>
-            <p>
-              For mainstream ease of use, Apple&apos;s 14-inch MacBook Pro with M3 Pro combines
-              long battery life with strong everyday performance — see Apple&apos;s published
-              battery and tech specs for the configuration you choose.
-            </p>
-          </details>
-          <details>
-            <summary>What&apos;s the best budget laptop you list?</summary>
-            <p>
-              In our current catalog, the Acer Aspire 5 (A515 family) is typically the lowest-cost
-              Windows option with a current Core i5 H-class CPU. Compare the exact model code and
-              RAM type (DDR4 vs LPDDR5) on Acer&apos;s site.
-            </p>
-          </details>
-          <details>
-            <summary>Is HP EliteBook 840 G11 good for business use?</summary>
-            <p>
-              Yes. HP EliteBook 840 G11 is a solid business laptop with dependable performance,
-              professional build quality, and enterprise-grade security features. Verify vPro and
-              graphics branding on the specific SKU.
-            </p>
-          </details>
-        </div>
-      </section>
-
-      {/* CTA STRIP */}
-      <section className="cta-strip">
-        <div className="container cta-strip-inner">
-          <div>
-            <h2>Ready to find your next laptop?</h2>
-            <p>
-              {laptops.length} curated laptops across {categories.length} categories. One click to
-              the best current deal.
-            </p>
-          </div>
-          <Link href="/laptops" className="btn btn-primary btn-lg">
-            Shop all laptops →
-          </Link>
-        </div>
-      </section>
+        </section>
+      </article>
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
     </>
   );
