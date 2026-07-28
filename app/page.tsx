@@ -159,20 +159,25 @@ export default function HomePage() {
         </div>
         <article className="book-home-card">
           <div className="book-home-card-body">
-            <span className="product-badge">German Edition · Paperback</span>
+            <span className="product-badge">German Edition · Paperback · 464 pages</span>
             <h3>
-              MASTER FUSION 360 MIT KI 2026: CAD, CAM, CNC, 3D-Druck- und Produktdesign Workflows
-              (German Edition)
+              <Link href="/master-fusion-360-mit-ki-2026-german-edition">
+                Master Fusion 360 Mit KI 2026
+              </Link>
             </h3>
             <p>
-              For German-speaking freelancers speeding up CAD-to-CNC workflows with AI in Fusion
-              360 — by STEPHEN DAVE. One dedicated product page, no catalog clutter.
+              A{' '}
+              <Link href="/master-fusion-360-mit-ki-2026-german-edition">
+                German Fusion 360 + AI book
+              </Link>{' '}
+              by Stephen Dave — CAD, CAM, CNC, 3D printing and product-design workflows for
+              German-speaking designers, engineers and freelancers.
             </p>
             <Link
               href="/master-fusion-360-mit-ki-2026-german-edition"
               className="btn btn-primary"
             >
-              View book page →
+              Read the Fusion 360 CAD, CAM, CNC and 3D printing guide →
             </Link>
           </div>
         </article>
@@ -248,8 +253,12 @@ export default function HomePage() {
             </p>
             <p>
               We cover ultrabooks, gaming laptops, MacBooks, ThinkPads, EliteBooks, Surface devices,
-              Chromebooks, and mobile workstations — plus accessories and specialist books when they
-              clearly help the same audience. New picks are added as they become worth recommending.
+              Chromebooks, and mobile workstations — plus accessories and specialist technical books
+              when they clearly help the same audience. For example, we maintain a dedicated page for{' '}
+              <Link href="/master-fusion-360-mit-ki-2026-german-edition">
+                Master Fusion 360 Mit KI 2026
+              </Link>
+              , a German Fusion 360 + AI guide. New picks are added as they become worth recommending.
             </p>
             <div className="hero-cta">
               <Link href="/laptops" className="btn btn-primary">Start shopping</Link>
@@ -330,6 +339,18 @@ export default function HomePage() {
           <h2 className="section-title">Frequently asked questions</h2>
         </div>
         <div className="faq">
+          <details>
+            <summary>Do you recommend any specialist books for Fusion 360 and AI?</summary>
+            <p>
+              Yes. We recommend{' '}
+              <Link href="/master-fusion-360-mit-ki-2026-german-edition">
+                Master Fusion 360 Mit KI 2026
+              </Link>
+              , a German-language paperback by Stephen Dave covering AI-assisted Fusion 360
+              workflows for CAD, CAM, CNC, 3D printing and product design. AISneer provides book
+              information and a retailer link; we do not sell or ship books ourselves.
+            </p>
+          </details>
           <details>
             <summary>Do you actually sell laptops, or do you just link to other stores?</summary>
             <p>

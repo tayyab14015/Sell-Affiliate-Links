@@ -1170,10 +1170,14 @@ h1, h2, h3, h4 {
 }
 
 .book-product-lead {
-  margin: 0;
+  margin: 0 0 12px;
   font-size: 1.05rem;
   color: var(--text-muted);
   max-width: 62ch;
+}
+
+.book-product-header .hero-cta {
+  margin-top: 20px;
 }
 
 .book-product-block {
@@ -1183,6 +1187,11 @@ h1, h2, h3, h4 {
 .book-product-block h2 {
   margin: 0 0 12px;
   font-size: 1.25rem;
+}
+
+.book-product-block h3.book-author-name {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
 }
 
 .book-product-block p {
@@ -1197,12 +1206,66 @@ h1, h2, h3, h4 {
   margin-top: 4px;
 }
 
+.book-audience-list {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 62ch;
+}
+
+.book-audience-list li {
+  color: var(--text-muted);
+  padding-left: 0;
+  font-size: 15px;
+}
+
+.book-audience-list strong {
+  color: var(--text);
+}
+
+.book-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 14.5px;
+}
+
+.book-details-table th,
+.book-details-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.book-details-table tr:last-child th,
+.book-details-table tr:last-child td {
+  border-bottom: none;
+}
+
+.book-details-table th {
+  width: 34%;
+  font-weight: 650;
+  color: var(--text);
+  background: var(--bg-muted);
+}
+
+.book-details-table td {
+  color: var(--text-muted);
+}
+
 .book-facts {
   margin-top: 8px;
 }
 
 .book-product-cta {
-  margin: 40px 0 16px;
+  margin: 40px 0 32px;
   padding: 24px;
   background: #fff;
   border: 1px solid var(--border);
@@ -1217,6 +1280,7 @@ h1, h2, h3, h4 {
 .book-product-cta p {
   margin: 0 0 16px;
   color: var(--text-muted);
+  max-width: 62ch;
 }
 
 .book-product-extractor {
@@ -1252,6 +1316,14 @@ h1, h2, h3, h4 {
   margin: 0;
   font-size: 1.15rem;
   line-height: 1.35;
+}
+
+.book-home-card-body h3 a {
+  color: inherit;
+}
+
+.book-home-card-body h3 a:hover {
+  color: var(--brand);
 }
 
 .book-home-card-body p {
