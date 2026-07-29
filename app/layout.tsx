@@ -165,8 +165,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 <script
   src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
-  data-site-id="site_7978413879c126f9256445e3e482cc70"
-  data-token="llmafftm_72290862ef6b4742f86f4e796a92c13d9f49e65e8fa90332a781b3d6d64a4050">
+  data-site-id="site_8731e43301d666177d83a55b7c17bdad"
+  data-token="llmafftm_590d91362bbeba28b8112afe57101ada13979dae4e5527be8887f7d74ac555f3">
 </script>
       </body>
     </html>
