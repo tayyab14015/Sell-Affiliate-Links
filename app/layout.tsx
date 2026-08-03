@@ -85,6 +85,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <Link href="/#what-you-learn">What You&apos;ll Learn</Link>
               <Link href="/#book-details">Details</Link>
               <Link href="/#faq">FAQ</Link>
+              <Link href="/blog">Blog</Link>
               {/* ARCHIVED — laptop & accessory shop removed; site is book-only
               <Link href="/">Home</Link>
               <Link href="/laptops">Shop Laptops</Link>
