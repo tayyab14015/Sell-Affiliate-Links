@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { amazonProductUrl, amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
 const SITE_URL = 'https://wordofprompt.com';
@@ -19,8 +20,6 @@ export const metadata: Metadata = {
   }
 };
 
-const amazonUrl = (asin: string) => `https://www.amazon.com/dp/${asin}`;
-
 // Deliberately thin schema: only the jacket is described, and it is the pullover
 // variant rather than the full-zip mentioned alongside it in the prose.
 const jsonLd = {
@@ -31,7 +30,7 @@ const jsonLd = {
   additionalProperty: [{ '@type': 'PropertyValue', name: 'closure_type', value: 'quarter_zip' }],
   offers: {
     '@type': 'Offer',
-    url: amazonUrl('B0BJ5W4KDS'),
+    url: amazonSearchUrl('Patagonia Better Sweater 1/4-Zip Fleece Pullover Nickel men'),
     price: 129,
     priceCurrency: 'USD'
   }
@@ -79,7 +78,11 @@ export default function MixedCategoryPage() {
             <li>About $248</li>
           </ul>
           <p>
-            <a className="blog-buy" href={amazonUrl('B0863TXGM3')} rel="nofollow sponsored noopener">
+            <a
+              className="blog-buy"
+              href={amazonSearchUrl('Sony WH-1000XM4 Wireless Noise Cancelling Headphones Midnight Blue')}
+              rel="nofollow sponsored noopener"
+            >
               View on Amazon
             </a>
           </p>
@@ -98,7 +101,11 @@ export default function MixedCategoryPage() {
             scale.
           </p>
           <p>
-            <a className="blog-buy" href={amazonUrl('B0BJ5W4KDS')} rel="nofollow sponsored noopener">
+            <a
+              className="blog-buy"
+              href={amazonSearchUrl('Patagonia Better Sweater 1/4-Zip Fleece Pullover Nickel men')}
+              rel="nofollow sponsored noopener"
+            >
               Shop now
             </a>
           </p>
@@ -114,7 +121,7 @@ export default function MixedCategoryPage() {
             search for one.
           </p>
           <p>
-            <a className="blog-buy" href={amazonUrl('B0H5NRKGYS')} rel="nofollow sponsored noopener">
+            <a className="blog-buy" href={amazonProductUrl('B0H5NRKGYS')} rel="nofollow sponsored noopener">
               Buy on Amazon
             </a>
           </p>

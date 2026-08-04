@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
 const SITE_URL = 'https://wordofprompt.com';
@@ -23,8 +24,6 @@ export const metadata: Metadata = {
   }
 };
 
-const amazonUrl = (asin: string) => `https://www.amazon.com/dp/${asin}`;
-
 type Sku = {
   label: string;
   platform: string;
@@ -32,7 +31,7 @@ type Sku = {
   distribution: 'digital' | 'physical_disc' | 'physical_cartridge';
   distributionLabel: string;
   price: string;
-  asin: string | null;
+  amazonQuery: string | null;
   note: string;
 };
 
@@ -61,7 +60,7 @@ const GAMES: Game[] = [
         distribution: 'digital',
         distributionLabel: 'Online game code, no disc shipped',
         price: '$54.99',
-        asin: 'B0CQ8VZ7YS',
+        amazonQuery: 'Cyberpunk 2077 Ultimate Edition PC Steam code',
         note:
           'Delivered as a Steam activation key by email. Nothing arrives in the post. There is no PC disc release of the Ultimate Edition at all.'
       },
@@ -72,7 +71,7 @@ const GAMES: Game[] = [
         distribution: 'physical_disc',
         distributionLabel: 'Blu-ray disc in a case',
         price: '$49.99',
-        asin: 'B0CJ7W1S2Q',
+        amazonQuery: 'Cyberpunk 2077 Ultimate Edition PlayStation 5',
         note:
           'A physical Blu-ray disc. Requires the PS5 model with an optical drive; the Digital Edition console cannot read it. Roughly 70 GB installs from the disc, then patches over the network.'
       }
@@ -93,7 +92,7 @@ const GAMES: Game[] = [
         distribution: 'physical_disc',
         distributionLabel: 'Blu-ray disc plus physical extras',
         price: '$69.99',
-        asin: 'B0CGVS3G5S',
+        amazonQuery: 'Baldurs Gate 3 Deluxe Edition PlayStation 5',
         note:
           'Two discs, a cloth map, an art booklet, a dice set and a soundtrack CD. The extras are the reason this edition exists; the game data is identical to the standard release.'
       },
@@ -104,7 +103,7 @@ const GAMES: Game[] = [
         distribution: 'digital',
         distributionLabel: 'Digital download only',
         price: '$59.99',
-        asin: null,
+        amazonQuery: 'Baldurs Gate 3 PC digital code',
         note:
           'Sold as a download through Steam and GOG. We have deliberately left the item number off this entry: Larian does not sell a PC disc, and any listing you find that claims to ship one is a key in a box.'
       }
@@ -125,7 +124,7 @@ const GAMES: Game[] = [
         distribution: 'digital',
         distributionLabel: 'Downloadable content code',
         price: '$39.99',
-        asin: 'B0D2K1YQ3F',
+        amazonQuery: 'Elden Ring Shadow of the Erdtree PC DLC code',
         note:
           'Requires Elden Ring to already be installed and licensed. This is a DLC code and cannot be played on its own.'
       },
@@ -136,7 +135,7 @@ const GAMES: Game[] = [
         distribution: 'physical_disc',
         distributionLabel: 'Blu-ray disc, base game plus expansion',
         price: '$79.99',
-        asin: 'B0D4G7MQZR',
+        amazonQuery: 'Elden Ring Shadow of the Erdtree Edition PlayStation 5',
         note:
           'The bundle: base game on disc with the expansion included. If you already own Elden Ring, this is the wrong purchase and you want the standalone expansion above.'
       }
@@ -157,7 +156,7 @@ const GAMES: Game[] = [
         distribution: 'physical_disc',
         distributionLabel: 'Blu-ray disc in a case',
         price: '$39.99',
-        asin: 'B09TF32MYG',
+        amazonQuery: 'Hogwarts Legacy Standard Edition Xbox Series X',
         note:
           'A disc. Plays on Xbox Series X and on Xbox One with the older build; the Series S has no drive and cannot use it.'
       },
@@ -168,7 +167,7 @@ const GAMES: Game[] = [
         distribution: 'digital',
         distributionLabel: 'Online game code',
         price: '$69.99',
-        asin: 'B0BS3H72WH',
+        amazonQuery: 'Hogwarts Legacy Digital Deluxe Edition Xbox code',
         note:
           'Adds the Dark Arts Pack, Thestral mount and 72-hour early access, and exists only as a code. There is no disc version of the Deluxe Edition on any platform.'
       }
@@ -189,7 +188,7 @@ const GAMES: Game[] = [
         distribution: 'physical_cartridge',
         distributionLabel: 'Game card (cartridge), not a disc',
         price: '$59.99',
-        asin: 'B0DBK4X8X9',
+        amazonQuery: 'The Legend of Zelda Echoes of Wisdom Nintendo Switch',
         note:
           'Physical, but a solid-state game card. It is not a disc and it is not a download, and the Switch has no optical drive of any kind.'
       }
@@ -226,7 +225,7 @@ const jsonLd = [
     ],
     offers: {
       '@type': 'Offer',
-      url: amazonUrl('B0CJ7W1S2Q'),
+      url: amazonSearchUrl('Cyberpunk 2077 Ultimate Edition PlayStation 5'),
       price: 49.99,
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock'
@@ -246,7 +245,7 @@ const jsonLd = [
     ],
     offers: {
       '@type': 'Offer',
-      url: amazonUrl('B0CQ8VZ7YS'),
+      url: amazonSearchUrl('Cyberpunk 2077 Ultimate Edition PC Steam code'),
       price: 54.99,
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock'
@@ -370,13 +369,13 @@ export default function GameEditionsPage() {
                           {sku.platform} ·{' '}
                           {sku.edition === 'Expansion' ? 'Expansion' : `${sku.edition} Edition`} ·{' '}
                           {sku.distributionLabel} · <span className="blog-price">{sku.price}</span>
-                          {sku.asin ? ` · ASIN ${sku.asin}` : ' · no retail item number listed'}
+                          {sku.amazonQuery ? ' · Amazon search link available' : ' · no retail item number listed'}
                         </span>
                         <p>{sku.note}</p>
-                        {sku.asin ? (
+                        {sku.amazonQuery ? (
                           <a
                             className="gm-btn"
-                            href={amazonUrl(sku.asin)}
+                            href={amazonSearchUrl(sku.amazonQuery)}
                             rel="nofollow sponsored noopener"
                           >
                             {sku.distribution === 'digital'

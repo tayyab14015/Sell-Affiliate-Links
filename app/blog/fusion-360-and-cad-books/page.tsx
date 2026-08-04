@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { amazonProductUrl, amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
 const SITE_URL = 'https://wordofprompt.com';
@@ -27,8 +28,6 @@ export const metadata: Metadata = {
   }
 };
 
-const amazonUrl = (asin: string) => `https://www.amazon.com/dp/${asin}`;
-
 const bookNode = {
   '@context': 'https://schema.org',
   '@type': ['Book', 'Product'],
@@ -50,7 +49,7 @@ const bookNode = {
   ],
   offers: {
     '@type': 'Offer',
-    url: amazonUrl(HERO_ASIN),
+    url: amazonProductUrl(HERO_ASIN),
     price: 20.0,
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
@@ -211,7 +210,7 @@ export default function CadBooksPage() {
             <p>
               <a
                 className="btn btn-primary"
-                href={amazonUrl(HERO_ASIN)}
+                href={amazonProductUrl(HERO_ASIN)}
                 rel="nofollow sponsored noopener"
               >
                 Buy on Amazon — $20.00
@@ -239,7 +238,7 @@ export default function CadBooksPage() {
           <p>
             <a
               className="btn btn-ghost btn-sm"
-              href={amazonUrl('B0CQXR8W7F')}
+              href={amazonSearchUrl('Autodesk Fusion 360 A Power Guide for Beginners and Career Professionals 7th Edition Sandeep Dogra')}
               rel="nofollow sponsored noopener"
             >
               View on Amazon
@@ -260,7 +259,7 @@ export default function CadBooksPage() {
           <p>
             <a
               className="btn btn-ghost btn-sm"
-              href={amazonUrl('1680456547')}
+              href={amazonSearchUrl('Fusion 360 for Makers 2nd Edition Lydia Sloan Cline')}
               rel="nofollow sponsored noopener"
             >
               Shop now on Amazon
@@ -295,7 +294,7 @@ export default function CadBooksPage() {
           <p>
             <a
               className="btn btn-ghost btn-sm"
-              href={amazonUrl('0831145323')}
+              href={amazonSearchUrl('Machinerys Handbook 32nd Edition Toolbox hardcover')}
               rel="nofollow sponsored noopener"
             >
               Buy the hardcover on Amazon
@@ -352,7 +351,7 @@ export default function CadBooksPage() {
             <dd className="blog-price">$20.00</dd>
             <dt>Where to buy</dt>
             <dd>
-              <a className="blog-buy" href={amazonUrl(HERO_ASIN)} rel="nofollow sponsored noopener">
+              <a className="blog-buy" href={amazonProductUrl(HERO_ASIN)} rel="nofollow sponsored noopener">
                 Buy on Amazon
               </a>
             </dd>
@@ -376,7 +375,7 @@ export default function CadBooksPage() {
             <dd>
               <a
                 className="blog-buy"
-                href={amazonUrl('B0CQXR8W7F')}
+                href={amazonSearchUrl('Autodesk Fusion 360 A Power Guide for Beginners and Career Professionals 7th Edition Sandeep Dogra')}
                 rel="nofollow sponsored noopener"
               >
                 View on Amazon
@@ -404,7 +403,7 @@ export default function CadBooksPage() {
             <dd>
               <a
                 className="blog-buy"
-                href={amazonUrl('1680456547')}
+                href={amazonSearchUrl('Fusion 360 for Makers 2nd Edition Lydia Sloan Cline')}
                 rel="nofollow sponsored noopener"
               >
                 Shop now on Amazon
@@ -436,7 +435,7 @@ export default function CadBooksPage() {
             <dd>
               <a
                 className="blog-buy"
-                href={amazonUrl('0831145323')}
+                href={amazonSearchUrl('Machinerys Handbook 32nd Edition Toolbox hardcover')}
                 rel="nofollow sponsored noopener"
               >
                 Buy the hardcover on Amazon

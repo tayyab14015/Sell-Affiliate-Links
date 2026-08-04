@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
 const SITE_URL = 'https://wordofprompt.com';
@@ -35,7 +36,7 @@ type Jacket = {
   sizeTested: string;
   price: number | null;
   priceLabel: string;
-  asin: string | null;
+  amazonQuery: string | null;
   pitch: string;
   bullets: string[];
   inSchema: boolean;
@@ -54,7 +55,7 @@ const JACKETS: Jacket[] = [
     sizeTested: 'Men’s M',
     price: 159,
     priceLabel: '$159',
-    asin: 'B0BJ5V1QRQ',
+    amazonQuery: 'Patagonia Better Sweater Fleece Jacket Stonewash men',
     pitch:
       'The one everybody owns, and the one that still makes sense. A full-length front zipper with a wind flap behind it, two zippered handwarmer pockets and a chest pocket that fits a phone. Because it opens all the way down, it is the version to buy if you layer it over a shirt during the workday and take it off six times before lunch.',
     bullets: [
@@ -77,7 +78,7 @@ const JACKETS: Jacket[] = [
     sizeTested: 'Men’s M',
     price: 129,
     priceLabel: '$129',
-    asin: 'B0BJ5W4KDS',
+    amazonQuery: 'Patagonia Better Sweater 1/4-Zip Fleece Pullover Nickel men',
     pitch:
       'Same fabric, same fit, different garment. The quarter-zip pullover has no front opening below the sternum, one chest pocket, and no handwarmer pockets at all. It is warmer in wind and thirty dollars cheaper, and it is the wrong purchase if you wanted the jacket. These two show up on the same retail page constantly, so read the closure before you check out.',
     bullets: [
@@ -100,7 +101,7 @@ const JACKETS: Jacket[] = [
     sizeTested: 'Men’s M',
     price: 179,
     priceLabel: '$179',
-    asin: 'B09XKQ7NPD',
+    amazonQuery: 'Arcteryx Delta LT Jacket Black Sapphire men',
     pitch:
       'The Delta LT is the trim technical midlayer that disappears under a shell, and it opens from hem to collar so you can dump heat on a climb without stopping. Arc’teryx names its fleece family Delta and then differentiates only by suffix, which is how people end up with the wrong closure.',
     bullets: [
@@ -123,7 +124,7 @@ const JACKETS: Jacket[] = [
     sizeTested: 'Men’s M',
     price: 159,
     priceLabel: '$159',
-    asin: null,
+    amazonQuery: 'Arcteryx Delta Half Zip Forage men',
     pitch:
       'The pullover sibling of the Delta LT. No hand pockets, a half-length zipper that stops at the sternum, and a slightly cleaner line under a harness. We prefer it for ski touring and dislike it for anything involving a laptop bag and a train platform.',
     bullets: [
@@ -146,7 +147,7 @@ const JACKETS: Jacket[] = [
     sizeTested: 'Men’s L',
     price: 149,
     priceLabel: '$149',
-    asin: 'B0C9K8X4T7',
+    amazonQuery: 'The North Face Apex Bionic 3 Jacket TNF Black men',
     pitch:
       'This is the softshell in the group, not a fleece: a woven face that blocks essentially all wind, a brushed backer for warmth, and a full-length centre-front zipper with an internal storm flap. Heavy for what it is, and unbeatable for standing on a sideline in February.',
     bullets: [
@@ -169,7 +170,7 @@ const JACKETS: Jacket[] = [
     sizeTested: 'Men’s XL',
     price: 44.99,
     priceLabel: '$44.99',
-    asin: 'B00OW1WJK2',
+    amazonQuery: 'Columbia Steens Mountain Full Zip 2.0 Fleece Jacket Collegiate Navy men',
     pitch:
       'Forty-five dollars, sold in about twenty colours, and warmer than its price suggests. The zipper is cheap and the fleece pills after a season, but as a car-and-campsite layer nothing beats it. We tested Collegiate Navy in XL; the colour and size are not the product, the Steens Mountain Full Zip 2.0 name is.',
     bullets: [
@@ -181,8 +182,6 @@ const JACKETS: Jacket[] = [
     inSchema: false
   }
 ];
-
-const amazonUrl = (asin: string) => `https://www.amazon.com/dp/${asin}`;
 
 const productNodes = JACKETS.filter((j) => j.inSchema).map((j) => ({
   '@context': 'https://schema.org',
@@ -204,7 +203,7 @@ const productNodes = JACKETS.filter((j) => j.inSchema).map((j) => ({
     priceCurrency: 'USD',
     ...(j.price ? { price: j.price } : {}),
     availability: 'https://schema.org/InStock',
-    ...(j.asin ? { url: amazonUrl(j.asin) } : {})
+    ...(j.amazonQuery ? { url: amazonSearchUrl(j.amazonQuery) } : {})
   }
 }));
 
@@ -346,7 +345,7 @@ export default function JacketsPage() {
             </ul>
             <a
               className="btn btn-primary btn-sm"
-              href={amazonUrl(JACKETS[0].asin as string)}
+              href={amazonSearchUrl(JACKETS[0].amazonQuery as string)}
               rel="nofollow sponsored noopener"
             >
               Shop now on Amazon
@@ -382,7 +381,7 @@ export default function JacketsPage() {
             </ul>
             <a
               className="btn btn-primary btn-sm"
-              href={amazonUrl(JACKETS[2].asin as string)}
+              href={amazonSearchUrl(JACKETS[2].amazonQuery as string)}
               rel="nofollow sponsored noopener"
             >
               View on Amazon
@@ -404,7 +403,7 @@ export default function JacketsPage() {
             </ul>
             <a
               className="btn btn-primary btn-sm"
-              href={amazonUrl(JACKETS[4].asin as string)}
+              href={amazonSearchUrl(JACKETS[4].amazonQuery as string)}
               rel="nofollow sponsored noopener"
             >
               Buy on Amazon
@@ -441,7 +440,7 @@ export default function JacketsPage() {
             </ul>
             <a
               className="btn btn-primary btn-sm"
-              href={amazonUrl(JACKETS[1].asin as string)}
+              href={amazonSearchUrl(JACKETS[1].amazonQuery as string)}
               rel="nofollow sponsored noopener"
             >
               Buy the pullover on Amazon
@@ -461,7 +460,13 @@ export default function JacketsPage() {
                 <li key={b}>{b}</li>
               ))}
             </ul>
-            <p className="muted">No stable retail listing at the time of writing.</p>
+            <a
+              className="btn btn-primary btn-sm"
+              href={amazonSearchUrl(JACKETS[3].amazonQuery as string)}
+              rel="nofollow sponsored noopener"
+            >
+              Search on Amazon
+            </a>
           </aside>
 
           <h2>The cheap one, and the one we cannot name</h2>
@@ -481,7 +486,7 @@ export default function JacketsPage() {
             </ul>
             <a
               className="btn btn-primary btn-sm"
-              href={amazonUrl(JACKETS[5].asin as string)}
+              href={amazonSearchUrl(JACKETS[5].amazonQuery as string)}
               rel="nofollow sponsored noopener"
             >
               Shop now

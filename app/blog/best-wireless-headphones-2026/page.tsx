@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
 const SITE_URL = 'https://wordofprompt.com';
@@ -36,7 +37,7 @@ type Phone = {
   codecs: string;
   priceBand: string;
   price: number;
-  asin: string | null;
+  amazonQuery: string | null;
   verdict: string;
   tag?: string;
 };
@@ -55,7 +56,7 @@ const PHONES: Phone[] = [
     codecs: 'SBC, AAC, LDAC',
     priceBand: '$330–$400',
     price: 348,
-    asin: 'B09XS7JWHH',
+    amazonQuery: 'Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black',
     verdict:
       'The fifth-generation flagship keeps the crown for cabin noise. Eight microphones feed the QN1 and V1 processors, and the lighter 250 g frame is the first WH-1000X that we could wear for a nine-hour flight without hot spots. It does not fold flat like the previous generation, so the case is noticeably larger in a backpack.',
     tag: 'Editor’s choice'
@@ -73,7 +74,7 @@ const PHONES: Phone[] = [
     codecs: 'SBC, AAC, aptX Adaptive',
     priceBand: '$380–$430',
     price: 429,
-    asin: 'B0CCZ26PZJ',
+    amazonQuery: 'Bose QuietComfort Ultra Headphones White Smoke',
     verdict:
       'Bose still cancels low-frequency rumble slightly more aggressively than Sony, and Immersive Audio is the only spatial mode here that survives head movement without swimming. Battery life drops to roughly 18 hours with Immersive Audio switched on, which is why the table lists 24 hours as the standard-mode figure.'
   },
@@ -90,7 +91,7 @@ const PHONES: Phone[] = [
     codecs: 'SBC, AAC, aptX Adaptive, aptX',
     priceBand: '$280–$350',
     price: 299,
-    asin: 'B0B6ZSK4Q2',
+    amazonQuery: 'Sennheiser MOMENTUM 4 Wireless Graphite',
     verdict:
       'Sixty hours per charge is not a typo, and the five-band EQ in the Smart Control app is the most useful tuning tool of the group. Noise cancelling is a step behind Sony and Bose on aircraft, and the plastic yokes feel cheaper than the price suggests.'
   },
@@ -107,7 +108,7 @@ const PHONES: Phone[] = [
     codecs: 'SBC, AAC, LDAC',
     priceBand: '$230–$280',
     price: 248,
-    asin: 'B0863TXGM3',
+    amazonQuery: 'Sony WH-1000XM4 Wireless Noise Cancelling Headphones Midnight Blue',
     verdict:
       'Two generations old and still the value pick. Speak-to-Chat, LDAC and multipoint are all here, the earcups fold flat into a smaller case, and the 40 mm driver is warmer than the 30 mm unit in the WH-1000XM5. Buy this one if you shop on price per hour of quiet.',
     tag: 'Best value'
@@ -125,7 +126,7 @@ const PHONES: Phone[] = [
     codecs: 'AAC (Lossless over USB-C on 2024 revision)',
     priceBand: '$450–$550',
     price: 479,
-    asin: 'B08PZHYWJS',
+    amazonQuery: 'Apple AirPods Max Space Gray',
     verdict:
       'Heavy, expensive, and still the best-sounding sealed can on this list when it is fed Apple Music from an iPhone. Note that two hardware revisions are in circulation: the original Lightning model and the 2024 USB-C refresh, which added wired lossless. The listings look almost identical, so check the port before you buy.'
   },
@@ -142,7 +143,7 @@ const PHONES: Phone[] = [
     codecs: 'SBC, AAC, LDAC',
     priceBand: '$150–$200',
     price: 199,
-    asin: 'B09980ZH76',
+    amazonQuery: 'Audio-Technica ATH-M50xBT2 Wireless Over-Ear Headphones Black',
     verdict:
       'The only pair here with no active noise cancelling at all, included because the passive isolation and studio-flat tuning make it the mixing-adjacent option. Fifty hours of battery and a 3.5 mm cable for zero-latency monitoring.'
   },
@@ -159,13 +160,11 @@ const PHONES: Phone[] = [
     codecs: 'SBC, AAC, LDAC',
     priceBand: '$80–$100',
     price: 99,
-    asin: 'B0CFWMSN5J',
+    amazonQuery: 'Anker Soundcore Space One Wireless Noise Cancelling Headphones Latte Cream',
     verdict:
       'Under a hundred dollars with LDAC and adaptive ANC that removes maybe 80 percent of what the Sony removes. The Latte Cream colourway is the one we tested; the Jet Black listing carries a different item number even though the hardware is identical.'
   }
 ];
-
-const amazonUrl = (asin: string) => `https://www.amazon.com/dp/${asin}`;
 
 const jsonLd = [
   {
@@ -216,7 +215,7 @@ const jsonLd = [
           price: p.price,
           priceCurrency: 'USD',
           availability: 'https://schema.org/InStock',
-          ...(p.asin ? { url: amazonUrl(p.asin) } : {})
+          ...(p.amazonQuery ? { url: amazonSearchUrl(p.amazonQuery) } : {})
         }
       }
     }))
@@ -320,10 +319,10 @@ export default function HeadphonesRoundupPage() {
                     <td>{p.codecs}</td>
                     <td className="blog-price">{p.priceBand}</td>
                     <td>
-                      {p.asin ? (
+                      {p.amazonQuery ? (
                         <a
                           className="blog-buy"
-                          href={amazonUrl(p.asin)}
+                          href={amazonSearchUrl(p.amazonQuery)}
                           rel="nofollow sponsored noopener"
                         >
                           View on Amazon
@@ -350,8 +349,12 @@ export default function HeadphonesRoundupPage() {
                 </h3>
                 <div className="hp-side">
                   <div className="blog-price">{p.priceBand}</div>
-                  {p.asin ? (
-                    <a className="blog-buy" href={amazonUrl(p.asin)} rel="nofollow sponsored noopener">
+                  {p.amazonQuery ? (
+                    <a
+                      className="blog-buy"
+                      href={amazonSearchUrl(p.amazonQuery)}
+                      rel="nofollow sponsored noopener"
+                    >
                       Buy on Amazon
                     </a>
                   ) : (

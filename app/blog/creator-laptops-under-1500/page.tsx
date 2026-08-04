@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
 const SITE_URL = 'https://wordofprompt.com';
@@ -36,7 +37,7 @@ type Laptop = {
   weight: string;
   price: number | null;
   priceLabel: string;
-  asin: string | null;
+  amazonQuery: string | null;
   eyebrow: string;
   body: string;
   variantNote?: string;
@@ -57,7 +58,7 @@ const LAPTOPS: Laptop[] = [
     weight: '1.88 kg (4.14 lb)',
     price: 749,
     priceLabel: '$749',
-    asin: 'B0BSLNCBSD',
+    amazonQuery: 'ASUS Vivobook 16 OLED M1605YA-ES74 Ryzen 7 7730U 16GB 512GB',
     eyebrow: 'Best panel for the money',
     body:
       'The retail box says Vivobook 16 OLED and nothing else, but the sticker underneath reads M1605YA-ES74, and that string is the only reliable way to tell this configuration apart from the 2025 model that shipped with a 1920 × 1200 IPS panel. The Ryzen 7 7730U is a Zen 3 part, so treat it as a fast office chip rather than a render workstation. What you are buying is a colour-accurate 3.2K OLED for well under a thousand dollars.',
@@ -78,7 +79,7 @@ const LAPTOPS: Laptop[] = [
     weight: '1.74 kg (3.8 lb)',
     price: 1449,
     priceLabel: '$1,449',
-    asin: 'B0CVDVJ64Y',
+    amazonQuery: 'Dell XPS 14 9440 Core Ultra 7 155H RTX 4050 32GB 1TB',
     eyebrow: 'Best all-round build',
     body:
       'Do not confuse the machine name with the chip name: the laptop is the XPS 14 9440, and the Core Ultra 7 155H inside it is the processor. Reviewers mix these up constantly. Dell pairs it with an RTX 4050 that is power-limited to 30 W, which is enough for Premiere Pro timeline scrubbing and DaVinci Resolve noise reduction but not for sustained Blender cycles. The capacitive touch function row remains the most divisive part of the design.',
@@ -97,7 +98,7 @@ const LAPTOPS: Laptop[] = [
     weight: '1.49 kg (3.28 lb)',
     price: 1249,
     priceLabel: '$1,249',
-    asin: 'B0D9XZ9XN2',
+    amazonQuery: 'Lenovo Yoga Pro 7 14ASP9 Ryzen AI 9 365 32GB 1TB',
     eyebrow: 'Best battery under load',
     body:
       'Another naming trap: Ryzen AI 9 365 is the processor, 14ASP9 is the chassis generation, and 83HN000EUS is the SKU that Lenovo actually ships. Twelve Zen 5 cores and a Radeon 880M give you the best performance-per-watt here, and the 73 Wh battery survived a full workday of Lightroom Classic exports. There is no discrete GPU, which is the trade you are making for the weight.',
@@ -116,7 +117,7 @@ const LAPTOPS: Laptop[] = [
     weight: '1.51 kg (3.3 lb)',
     price: 1299,
     priceLabel: '$1,299',
-    asin: 'B0DZDCG7LL',
+    amazonQuery: 'Apple MacBook Air 15-inch M4 16GB 512GB',
     eyebrow: 'Best for silent editing',
     body:
       'Fanless, so it throttles on long exports, and it is the only machine here that cannot be configured with 32 GB of memory at this price. Everything else about it is unfair: 18 hours of real battery, a genuinely quiet chassis and the best trackpad on any laptop. The 256 GB base configuration is the one to avoid because it uses a single NAND package and halves SSD read speed.',
@@ -137,7 +138,7 @@ const LAPTOPS: Laptop[] = [
     weight: '1.85 kg (4.08 lb)',
     price: 1499,
     priceLabel: '$1,499',
-    asin: 'B0D9YCFZ8T',
+    amazonQuery: 'ASUS ProArt P16 H7606WV Ryzen AI 9 HX 370 RTX 4060 32GB 1TB',
     eyebrow: 'Most GPU per dollar',
     body:
       'The listing that most retailers use drops the manufacturer name entirely and leads with the sub-brand, which is why this card is headed the way it is. It is a 16-inch creator machine with an RTX 4060, a 4K OLED touch panel, a physical DialPad next to the trackpad and a 90 Wh battery. At exactly $1,499 it is the fastest thing in this guide that still clears our budget.',
@@ -156,15 +157,13 @@ const LAPTOPS: Laptop[] = [
     weight: '1.32 kg (2.91 lb)',
     price: null,
     priceLabel: 'Street price varies, typically $1,000–$1,150',
-    asin: null,
+    amazonQuery: 'Acer Swift Go 14 AI SFG14-64T-79LT Core Ultra 7 258V 16GB 1TB OLED',
     eyebrow: 'Lightest of the six',
     body:
       'We could not pin a stable listing to this configuration, so there is no direct link below — search the model name and check that the panel is the 2880 × 1800 OLED rather than the 1920 × 1200 IPS that ships in the cheaper trim. The Lunar Lake chip is the efficiency champion of the group and the chassis is under 1.35 kg.',
     inSchema: false
   }
 ];
-
-const amazonUrl = (asin: string) => `https://www.amazon.com/dp/${asin}`;
 
 const productNodes = LAPTOPS.filter((l) => l.inSchema).map((l) => ({
   '@type': 'Product',
@@ -188,7 +187,7 @@ const productNodes = LAPTOPS.filter((l) => l.inSchema).map((l) => ({
     priceCurrency: 'USD',
     ...(l.price ? { price: l.price } : {}),
     availability: 'https://schema.org/InStock',
-    ...(l.asin ? { url: amazonUrl(l.asin) } : {})
+    ...(l.amazonQuery ? { url: amazonSearchUrl(l.amazonQuery) } : {})
   }
 }));
 
@@ -211,7 +210,7 @@ const vivobookOneTerabyte = {
     price: 869,
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
-    url: 'https://www.amazon.com/dp/B0CJKQ7Y2P'
+    url: amazonSearchUrl('ASUS Vivobook 16 OLED M1605YA-ES96 Ryzen 7 7730U 16GB 1TB')
   }
 };
 
@@ -323,10 +322,10 @@ export default function CreatorLaptopsPage() {
 
                 <footer>
                   <span className="muted">{l.gpu.includes('NVIDIA') ? 'Discrete GPU' : 'Integrated GPU'}</span>
-                  {l.asin ? (
+                  {l.amazonQuery ? (
                     <a
                       className="btn btn-primary btn-sm"
-                      href={amazonUrl(l.asin)}
+                      href={amazonSearchUrl(l.amazonQuery)}
                       rel="nofollow sponsored noopener"
                     >
                       Buy on Amazon
