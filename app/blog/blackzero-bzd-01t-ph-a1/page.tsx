@@ -11,35 +11,72 @@ const DATE_MODIFIED_DISPLAY = 'August 6, 2026';
 
 const MODEL = 'BZD-01T-PH-A1';
 const BRAND = 'Blackzero';
-const ASIN = 'B0DBQMQMMW';
+/** Former Amazon ASIN for the A1 listing — no longer buyable. */
+const FORMER_ASIN = 'B0DBQMQMMW';
+/** Live buyable listing that matches the same 2-tier drill + hand-tool kit. */
+const LIVE_MODEL = 'BZD-01T-PH';
+const LIVE_ASIN = 'B0D5CLZ1ZT';
 const PRICE = 259.0;
 const PRICE_DISPLAY = '$259.00';
 const IMG_BASE = '/images/tools/blackzero-bzd-01t-ph-a1';
 const BUY_URL =
   'https://www.amazon.co.uk/BLACKZERO-Cordless-Drill-Lithium-Ion-Battery/dp/B0D5CLZ1ZT';
-const BUY_URL_ASIN = 'B0D5CLZ1ZT';
+
+const AVAILABILITY_NOTE = `The Blackzero ${MODEL} listing (ASIN ${FORMER_ASIN}) is no longer available on Amazon. Based on Blackzero’s published kit description, it matches the same 2-tier drill + hand-tool kit currently sold as ${LIVE_MODEL} (ASIN ${LIVE_ASIN}). We link to the live listing so you can check today’s price and availability.`;
 
 const TITLE =
   'Blackzero BZD-01T-PH-A1 Explained: Exact Specifications, Five Modes and Model Differences';
 const META_TITLE = 'Blackzero BZD-01T-PH-A1: Specs, Modes & Differences';
 const META_DESCRIPTION =
-  'Exact specs for the Blackzero BZD-01T-PH-A1, all 5 working modes explained, and how it differs from the BZD-01T-PH, BZD-01T-PS and BZD-01.';
+  'Exact specs for the Blackzero BZD-01T-PH-A1 (former ASIN B0DBQMQMMW), all 5 working modes explained, and how it maps to the live BZD-01T-PH listing.';
 
 export const metadata: Metadata = {
   title: META_TITLE,
   description: META_DESCRIPTION,
   alternates: { canonical: PAGE_URL },
+  authors: [{ name: 'Daniel Kessler' }],
+  keywords: [
+    'Blackzero BZD-01T-PH-A1',
+    'BZD-01T-PH-A1 specs',
+    'Blackzero cordless drill',
+    'BZD-01T-PH',
+    'B0DBQMQMMW',
+    'Blackzero 2-in-1 tool kit',
+    'Blackzero drill 5 modes'
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
   openGraph: {
     type: 'article',
     url: PAGE_URL,
     title: META_TITLE,
     description: META_DESCRIPTION,
-    siteName: 'AISneer'
+    siteName: 'AISneer',
+    publishedTime: DATE_PUBLISHED,
+    modifiedTime: DATE_MODIFIED,
+    authors: ['Daniel Kessler'],
+    images: [
+      {
+        url: `/images/tools/blackzero-bzd-01t-ph-a1/drill-hero.jpg`,
+        width: 1024,
+        height: 997,
+        alt: 'Blackzero BZD-01T-PH-A1 cordless drill with both case tiers open'
+      }
+    ]
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: META_TITLE,
-    description: META_DESCRIPTION
+    description: META_DESCRIPTION,
+    images: [`/images/tools/blackzero-bzd-01t-ph-a1/drill-hero.jpg`]
   }
 };
 
@@ -54,11 +91,12 @@ const SIBLING_MODELS = [
   },
   {
     model: 'BZD-01T-PH',
-    asin: 'B0D5CLZ1ZT',
+    asin: LIVE_ASIN,
     listingColor: 'Black',
     listingName: 'BLACKZERO Cordless Drill, 16V Lithium-Ion Drill with Battery, BZD-01T-PH',
     note:
-      'Paired with the 2-tier portable case: one tier is the drill and bits, the other is a hand-tool set (hammer, screwdrivers, pliers, tape measure).'
+      'The live buyable listing. Same 2-tier portable case as A1: one tier is the drill and bits, the other is a hand-tool set (hammer, screwdrivers, pliers, tape measure). This is the Amazon ASIN we link for price and availability.',
+    live: true
   },
   {
     model: 'BZD-01T-PS',
@@ -71,42 +109,54 @@ const SIBLING_MODELS = [
   },
   {
     model: 'BZD-01T-PH-A1',
-    asin: ASIN,
+    asin: FORMER_ASIN,
     listingColor: 'Black',
     listingName: 'Blackzero BZD-01T-PH-A1 — Cordless Drill/Driver, 5 Operation Modes',
     note:
-      'The subject of this page, priced at $259.00 at time of writing. Same 2-tier portable kit as BZD-01T-PH — drill tier plus hand-tool tier including the sheepshead hammer — listed under its own separate ASIN.',
+      'The subject of this page (former ASIN). Same 2-tier drill + hand-tool kit as BZD-01T-PH. The A1 Amazon listing is no longer available; buy via the live BZD-01T-PH ASIN instead.',
     current: true
   }
 ] as const;
 
 const GALLERY = [
   {
-    src: `${IMG_BASE}/drill-hero.png`,
+    src: `${IMG_BASE}/drill-hero.jpg`,
     alt: `${BRAND} ${MODEL} cordless drill with both case tiers open, showing bits and hand tools`,
-    caption: 'The drill plus both open case tiers'
+    caption: 'The drill plus both open case tiers',
+    width: 1024,
+    height: 997
   },
   {
-    src: `${IMG_BASE}/drill-detail.png`,
+    src: `${IMG_BASE}/drill-detail.jpg`,
     alt: `${BRAND} ${MODEL} drill tier product detail — labeled charging cable, bits, step drill bit and screwdriver sets`,
-    caption: 'Drill tier, item-by-item'
+    caption: 'Drill tier, item-by-item',
+    width: 1024,
+    height: 1024
   },
   {
-    src: `${IMG_BASE}/hand-tools-detail.png`,
+    src: `${IMG_BASE}/hand-tools-detail.jpg`,
     alt: `${BRAND} ${MODEL} hand-tool tier product detail — labeled hammer, tape measure, wrench, pliers and screwdrivers`,
-    caption: 'Hand-tool tier, item-by-item'
+    caption: 'Hand-tool tier, item-by-item',
+    width: 1024,
+    height: 1024
   },
   {
-    src: `${IMG_BASE}/case-size.png`,
+    src: `${IMG_BASE}/case-size.jpg`,
     alt: `${BRAND} ${MODEL} combination tool box size diagram — 13.2 x 9.5 x 6.4 inch double-layer case`,
-    caption: 'Case dimensions'
+    caption: 'Case dimensions',
+    width: 1024,
+    height: 1024
   },
   {
-    src: `${IMG_BASE}/toolbox-locking.png`,
+    src: `${IMG_BASE}/toolbox-locking.jpg`,
     alt: `${BRAND} ${MODEL} combination toolbox set — modular locking system, monolayer and multi-storey`,
-    caption: 'Modular locking system'
+    caption: 'Modular locking system',
+    width: 1024,
+    height: 1024
   }
 ] as const;
+
+const OG_IMAGE = `${SITE_URL}${IMG_BASE}/drill-hero.jpg`;
 
 const DRILL_TIER_ITEMS = [
   '16V multi-speed smart electric drill',
@@ -170,16 +220,16 @@ const FAQ_ITEMS = [
   {
     question: `What is the Blackzero ${MODEL}?`,
     answer:
-      `The Blackzero ${MODEL} is a 16V cordless brushless drill/driver sold as part of a 2-in-1 portable tool case (ASIN ${ASIN}, Drills > Drill Drivers on Amazon). One case tier holds the drill, bits and charging cable; the other holds a hand-tool set. It uses a touchscreen display to switch between 5 working modes and charges over USB-C.`
+      `The Blackzero ${MODEL} is a 16V cordless brushless drill/driver sold as part of a 2-in-1 portable tool case (former Amazon ASIN ${FORMER_ASIN}). One case tier holds the drill, bits and charging cable; the other holds a hand-tool set. It uses a touchscreen display to switch between 5 working modes and charges over USB-C. That A1 listing is no longer available; the same kit is currently sold as ${LIVE_MODEL} (ASIN ${LIVE_ASIN}).`
   },
   {
     question: `What does the "A1" in ${MODEL} mean?`,
     answer:
-      'Blackzero has not published an official explanation of the A1 suffix. Amazon\'s own catalog lists BZD-01T-PH-A1 (ASIN B0DBQMQMMW) as a separate listing from the plain BZD-01T-PH (ASIN B0D5CLZ1ZT), even though both describe the same 2-tier drill-and-hand-tool kit. This is the naming pattern Amazon typically uses for a distinct packaging, photo set or bundle variant of the same base model rather than a hardware revision. Match the exact ASIN when buying if you need a specific variant.'
+      `Blackzero has not published an official explanation of the A1 suffix. Amazon previously listed ${MODEL} (ASIN ${FORMER_ASIN}) separately from ${LIVE_MODEL} (ASIN ${LIVE_ASIN}), even though both describe the same 2-tier drill-and-hand-tool kit. That is the naming pattern Amazon typically uses for a distinct packaging, photo set or bundle variant of the same base model rather than a hardware revision. The A1 ASIN is no longer buyable; use the live ${LIVE_MODEL} listing instead.`
   },
   {
     question: `How much does the ${MODEL} cost?`,
-    answer: `${PRICE_DISPLAY} at the time of writing, per the Amazon listing for ASIN ${ASIN}. Amazon prices change, so check the live listing for the current price and any active deals.`
+    answer: `${PRICE_DISPLAY} was the last published price we recorded for this kit. Because the former A1 listing (ASIN ${FORMER_ASIN}) is gone, check the live ${LIVE_MODEL} listing (ASIN ${LIVE_ASIN}) for today’s price and any active deals.`
   },
   {
     question: `What voltage and torque does the ${MODEL} drill have?`,
@@ -208,7 +258,7 @@ const FAQ_ITEMS = [
   },
   {
     question: `Where can I buy the ${MODEL} drill?`,
-    answer: `AISneer does not sell this drill directly. We link to the live Amazon listing for this same drill/hand-tool kit (ASIN ${BUY_URL_ASIN}) so you can check today's price, availability and seller.`
+    answer: `AISneer does not sell this drill directly. The ${MODEL} listing (ASIN ${FORMER_ASIN}) is no longer available on Amazon. Based on Blackzero’s published kit description, it matches the same 2-tier drill + hand-tool kit currently sold as ${LIVE_MODEL} (ASIN ${LIVE_ASIN}). We link to that live listing so you can check today’s price, availability and seller.`
   }
 ] as const;
 
@@ -216,11 +266,20 @@ const blogPostingJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: TITLE,
+  description: META_DESCRIPTION,
   url: PAGE_URL,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': PAGE_URL },
+  image: GALLERY.map((g) => `${SITE_URL}${g.src}`),
   datePublished: DATE_PUBLISHED,
   dateModified: DATE_MODIFIED,
-  author: { '@type': 'Person', name: 'Daniel Kessler' },
-  publisher: { '@type': 'Organization', name: 'AISneer' },
+  inLanguage: 'en',
+  author: {
+    '@type': 'Person',
+    name: 'Daniel Kessler',
+    description:
+      'Writes tool and hardware explainers for AISneer, focusing on matching exact model numbers and ASINs to the correct specs.'
+  },
+  publisher: { '@type': 'Organization', name: 'AISneer', url: SITE_URL },
   about: `${BRAND} ${MODEL} cordless drill`
 };
 
@@ -230,8 +289,7 @@ const breadcrumbJsonLd = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
     { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
-    { '@type': 'ListItem', position: 3, name: 'Tools', item: `${SITE_URL}/blog?topic=tools` },
-    { '@type': 'ListItem', position: 4, name: `${BRAND} ${MODEL}`, item: PAGE_URL }
+    { '@type': 'ListItem', position: 3, name: `${BRAND} ${MODEL}`, item: PAGE_URL }
   ]
 };
 
@@ -241,24 +299,22 @@ const productJsonLd = {
   name: `${BRAND} ${MODEL} Cordless Drill/Driver 2-in-1 Tool Kit`,
   brand: { '@type': 'Brand', name: BRAND },
   model: MODEL,
+  sku: LIVE_ASIN,
   category: 'Drills > Drill Drivers',
   image: GALLERY.map((g) => `${SITE_URL}${g.src}`),
   description:
-    'Cordless Drill/Driver, 5 Operation Modes, sold as a 2-in-1 portable tool kit with a hand-tool tier. 16V brushless motor, up to 60 N·m torque, USB-C rechargeable 1600mAh battery good for up to 850 screws per charge.',
+    `Cordless Drill/Driver, 5 Operation Modes, sold as a 2-in-1 portable tool kit with a hand-tool tier. Former Amazon ASIN ${FORMER_ASIN} (no longer available); currently buyable as ${LIVE_MODEL} (ASIN ${LIVE_ASIN}). 16V brushless motor, up to 60 N·m torque, USB-C rechargeable 1600mAh battery good for up to 850 screws per charge.`,
   additionalProperty: [
     { '@type': 'PropertyValue', name: 'voltage', value: '16V (16.8V max)' },
     { '@type': 'PropertyValue', name: 'max_torque', value: '60 N·m' },
     { '@type': 'PropertyValue', name: 'battery', value: '1600mAh Li-ion, USB-C rechargeable' },
     { '@type': 'PropertyValue', name: 'working_modes', value: 5 },
     { '@type': 'PropertyValue', name: 'motor_type', value: 'Brushless' },
-    { '@type': 'PropertyValue', name: 'screws_per_charge', value: 'up to 850' }
+    { '@type': 'PropertyValue', name: 'screws_per_charge', value: 'up to 850' },
+    { '@type': 'PropertyValue', name: 'former_asin', value: FORMER_ASIN },
+    { '@type': 'PropertyValue', name: 'live_asin', value: LIVE_ASIN },
+    { '@type': 'PropertyValue', name: 'live_model', value: LIVE_MODEL }
   ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: 4.8,
-    reviewCount: 6,
-    bestRating: 5
-  },
   offers: {
     '@type': 'Offer',
     url: BUY_URL,
@@ -266,7 +322,8 @@ const productJsonLd = {
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     itemCondition: 'https://schema.org/NewCondition',
-    seller: { '@type': 'Organization', name: 'Amazon' }
+    seller: { '@type': 'Organization', name: 'Amazon' },
+    name: `${BRAND} ${LIVE_MODEL} (live listing matching ${MODEL})`
   }
 };
 
@@ -314,48 +371,69 @@ export default function BlackzeroBzd01tPhA1Page() {
           </div>
           <p className="blog-lede">
             The <strong>{BRAND} {MODEL}</strong> is a 16V cordless brushless drill/driver sold in a
-            2-in-1 portable tool case (ASIN {ASIN}), priced at <strong>{PRICE_DISPLAY}</strong> at
-            the time of writing, with 5 touchscreen-selectable working modes. Below are its exact
-            listed specifications, what&apos;s in the case, what each of the 5 modes does, and how
-            this specific model number differs from the other Blackzero BZD-01 listings
-            it&apos;s easy to confuse it with.
+            2-in-1 portable tool case. Its former Amazon listing (ASIN {FORMER_ASIN}) is no longer
+            available; the same kit is currently sold as <strong>{LIVE_MODEL}</strong> (ASIN{' '}
+            {LIVE_ASIN}). Below are its exact listed specifications, what&apos;s in the case, what
+            each of the 5 modes does, and how this model number differs from the other Blackzero
+            BZD-01 listings it&apos;s easy to confuse it with.
           </p>
         </header>
 
+        <aside className="tl-avail" aria-label="Availability note">
+          <strong>Availability note:</strong> {AVAILABILITY_NOTE}
+        </aside>
+
+        <nav className="tl-toc" aria-label="On this page">
+          <span className="tl-toc-label">On this page:</span>{' '}
+          <a href="#specs">Specifications</a> · <a href="#in-the-box">What&apos;s in the case</a> ·{' '}
+          <a href="#modes">The 5 modes</a> · <a href="#differences">Model differences</a> ·{' '}
+          <a href="#faq">FAQ</a> · <a href="#where-to-buy">Price &amp; availability</a>
+        </nav>
+
         <div className="tl-gallery" aria-label={`${BRAND} ${MODEL} product images`}>
-          {GALLERY.map((g) => (
+          {GALLERY.map((g, i) => (
             <figure key={g.src} className="tl-gallery-item">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={g.src} alt={g.alt} loading="eager" />
+              <img
+                src={g.src}
+                alt={g.alt}
+                width={g.width}
+                height={g.height}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : 'auto'}
+                decoding="async"
+              />
               <figcaption>{g.caption}</figcaption>
             </figure>
           ))}
         </div>
         <p className="tl-gallery-credit">
-          Images from the Blackzero {MODEL} Amazon listing (ASIN {ASIN}).
+          Product images from Blackzero&apos;s kit listing for the same 2-tier drill + hand-tool
+          platform (live ASIN {LIVE_ASIN}; former A1 ASIN {FORMER_ASIN}).
         </p>
 
         <div className="tl-quick">
           <h2>Quick answer</h2>
           <p>
-            <strong>{BRAND} {MODEL}</strong> (ASIN {ASIN}) is a 16V, brushless, USB-C rechargeable
-            cordless drill/driver with up to 60 N·m of torque and 5 working modes selected from an
-            intelligent touchscreen display, priced at <strong>{PRICE_DISPLAY}</strong>. It ships in
-            a 2-tier portable case: one tier holds the drill and bits, the other holds a hand-tool
-            set including a sheepshead hammer — the same kit design sold under the BZD-01T-PH model
-            number, listed here under its own separate ASIN.
+            <strong>{BRAND} {MODEL}</strong> (former ASIN {FORMER_ASIN}) is a 16V, brushless, USB-C
+            rechargeable cordless drill/driver with up to 60 N·m of torque and 5 working modes
+            selected from an intelligent touchscreen display. It ships in a 2-tier portable case:
+            one tier holds the drill and bits, the other holds a hand-tool set including a
+            sheepshead hammer — the same kit design now sold live as <strong>{LIVE_MODEL}</strong>{' '}
+            (ASIN {LIVE_ASIN}). Last recorded price for this kit was{' '}
+            <strong>{PRICE_DISPLAY}</strong>; check the live listing for today&apos;s price.
           </p>
           <span className="tl-rating" aria-label="Amazon rating">
-            ★ 4.8 / 5 — 6 ratings on Amazon
+            ★ 4.8 / 5 — 6 ratings on the former Amazon listing
           </span>
         </div>
 
         <section className="blog-section" aria-labelledby="specs">
           <h2 id="specs">Exact {MODEL} specifications</h2>
           <p>
-            These are the specifications published on the Amazon listing for ASIN {ASIN}, cross-checked
-            against Blackzero&apos;s listings for the same BZD-01T drill platform (BZD-01T-PH and
-            BZD-01T-PS) and two independent reviews of that platform.
+            These are the specifications published for the {MODEL} kit (former ASIN {FORMER_ASIN}),
+            cross-checked against Blackzero&apos;s live {LIVE_MODEL} listing (ASIN {LIVE_ASIN}), the
+            BZD-01T-PS listing, and independent reviews of the same BZD-01T drill platform.
           </p>
           <div className="hp-tablewrap">
             <table className="hp-table">
@@ -370,12 +448,22 @@ export default function BlackzeroBzd01tPhA1Page() {
                   <td>{MODEL}</td>
                 </tr>
                 <tr>
-                  <th scope="row">ASIN</th>
-                  <td>{ASIN}</td>
+                  <th scope="row">Former ASIN ({MODEL})</th>
+                  <td>
+                    {FORMER_ASIN} — no longer available on Amazon
+                  </td>
                 </tr>
                 <tr>
-                  <th scope="row">Price</th>
-                  <td className="blog-price">{PRICE_DISPLAY} (at time of writing)</td>
+                  <th scope="row">Live buy ASIN ({LIVE_MODEL})</th>
+                  <td>
+                    {LIVE_ASIN} — same 2-tier drill + hand-tool kit; this is the listing we link
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Last recorded price</th>
+                  <td className="blog-price">
+                    {PRICE_DISPLAY} (check live listing; Amazon prices change)
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">Category</th>
@@ -437,17 +525,18 @@ export default function BlackzeroBzd01tPhA1Page() {
                 </tr>
                 <tr>
                   <th scope="row">Amazon rating</th>
-                  <td>4.8 out of 5 (6 ratings, at time of writing)</td>
+                  <td>4.8 out of 5 (6 ratings on the former listing, before delisting)</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p className="muted" style={{ fontSize: '13px', marginTop: '10px' }}>
             Chuck capacity, no-load current, exact charge time and the drill&apos;s weight are not
-            listed on Blackzero&apos;s {ASIN} copy or images; the chuck and current figures commonly
-            cited for the shared BZD-01T platform (2–10mm chuck, ≤4A no-load current) come from the
-            BZD-01T-PH/PS listings and independent reviews in the sources section below, not from
-            Blackzero&apos;s A1-specific copy. We do not have a confirmed weight for this SKU.
+            listed on Blackzero&apos;s former {FORMER_ASIN} copy or images; the chuck and current
+            figures commonly cited for the shared BZD-01T platform (2–10mm chuck, ≤4A no-load
+            current) come from the BZD-01T-PH/PS listings and independent reviews in the sources
+            section below, not from Blackzero&apos;s A1-specific copy. We do not have a confirmed
+            weight for this SKU.
           </p>
         </section>
 
@@ -543,6 +632,7 @@ export default function BlackzeroBzd01tPhA1Page() {
                     <th scope="row">
                       {m.model}
                       {'current' in m && m.current ? <span className="hp-tag">This page</span> : null}
+                      {'live' in m && m.live ? <span className="hp-tag">Live buy</span> : null}
                     </th>
                     <td>{m.asin}</td>
                     <td>{m.listingColor}</td>
@@ -554,11 +644,12 @@ export default function BlackzeroBzd01tPhA1Page() {
           </div>
           <p>
             In short: <strong>BZD-01</strong> is the base drill-only or essential-kit listing,{' '}
-            <strong>BZD-01T-PH</strong> pairs the drill with a hand-tool tier, <strong>BZD-01T-PS</strong>{' '}
-            pairs it with a hardware/fastener tier instead, and <strong>{MODEL}</strong> is that same
-            drill-plus-hand-tool kit as BZD-01T-PH, listed under its own separate ASIN at{' '}
-            {PRICE_DISPLAY}. All four share the same 16V brushless motor, 60 N·m torque rating and
-            5-mode touchscreen design described above.
+            <strong>{LIVE_MODEL}</strong> is the live 2-tier drill + hand-tool kit (ASIN{' '}
+            {LIVE_ASIN}), <strong>BZD-01T-PS</strong> pairs the same drill with a hardware/fastener
+            tier instead, and <strong>{MODEL}</strong> is the former listing for that same
+            drill-plus-hand-tool kit (ASIN {FORMER_ASIN}, no longer available). All four share the
+            same 16V brushless motor, 60 N·m torque rating and 5-mode touchscreen design described
+            above. For buying, use the live {LIVE_MODEL} listing.
           </p>
         </section>
 
@@ -574,8 +665,9 @@ export default function BlackzeroBzd01tPhA1Page() {
               and quieter operation of a brushless motor at a mainstream price point.
             </li>
             <li>
-              <strong>Anyone comparing Blackzero listings</strong> who wants to confirm which exact
-              ASIN and kit tier they are about to order before checkout.
+              <strong>Anyone comparing Blackzero listings</strong> who searched for {MODEL} /{' '}
+              {FORMER_ASIN} and needs the intentional map to the live {LIVE_MODEL} buy link (ASIN{' '}
+              {LIVE_ASIN}).
             </li>
           </ul>
         </section>
@@ -592,11 +684,15 @@ export default function BlackzeroBzd01tPhA1Page() {
 
         <section className="blog-section" aria-labelledby="where-to-buy">
           <h2 id="where-to-buy">Where to check the current price</h2>
+          <aside className="tl-avail" aria-label="Availability note">
+            <strong>Availability note:</strong> {AVAILABILITY_NOTE}
+          </aside>
           <p>
-            AISneer does not sell this drill directly. At the time of writing it&apos;s listed at{' '}
-            <strong className="blog-price">{PRICE_DISPLAY}</strong>. We link to the live Amazon
-            listing for this drill/hand-tool kit (ASIN {BUY_URL_ASIN}) so you can confirm
-            today&apos;s price, seller and availability before buying, since Amazon prices change.
+            AISneer does not sell this drill directly. Last recorded price for this kit was{' '}
+            <strong className="blog-price">{PRICE_DISPLAY}</strong>. Because the former{' '}
+            {MODEL} listing (ASIN {FORMER_ASIN}) is gone, we link to the live{' '}
+            <strong>{LIVE_MODEL}</strong> Amazon listing (ASIN {LIVE_ASIN}) so you can confirm
+            today&apos;s price, seller and availability before buying.
           </p>
           <a
             className="btn btn-primary btn-lg"
@@ -604,7 +700,7 @@ export default function BlackzeroBzd01tPhA1Page() {
             target="_blank"
             rel="nofollow sponsored noopener noreferrer"
           >
-            Check current price on Amazon →
+            Check live {LIVE_MODEL} price on Amazon →
           </a>
         </section>
 
@@ -613,14 +709,19 @@ export default function BlackzeroBzd01tPhA1Page() {
             How we compiled this page
           </h2>
           <p>
-            We did not physically test this exact unit. The specifications, price and kit contents
-            above were compiled from Blackzero&apos;s own listing copy and product images for ASIN{' '}
-            {ASIN}, cross-checked against Blackzero&apos;s listings for the BZD-01T-PH, BZD-01T-PS
-            and BZD-01 model numbers and independent reviews of the same drill platform:
+            We did not physically test this exact unit. Specs and kit contents were compiled from
+            Blackzero&apos;s published listing copy and product images for the former {MODEL} ASIN{' '}
+            {FORMER_ASIN}, then cross-checked against the live {LIVE_MODEL} listing (ASIN{' '}
+            {LIVE_ASIN}), BZD-01T-PS, BZD-01, and independent reviews of the same drill platform:
           </p>
           <ul>
-            <li>Amazon listing copy and product images, ASIN B0DBQMQMMW (BZD-01T-PH-A1)</li>
-            <li>Amazon listing, ASIN B0D5CLZ1ZT (BZD-01T-PH)</li>
+            <li>
+              Amazon listing copy and product images — former ASIN {FORMER_ASIN} ({MODEL}, no longer
+              available)
+            </li>
+            <li>
+              Amazon live listing — ASIN {LIVE_ASIN} ({LIVE_MODEL}; buy link on this page)
+            </li>
             <li>Amazon listing, ASIN B0D5CJRL8X (BZD-01T-PS)</li>
             <li>Amazon listing, ASIN B0D5CKFVB4 (BZD-01)</li>
             <li>3rd Planet Techies — Blackzero BZD-01 cordless drill review and performance test</li>
@@ -629,7 +730,7 @@ export default function BlackzeroBzd01tPhA1Page() {
           </ul>
           <p>
             Where sources disagreed, or a figure (like exact weight or a numbered mode-to-RPM
-            chart) simply was not published anywhere for this ASIN, we flagged it in the relevant
+            chart) simply was not published anywhere for this SKU, we flagged it in the relevant
             section above instead of presenting it as confirmed A1-specific fact.
           </p>
         </section>

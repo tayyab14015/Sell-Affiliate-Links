@@ -50,7 +50,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: ['/', '/laptops', '/usb-hubs', '/blog']
       },
     ],
-    sitemap: [`${SITE_URL}/sitemap.xml`, '/sitemap.xml'],
+    sitemap: [`${SITE_URL}/sitemap.xml`],
     host: SITE_URL
   };
 }

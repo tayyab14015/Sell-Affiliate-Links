@@ -149,6 +149,9 @@ export default function MixedCategoryPage() {
               <Link href="/blog/fusion-360-and-cad-books">CAD books worth owning</Link>
             </li>
             <li>
+              <Link href="/blog/blackzero-bzd-01t-ph-a1">Blackzero BZD-01T-PH-A1 drill kit, explained</Link>
+            </li>
+            <li>
               <Link href="/blog">Back to the blog</Link>
             </li>
           </ul>

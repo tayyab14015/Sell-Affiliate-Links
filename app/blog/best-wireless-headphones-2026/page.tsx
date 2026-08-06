@@ -448,7 +448,7 @@ export default function HeadphonesRoundupPage() {
               <Link href="/blog/creator-laptops-under-1500">Creator laptops under $1,500</Link>
             </li>
             <li>
-              <Link href="/blog/pc-games-editions-explained">PC game editions explained</Link>
+              <Link href="/blog/blackzero-bzd-01t-ph-a1">Blackzero BZD-01T-PH-A1: exact specs and modes</Link>
             </li>
             <li>
               <Link href="/blog/best-fleece-and-softshell-jackets">Fleece and softshell jackets</Link>

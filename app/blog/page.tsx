@@ -28,11 +28,11 @@ const POSTS: Post[] = [
     badge: 'Tools',
     title: 'Blackzero BZD-01T-PH-A1 Explained: Exact Specs, Five Modes and Model Differences',
     summary:
-      'Exact published specifications and $259 price for the Blackzero BZD-01T-PH-A1 2-in-1 drill kit, all 5 working modes explained, product images, and how it differs from the BZD-01T-PH, BZD-01T-PS and BZD-01 listings.',
-    layout: 'Spec explainer with quick-answer box, product gallery, comparison table and sourced FAQ',
+      'Exact specs for the Blackzero BZD-01T-PH-A1 (former ASIN B0DBQMQMMW), five modes explained, and the intentional map to the live BZD-01T-PH buy listing (ASIN B0D5CLZ1ZT).',
+    layout: 'Spec explainer with availability note, product gallery, comparison table and sourced FAQ',
     updated: 'August 6, 2026',
     notes:
-      'Model-number disambiguation for four Blackzero ASINs, 5-mode breakdown sourced from independent reviews, manufacturer product images, and an explicit callout where exact weight and a numbered RPM chart remain unpublished for the A1 SKU. Schema: Product with AggregateRating and price, plus FAQPage.'
+      'Owns the rare A1 query while clearly resolving buyers to the live PH ASIN. Schema offers.url points at B0D5CLZ1ZT; B0DBQMQMMW kept as historical/former ASIN only.'
   },
   {
     href: '/blog/best-wireless-headphones-2026',

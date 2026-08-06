@@ -402,7 +402,7 @@ export default function CreatorLaptopsPage() {
               <Link href="/blog/best-wireless-headphones-2026">Best wireless headphones of 2026</Link>
             </li>
             <li>
-              <Link href="/blog/fusion-360-and-cad-books">The CAD books worth owning</Link>
+              <Link href="/blog/blackzero-bzd-01t-ph-a1">Blackzero BZD-01T-PH-A1 drill kit specs</Link>
             </li>
             <li>
               <Link href="/blog/mixed-category-stress">Our messiest gear notes</Link>

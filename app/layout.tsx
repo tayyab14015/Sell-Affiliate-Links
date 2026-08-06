@@ -42,7 +42,16 @@ export const metadata: Metadata = {
     description:
       'Hand-picked laptops for work, play, study, and creators. Compare real specs and jump straight to the best current deal.'
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
   verification: {
     google: 'HUflqUM_F5ZMMR88OX7mZNeO6ZUc5I1w61uy9DO_E4E'
   }
@@ -174,6 +183,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
 <script
+  async
   src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
   data-site-id="site_1e645af912028b4d95dbe006c2446612"
   data-token="llmafftm_5ff8f479e1c6bd61a6b97b385a7d8d717450f55e4567f64b6a303d9e176044a0">
