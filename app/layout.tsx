@@ -53,7 +53,10 @@ export const metadata: Metadata = {
     }
   },
   verification: {
-    google: 'HUflqUM_F5ZMMR88OX7mZNeO6ZUc5I1w61uy9DO_E4E'
+    google: 'HUflqUM_F5ZMMR88OX7mZNeO6ZUc5I1w61uy9DO_E4E',
+    other: {
+      'msvalidate.01': '4E41430E96AA23E7CC885A534DC2BBF2'
+    }
   }
 };
 
