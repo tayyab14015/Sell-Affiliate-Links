@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import './blog.css';
 
-const SITE_URL = 'https://wordofprompt.com';
+const SITE_URL = 'https://www.aisneer.com';
 const PAGE_URL = `${SITE_URL}/blog`;
 
 export const metadata: Metadata = {
   title: 'Blog — Buying Guides and Field Tests',
   description:
-    'Buying guides and field tests from Word of Prompt: wireless headphones, creator laptops, fleece and softshell jackets, CAD books and game editions.',
+    'Buying guides and field tests from AISneer: cordless drills, wireless headphones, creator laptops, fleece and softshell jackets, CAD books and game editions.',
   alternates: { canonical: PAGE_URL }
 };
 
@@ -23,6 +23,17 @@ type Post = {
 };
 
 const POSTS: Post[] = [
+  {
+    href: '/blog/blackzero-bzd-01t-ph-a1',
+    badge: 'Tools',
+    title: 'Blackzero BZD-01T-PH-A1 Explained: Exact Specs, Five Modes and Model Differences',
+    summary:
+      'Exact published specifications and $259 price for the Blackzero BZD-01T-PH-A1 2-in-1 drill kit, all 5 working modes explained, product images, and how it differs from the BZD-01T-PH, BZD-01T-PS and BZD-01 listings.',
+    layout: 'Spec explainer with quick-answer box, product gallery, comparison table and sourced FAQ',
+    updated: 'August 6, 2026',
+    notes:
+      'Model-number disambiguation for four Blackzero ASINs, 5-mode breakdown sourced from independent reviews, manufacturer product images, and an explicit callout where exact weight and a numbered RPM chart remain unpublished for the A1 SKU. Schema: Product with AggregateRating and price, plus FAQPage.'
+  },
   {
     href: '/blog/best-wireless-headphones-2026',
     badge: 'Audio',
@@ -104,11 +115,11 @@ export default function BlogIndexPage() {
       </nav>
 
       <header>
-        <p className="blog-kicker">Word of Prompt</p>
+        <p className="blog-kicker">AISneer</p>
         <h1>Buying guides and field tests</h1>
         <p className="blog-lede">
-          Six posts, six layouts. Each one covers a single category in depth, lists the exact
-          configuration or variant we tested, and links to the listing we bought from.
+          Seven posts, seven layouts. Each one covers a single category in depth, lists the exact
+          configuration or model number, and links to the listing it&apos;s based on.
         </p>
       </header>
 

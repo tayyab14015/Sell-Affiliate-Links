@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { amazonProductUrl, amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
-const SITE_URL = 'https://wordofprompt.com';
+const SITE_URL = 'https://www.aisneer.com';
 const PAGE_PATH = '/blog/fusion-360-and-cad-books';
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const DATE_PUBLISHED = '2026-06-24';
@@ -479,7 +479,7 @@ export default function CadBooksPage() {
         </article>
       </div>
 
-      <aside className="blog-noise" aria-label="More from Word of Prompt">
+      <aside className="blog-noise" aria-label="More from AISneer">
         <div className="blog-noise-card">
           <h2>Reference shelf newsletter</h2>
           <p>One book recommendation a month, no listicles.</p>

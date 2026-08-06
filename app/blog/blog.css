@@ -1,8 +1,8 @@
 /* ---------------------------------------------------------------------------
  * Blog styles.
- * Every article route gets its own prefix so the five layouts stay visually
+ * Every article route gets its own prefix so the layouts stay visually
  * distinct: hp- headphones, cl- laptops, jk- jackets, bk- books, gm- games,
- * cx- mixed, bx- index.
+ * cx- mixed, tl- tool spec explainer, bx- index.
  * ------------------------------------------------------------------------- */
 
 /* ---------- Shared shell ---------- */
@@ -835,4 +835,149 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4px 14px;
+}
+
+/* ---------- Blog 7: tool spec explainer (tl-) ---------- */
+
+.tl-quick {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+  padding: 16px 18px;
+  margin: 22px 0 0;
+}
+.tl-quick h2 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand);
+}
+.tl-quick p {
+  margin: 0;
+  font-size: 15.5px;
+  color: var(--text);
+}
+.tl-quick p + p {
+  margin-top: 8px;
+}
+
+.tl-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--bg-muted);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin: 10px 0 0;
+}
+
+.tl-modes {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tl-mode {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.tl-mode-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  font-size: 12.5px;
+  margin-bottom: 10px;
+}
+.tl-mode h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+.tl-mode p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.tl-source-note {
+  font-size: 13px;
+  color: var(--text-faint);
+  border-top: 1px dashed var(--border-strong);
+  padding-top: 12px;
+  margin-top: 18px;
+}
+.tl-source-note ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.tl-unknown {
+  border: 1px dashed #f59e0b;
+  background: #fffbeb;
+  color: #7c4a03;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 14px;
+  margin: 14px 0 0;
+}
+
+.tl-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 18px 0 0;
+}
+.tl-gallery-item {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tl-gallery-item img {
+  display: block;
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+}
+.tl-gallery-item figcaption {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-faint);
+  text-align: center;
+}
+.tl-gallery-credit {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.tl-kit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 14px 0;
+}
+.tl-kit-grid h3 {
+  font-size: 15px;
+  margin: 0 0 8px;
 }

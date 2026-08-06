@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
-const SITE_URL = 'https://wordofprompt.com';
+const SITE_URL = 'https://www.aisneer.com';
 const PAGE_PATH = '/blog/best-fleece-and-softshell-jackets';
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const DATE_PUBLISHED = '2026-01-19';
@@ -548,7 +548,7 @@ export default function JacketsPage() {
         </div>
       </article>
 
-      <aside className="blog-noise" aria-label="More from Word of Prompt">
+      <aside className="blog-noise" aria-label="More from AISneer">
         <div className="blog-noise-card">
           <h2>The Layering Letter</h2>
           <p>Field notes every other Thursday. Unsubscribe whenever.</p>

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
-const SITE_URL = 'https://wordofprompt.com';
+const SITE_URL = 'https://www.aisneer.com';
 const PAGE_PATH = '/blog/creator-laptops-under-1500';
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const DATE_PUBLISHED = '2026-05-02';
@@ -225,7 +225,7 @@ const jsonLd = {
       datePublished: DATE_PUBLISHED,
       dateModified: DATE_MODIFIED,
       author: { '@type': 'Person', name: 'Devin Oyelaran' },
-      publisher: { '@type': 'Organization', name: 'Word of Prompt' }
+      publisher: { '@type': 'Organization', name: 'AISneer' }
     },
     {
       '@type': 'BreadcrumbList',
@@ -384,7 +384,7 @@ export default function CreatorLaptopsPage() {
         </section>
       </article>
 
-      <aside className="blog-noise" aria-label="More from Word of Prompt">
+      <aside className="blog-noise" aria-label="More from AISneer">
         <div className="blog-noise-card">
           <h2>Get the next hardware guide</h2>
           <p>We publish one buying guide a month. No affiliate spam.</p>

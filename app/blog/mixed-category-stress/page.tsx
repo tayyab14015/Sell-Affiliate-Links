@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { amazonProductUrl, amazonSearchUrl } from '../amazon';
 import '../blog.css';
 
-const SITE_URL = 'https://wordofprompt.com';
+const SITE_URL = 'https://www.aisneer.com';
 const PAGE_PATH = '/blog/mixed-category-stress';
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const DATE_MODIFIED_DISPLAY = 'July 12, 2026';
@@ -138,7 +138,7 @@ export default function MixedCategoryPage() {
         </div>
       </article>
 
-      <aside className="blog-noise" aria-label="More from Word of Prompt">
+      <aside className="blog-noise" aria-label="More from AISneer">
         <div className="blog-noise-card">
           <h3>Related posts</h3>
           <ul>
