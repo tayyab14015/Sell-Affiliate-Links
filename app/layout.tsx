@@ -186,10 +186,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
 <script
-  async
   src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
-  data-site-id="site_1e645af912028b4d95dbe006c2446612"
-  data-token="llmafftm_5ff8f479e1c6bd61a6b97b385a7d8d717450f55e4567f64b6a303d9e176044a0">
+  data-site-id="site_0242374ca2834d7311309033a76870bc"
+  data-token="llmafftm_80337a150887774213c955aee36337ad71cdf603ea05500028eaebc970c0aed3">
 </script>
       </body>
     </html>
