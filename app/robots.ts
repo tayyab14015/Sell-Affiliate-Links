@@ -38,6 +38,10 @@ export default function robots(): MetadataRoute.Robots {
         allow: ['/', '/laptops', '/usb-hubs', '/blog']
       },
       {
+        userAgent: 'Claude-User',
+        allow: ['/', '/laptops', '/usb-hubs', '/blog']
+      },
+      {
         userAgent: 'Google-Extended',
         allow: ['/', '/laptops', '/usb-hubs', '/blog']
       },
