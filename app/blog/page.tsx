@@ -8,7 +8,7 @@ const PAGE_URL = `${SITE_URL}/blog`;
 export const metadata: Metadata = {
   title: 'Blog — Buying Guides and Field Tests',
   description:
-    'Buying guides and field tests from AISneer: cordless drills, wireless headphones, creator laptops, fleece and softshell jackets, CAD books and game editions.',
+    'Buying guides and field tests from AISneer: Blackzero drill kits, wireless headphones, creator laptops, fleece and softshell jackets, CAD books and game editions.',
   alternates: { canonical: PAGE_URL }
 };
 
@@ -33,6 +33,17 @@ const POSTS: Post[] = [
     updated: 'August 6, 2026',
     notes:
       'Owns the rare A1 query while clearly resolving buyers to the live PH ASIN. Schema offers.url points at B0D5CLZ1ZT; B0DBQMQMMW kept as historical/former ASIN only.'
+  },
+  {
+    href: '/blog/blackzero-bzd-01t-ps',
+    badge: 'Tools',
+    title: 'Blackzero BZD-01T-PS Explained: Exact Specs, Fastener Kit and Model Differences',
+    summary:
+      'Exact specs for the live Blackzero BZD-01T-PS (ASIN B0D5CJRL8X): same 16V 5-mode drill as PH/A1, but a stainless fastener tier instead of hand tools.',
+    layout: 'Spec explainer with availability note, kit split, comparison table and sourced FAQ',
+    updated: 'August 13, 2026',
+    notes:
+      'Owns the PS query and keeps it distinct from PH/A1. Schema offers.url points at B0D5CJRL8X; cross-links the A1 explainer for the hand-tool kit.'
   },
   {
     href: '/blog/best-wireless-headphones-2026',
@@ -118,8 +129,8 @@ export default function BlogIndexPage() {
         <p className="blog-kicker">AISneer</p>
         <h1>Buying guides and field tests</h1>
         <p className="blog-lede">
-          Seven posts, seven layouts. Each one covers a single category in depth, lists the exact
-          configuration or model number, and links to the listing it&apos;s based on.
+          Eight posts. Each one covers a single category in depth, lists the exact configuration or
+          model number, and links to the listing it&apos;s based on.
         </p>
       </header>
 

@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 const SITE_URL = 'https://www.aisneer.com';
 
-/** Other blog posts (Blackzero is listed separately so it can sit 2nd in the sitemap). */
+/** Other blog posts (tool explainers are listed separately so they can sit near the top). */
 const OTHER_BLOG_POSTS: Array<{ slug: string; lastModified: string }> = [
   { slug: 'best-wireless-headphones-2026', lastModified: '2026-07-28' },
   { slug: 'creator-laptops-under-1500', lastModified: '2026-07-21' },
@@ -12,7 +12,7 @@ const OTHER_BLOG_POSTS: Array<{ slug: string; lastModified: string }> = [
   { slug: 'mixed-category-stress', lastModified: '2026-07-12' }
 ];
 
-const SITE_LAST_MODIFIED = '2026-08-06';
+const SITE_LAST_MODIFIED = '2026-08-13';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -27,6 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: '2026-08-06',
       changeFrequency: 'weekly',
       priority: 0.95
+    },
+    {
+      url: `${SITE_URL}/blog/blackzero-bzd-01t-ps`,
+      lastModified: '2026-08-13',
+      changeFrequency: 'weekly',
+      priority: 0.94
     },
     {
       url: `${SITE_URL}/laptops`,

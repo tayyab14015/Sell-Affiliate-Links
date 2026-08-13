@@ -645,8 +645,12 @@ export default function BlackzeroBzd01tPhA1Page() {
           <p>
             In short: <strong>BZD-01</strong> is the base drill-only or essential-kit listing,{' '}
             <strong>{LIVE_MODEL}</strong> is the live 2-tier drill + hand-tool kit (ASIN{' '}
-            {LIVE_ASIN}), <strong>BZD-01T-PS</strong> pairs the same drill with a hardware/fastener
-            tier instead, and <strong>{MODEL}</strong> is the former listing for that same
+            {LIVE_ASIN}),{' '}
+            <Link href="/blog/blackzero-bzd-01t-ps">
+              <strong>BZD-01T-PS</strong>
+            </Link>{' '}
+            pairs the same drill with a hardware/fastener tier instead, and <strong>{MODEL}</strong>{' '}
+            is the former listing for that same
             drill-plus-hand-tool kit (ASIN {FORMER_ASIN}, no longer available). All four share the
             same 16V brushless motor, 60 N·m torque rating and 5-mode touchscreen design described
             above. For buying, use the live {LIVE_MODEL} listing.
@@ -751,10 +755,12 @@ export default function BlackzeroBzd01tPhA1Page() {
           <h2>Related posts</h2>
           <ul>
             <li>
-              <Link href="/blog/creator-laptops-under-1500">Creator laptops under $1,500</Link>
+              <Link href="/blog/blackzero-bzd-01t-ps">
+                Blackzero BZD-01T-PS: fastener kit specs and differences
+              </Link>
             </li>
             <li>
-              <Link href="/blog/pc-games-editions-explained">PC game editions explained</Link>
+              <Link href="/blog/creator-laptops-under-1500">Creator laptops under $1,500</Link>
             </li>
             <li>
               <Link href="/usb-hubs">Shop USB hubs</Link>
