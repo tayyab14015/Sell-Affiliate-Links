@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     'Browse every laptop on AISneer: ultrabooks, gaming laptops, MacBooks, ThinkPads, EliteBooks, Surface, Chromebooks, and mobile workstations. Compare real specs and jump to the current deal.',
   alternates: {
-    canonical: 'https://aisneer.com/laptops',
+    canonical: 'https://www.aisneer.com/laptops',
     types: {
       'application/json': laptopsFeedUrl
     }
@@ -143,7 +143,7 @@ export default async function LaptopsPage({
         category: l.category,
         description: l.description,
         image: l.image,
-        url: `https://aisneer.com/laptops#${l.slug}`,
+        url: `https://www.aisneer.com/laptops#${l.slug}`,
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: l.ratingStars,
@@ -159,6 +159,45 @@ export default async function LaptopsPage({
         }
       }
     }))
+  };
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Which laptop is best overall for beginners?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "For mainstream ease of use, Apple's 14-inch MacBook Pro with M3 Pro combines long battery life and strong performance for everyday work — see Apple's published battery and tech specs for the configuration you choose."
+        }
+      },
+      {
+        '@type': 'Question',
+        name: "What's the best budget laptop in this list?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "The Acer Aspire 5 (A515 family) is typically the lowest-cost Windows option with a current Core i5 H-class CPU — compare exact model numbers and RAM type (DDR4 vs LPDDR5) on Acer's site."
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Is the HP EliteBook 840 G11 good for business use?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. HP EliteBook 840 G11 offers dependable performance, professional build quality, and enterprise-grade security features. Verify vPro and graphics branding on the specific SKU you configure.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Do I need an RTX 4070 for gaming?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Not necessarily. RTX 4060 handles 1080p/1440p high-refresh gaming very well. RTX 4070 is the better pick if you want QHD+ high-refresh or heavier creative workloads on the same machine.'
+        }
+      }
+    ]
   };
 
   return (
@@ -343,7 +382,7 @@ export default async function LaptopsPage({
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([productListJsonLd, faqJsonLd]) }}
       />
     </>
   );

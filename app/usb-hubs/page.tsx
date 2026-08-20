@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     'Browse USB-C hubs, USB 3.0 splitters, and OTG adapters for laptops, MacBooks, phones, and desktops. Compare options under $5 and search current prices on Google.',
   alternates: {
-    canonical: 'https://aisneer.com/usb-hubs'
+    canonical: 'https://www.aisneer.com/usb-hubs'
   }
 };
 
@@ -131,8 +131,8 @@ export default async function UsbHubsPage({
         brand: { '@type': 'Brand', name: h.brand },
         category: h.category,
         description: h.description,
-        image: h.image,
-        url: `https://aisneer.com/usb-hubs#${h.slug}`,
+        image: h.image.startsWith('http') ? h.image : `https://www.aisneer.com${h.image}`,
+        url: `https://www.aisneer.com/usb-hubs#${h.slug}`,
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: h.ratingStars,
@@ -148,6 +148,45 @@ export default async function UsbHubsPage({
         }
       }
     }))
+  };
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Do I need a USB-C hub or a USB 3.0 hub?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'If your laptop or tablet only has USB-C ports, pick a USB-C hub or adapter. If you still have full-size USB-A ports, a USB 3.0 splitter is usually the cheaper option.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'What is the best budget USB hub in this list?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'The USB 3.0 Hub 4-Port Splitter Expander at $3.90 is the lowest-priced option here — good for keyboards, mice, flash drives, and printers on a tight budget.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Are these good for MacBook and iPhone?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Several picks explicitly support MacBook Pro/Air, iPad, and recent iPhones via USB-C OTG adapters. Always confirm your exact port type (USB-C vs USB-A) before buying.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Why does the buy button open Google Shopping?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We link to Google Shopping search results so you can compare current prices across retailers yourself — no affiliate redirects from this page.'
+        }
+      }
+    ]
   };
 
   return (
@@ -322,7 +361,7 @@ export default async function UsbHubsPage({
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([productListJsonLd, faqJsonLd]) }}
       />
     </>
   );

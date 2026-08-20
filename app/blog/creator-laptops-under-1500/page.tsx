@@ -214,6 +214,29 @@ const vivobookOneTerabyte = {
   }
 };
 
+const FAQ_ITEMS = [
+  {
+    question: 'Which creator laptops would you actually buy under $1,500?',
+    answer:
+      'Six, as configured: the ASUS Vivobook 16 OLED M1605YA-ES74 ($749) for the 3.2K OLED panel, the Dell XPS 14 9440 ($1,449) for build, the Lenovo Yoga Pro 7 14ASP9 ($1,249) for battery under load, the Apple MacBook Air 15-inch M4 in 512 GB ($1,299) for silent editing, the ASUS ProArt P16 H7606WV ($1,499) for GPU, and the Acer Swift Go 14 AI SFG14-64T-79LT (typically $1,000–$1,150) for weight. Match the part number on each card, not the marketing name.'
+  },
+  {
+    question: 'Why should I match the part number instead of the product name?',
+    answer:
+      'The product line name is not a configuration. ASUS ships at least four panels under Vivobook 16 OLED; this guide’s 512 GB machine is M1605YA-ES74 and the 1 TB sibling is M1605YA-ES96. Dell sells the XPS 14 9440 with a Core Ultra 7 155H and a 165H under the same title. Apple’s MacBook Air 15-inch M4 256 GB, 512 GB and 1 TB variants differ in sequential write speed by more than a factor of two. A Core Ultra 7 155H is not a model number, and neither is an RTX 4060.'
+  },
+  {
+    question: 'Do I need 32 GB of RAM for photo and video work?',
+    answer:
+      'Where possible, yes. Photoshop with a dozen smart objects and DaVinci Resolve with optimised media both eat 16 GB. Four of the six machines here ship 32 GB. The exceptions are the Vivobook 16 OLED and the MacBook Air 15, both at 16 GB.'
+  },
+  {
+    question: 'Should I buy the 256 GB MacBook Air 15?',
+    answer:
+      'No. The 256 GB base configuration uses a single NAND package and halves SSD read speed. The price in this guide is the 512 GB unified-memory configuration (MC9K4LL/A).'
+  }
+] as const;
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -238,7 +261,17 @@ const jsonLd = {
       ]
     },
     ...productNodes,
-    vivobookOneTerabyte
+    vivobookOneTerabyte,
+    {
+      '@type': 'FAQPage',
+      '@id': `${PAGE_URL}#faq`,
+      dateModified: DATE_MODIFIED,
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer }
+      }))
+    }
   ]
 };
 
@@ -275,6 +308,16 @@ export default function CreatorLaptopsPage() {
       <article>
         <section className="blog-section" aria-labelledby="picks">
           <h2 id="picks">The six machines</h2>
+          <p>
+            <strong>
+              These are the six creator notebooks we would buy under $1,500 as configured: the ASUS
+              Vivobook 16 OLED for the panel, the Dell XPS 14 9440 for build, the Lenovo Yoga Pro 7
+              for battery, the MacBook Air 15 M4 (512 GB) for silent editing, the ASUS ProArt P16
+              for GPU, and the Acer Swift Go 14 AI for weight.
+            </strong>{' '}
+            Match the part number on each card — the marketing name almost never tells you which
+            configuration you are looking at.
+          </p>
           <div className="cl-grid">
             {LAPTOPS.map((l) => (
               <article className="cl-card" key={l.sku}>
@@ -381,6 +424,16 @@ export default function CreatorLaptopsPage() {
             If you are cross-checking a listing against this guide, match the part number in each
             card. A Core Ultra 7 155H is not a model number, and neither is an RTX 4060.
           </p>
+        </section>
+
+        <section className="blog-section blog-faq" aria-labelledby="faq">
+          <h2 id="faq">Frequently asked questions</h2>
+          {FAQ_ITEMS.map((item) => (
+            <details key={item.question}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
         </section>
       </article>
 

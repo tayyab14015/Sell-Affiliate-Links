@@ -166,6 +166,29 @@ const PHONES: Phone[] = [
   }
 ];
 
+const FAQ_ITEMS = [
+  {
+    question: 'Is the Sony WH-1000XM5 worth it over the WH-1000XM4?',
+    answer:
+      'Only if noise cancelling and call quality are your top two priorities. The WH-1000XM5 is quieter on aircraft and much better on calls thanks to its four beamforming microphones. The WH-1000XM4 folds flat, has the warmer 40 mm driver, and sells for about $100 less. Both do 30 hours and both support LDAC. If you are choosing purely on value, buy the WH-1000XM4.'
+  },
+  {
+    question: 'Is there a cheaper Sony with noise cancelling?',
+    answer:
+      'Yes. The Sony WH-CH720N sits below both flagship models, weighs only 192 g, and regularly sells for around $130. It is not in the comparison table above because we tested it last year, but it remains the cheapest Sony we would recommend with ANC.'
+  },
+  {
+    question: 'Does the colour I choose change the price?',
+    answer:
+      'Frequently, yes. Anker lists Soundcore Space One in Latte Cream and Jet Black under separate item numbers, and the Bose QuietComfort Ultra Headphones in White Smoke and Black rarely discount at the same time. Buy the colour that is cheap; the drivers are identical.'
+  },
+  {
+    question: 'Which pair should I skip if I mostly work from home?',
+    answer:
+      'Apple AirPods Max. At 384 g it is the heaviest pair here, and the noise you are cancelling at home is usually a dishwasher rather than a jet engine. The Audio-Technica ATH-M50xBT2 or the Anker Soundcore Space One will serve you better for a third of the money.'
+  }
+] as const;
+
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -219,6 +242,16 @@ const jsonLd = [
         }
       }
     }))
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    dateModified: DATE_MODIFIED,
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer }
+    }))
   }
 ];
 
@@ -258,6 +291,13 @@ export default function HeadphonesRoundupPage() {
 
         <section className="blog-section" aria-labelledby="short-version">
           <h2 id="short-version">The short version</h2>
+          <p>
+            <strong>
+              Buy the Sony WH-1000XM5 if you want the best all-round wireless ANC pair we measured
+              ($348); buy the WH-1000XM4 at $248 if you want the same 30-hour battery and LDAC for
+              less.
+            </strong>
+          </p>
           <p>
             If you only read one paragraph: 1. Sony WH-1000XM5 is the best all-rounder at $348. 2.
             Bose QuietComfort Ultra Headphones cancel the most low-frequency noise for $429. 3.
@@ -387,46 +427,12 @@ export default function HeadphonesRoundupPage() {
 
         <section className="blog-section blog-faq" aria-labelledby="faq">
           <h2 id="faq">Frequently asked questions</h2>
-
-          <details>
-            <summary>Is the Sony WH-1000XM5 worth it over the WH-1000XM4?</summary>
-            <p>
-              Only if noise cancelling and call quality are your top two priorities. The WH-1000XM5
-              is quieter on aircraft and much better on calls thanks to its four beamforming
-              microphones. The WH-1000XM4 folds flat, has the warmer 40 mm driver, and sells for
-              about $100 less. Both do 30 hours and both support LDAC. If you are choosing purely on
-              value, buy the WH-1000XM4.
-            </p>
-          </details>
-
-          <details>
-            <summary>Is there a cheaper Sony with noise cancelling?</summary>
-            <p>
-              Yes. The Sony WH-CH720N sits below both flagship models, weighs only 192 g, and
-              regularly sells for around $130. It is not in the comparison table above because we
-              tested it last year, but it remains the cheapest Sony we would recommend with ANC.
-            </p>
-          </details>
-
-          <details>
-            <summary>Does the colour I choose change the price?</summary>
-            <p>
-              Frequently, yes. Anker lists Soundcore Space One in Latte Cream and Jet Black under
-              separate item numbers, and the Bose QuietComfort Ultra Headphones in White Smoke and
-              Black rarely discount at the same time. Buy the colour that is cheap; the drivers are
-              identical.
-            </p>
-          </details>
-
-          <details>
-            <summary>Which pair should I skip if I mostly work from home?</summary>
-            <p>
-              Apple AirPods Max. At 384 g it is the heaviest pair here, and the noise you are
-              cancelling at home is usually a dishwasher rather than a jet engine. The
-              Audio-Technica ATH-M50xBT2 or the Anker Soundcore Space One will serve you better for
-              a third of the money.
-            </p>
-          </details>
+          {FAQ_ITEMS.map((item) => (
+            <details key={item.question}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
         </section>
       </article>
 

@@ -12,7 +12,7 @@ const OTHER_BLOG_POSTS: Array<{ slug: string; lastModified: string }> = [
   { slug: 'mixed-category-stress', lastModified: '2026-07-12' }
 ];
 
-const SITE_LAST_MODIFIED = '2026-08-13';
+const SITE_LAST_MODIFIED = '2026-08-20';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/blog/blackzero-bzd-01t-ps`,
-      lastModified: '2026-08-13',
+      lastModified: '2026-08-20',
       changeFrequency: 'weekly',
       priority: 0.94
     },

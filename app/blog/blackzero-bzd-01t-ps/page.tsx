@@ -6,8 +6,9 @@ const SITE_URL = 'https://www.aisneer.com';
 const PAGE_PATH = '/blog/blackzero-bzd-01t-ps';
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const DATE_PUBLISHED = '2026-08-13';
-const DATE_MODIFIED = '2026-08-13';
-const DATE_MODIFIED_DISPLAY = 'August 13, 2026';
+const DATE_MODIFIED = '2026-08-20';
+const DATE_MODIFIED_DISPLAY = 'August 20, 2026';
+const IMG_BASE = '/images/tools/blackzero-bzd-01t-ps';
 
 const MODEL = 'BZD-01T-PS';
 const BRAND = 'Blackzero';
@@ -60,14 +61,49 @@ export const metadata: Metadata = {
     siteName: 'AISneer',
     publishedTime: DATE_PUBLISHED,
     modifiedTime: DATE_MODIFIED,
-    authors: ['Daniel Kessler']
+    authors: ['Daniel Kessler'],
+    images: [
+      {
+        url: `${IMG_BASE}/drill-detail.jpg`,
+        width: 1024,
+        height: 1024,
+        alt: 'Blackzero BZD-01T-PS 16V brushless cordless drill in the drill-tier case'
+      }
+    ]
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: META_TITLE,
-    description: META_DESCRIPTION
+    description: META_DESCRIPTION,
+    images: [`${IMG_BASE}/drill-detail.jpg`]
   }
 };
+
+const GALLERY = [
+  {
+    src: `${IMG_BASE}/drill-detail.jpg`,
+    alt: `${BRAND} ${MODEL} drill tier — 16V brushless drill, bits, nut drivers and USB-C charging cable`,
+    caption: 'Drill tier (shared BZD-01T platform)',
+    width: 1024,
+    height: 1024
+  },
+  {
+    src: `${IMG_BASE}/case-size.jpg`,
+    alt: `${BRAND} ${MODEL} 2-tier combination toolbox size diagram`,
+    caption: 'Case dimensions',
+    width: 1024,
+    height: 1024
+  },
+  {
+    src: `${IMG_BASE}/toolbox-locking.jpg`,
+    alt: `${BRAND} ${MODEL} stackable ABS case with modular locking system`,
+    caption: 'Modular locking case',
+    width: 1024,
+    height: 1024
+  }
+] as const;
+
+const PRODUCT_IMAGES = GALLERY.map((g) => `${SITE_URL}${g.src}`);
 
 const SIBLING_MODELS = [
   {
@@ -221,6 +257,7 @@ const blogPostingJsonLd = {
   description: META_DESCRIPTION,
   url: PAGE_URL,
   mainEntityOfPage: { '@type': 'WebPage', '@id': PAGE_URL },
+  image: PRODUCT_IMAGES,
   datePublished: DATE_PUBLISHED,
   dateModified: DATE_MODIFIED,
   inLanguage: 'en',
@@ -230,7 +267,15 @@ const blogPostingJsonLd = {
     description:
       'Writes tool and hardware explainers for AISneer, focusing on matching exact model numbers and ASINs to the correct specs.'
   },
-  publisher: { '@type': 'Organization', name: 'AISneer', url: SITE_URL },
+  publisher: {
+    '@type': 'Organization',
+    name: 'AISneer',
+    url: SITE_URL,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/logo.svg`
+    }
+  },
   about: `${BRAND} ${MODEL} cordless drill fastener kit`,
   isPartOf: {
     '@type': 'Blog',
@@ -258,6 +303,7 @@ const productJsonLd = {
   sku: ASIN,
   mpn: MODEL,
   category: 'Drills > Drill Drivers',
+  image: PRODUCT_IMAGES,
   description:
     `Brushless cordless drill/driver with 5 operation modes, sold as a 2-in-1 portable kit with a fastener/hardware tier. Amazon ASIN ${ASIN}. 16V brushless motor, up to 60 N·m torque, USB-C rechargeable 1600mAh battery, stainless hex-socket screws, barrel nuts, expansion screws and cold-pressed round terminals.`,
   additionalProperty: [
@@ -347,6 +393,28 @@ export default function BlackzeroBzd01tPsPage() {
           <a href="#modes">The 5 modes</a> · <a href="#differences">Model differences</a> ·{' '}
           <a href="#faq">FAQ</a> · <a href="#where-to-buy">Price &amp; availability</a>
         </nav>
+
+        <div className="tl-gallery" aria-label={`${BRAND} ${MODEL} product images`}>
+          {GALLERY.map((g, i) => (
+            <figure key={g.src} className="tl-gallery-item">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={g.src}
+                alt={g.alt}
+                width={g.width}
+                height={g.height}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : 'auto'}
+                decoding="async"
+              />
+              <figcaption>{g.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <p className="tl-gallery-credit">
+          Product photos of the shared BZD-01T drill and 2-tier ABS case. The {MODEL} listing uses
+          this drill/case with a fastener/hardware tier rather than the PH hand-tool tier.
+        </p>
 
         <div className="tl-quick">
           <h2>Quick answer</h2>

@@ -7,6 +7,8 @@ const SITE_NAME = 'AISneer';
 const SITE_TAGLINE = 'Curated laptop picks and honest deals';
 const SITE_URL = 'https://www.aisneer.com';
 
+const DEFAULT_OG_IMAGE = `${SITE_URL}/logo.svg`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -28,19 +30,25 @@ export const metadata: Metadata = {
     'affiliate laptop deals',
     'AISneer'
   ],
+  icons: {
+    icon: '/logo.svg',
+    apple: '/logo.svg'
+  },
   openGraph: {
     type: 'website',
     url: SITE_URL,
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description:
       'Hand-picked laptops for work, play, study, and creators. Compare real specs and jump straight to the best current deal.',
-    siteName: SITE_NAME
+    siteName: SITE_NAME,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 512, height: 512, alt: SITE_NAME }]
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description:
-      'Hand-picked laptops for work, play, study, and creators. Compare real specs and jump straight to the best current deal.'
+      'Hand-picked laptops for work, play, study, and creators. Compare real specs and jump straight to the best current deal.',
+    images: [DEFAULT_OG_IMAGE]
   },
   robots: {
     index: true,
@@ -67,8 +75,17 @@ type RootLayoutProps = {
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'OnlineStore',
+  '@id': `${SITE_URL}/#organization`,
   name: SITE_NAME,
   url: SITE_URL,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${SITE_URL}/logo.svg`,
+    width: 512,
+    height: 512
+  },
+  image: `${SITE_URL}/logo.svg`,
+  email: 'hello@aisneer.com',
   description:
     'AISneer is an independent laptop discovery store. We curate laptops across ultrabook, gaming, business, creator, student, and workstation categories and link you to current retailer deals.',
   slogan: SITE_TAGLINE,
@@ -82,8 +99,21 @@ const organizationJsonLd = {
     'Creator laptops',
     'Chromebooks',
     'Mobile workstations',
-    'USB hubs'
+    'USB hubs',
+    'Cordless drills'
   ]
+};
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  name: SITE_NAME,
+  url: SITE_URL,
+  inLanguage: 'en',
+  description:
+    'Hand-picked laptops, USB hubs, and spec-accurate buying guides with current retailer deal links.',
+  publisher: { '@id': `${SITE_URL}/#organization` }
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -155,6 +185,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 </ul>
               </div>
               <div>
+                <h4>Guides</h4>
+                <ul>
+                  <li><Link href="/blog">All guides</Link></li>
+                  <li><Link href="/blog/blackzero-bzd-01t-ps">Blackzero BZD-01T-PS</Link></li>
+                  <li><Link href="/blog/blackzero-bzd-01t-ph-a1">Blackzero BZD-01T-PH-A1</Link></li>
+                  <li><Link href="/blog/creator-laptops-under-1500">Creator laptops under $1,500</Link></li>
+                </ul>
+              </div>
+              <div>
                 <h4>Company</h4>
                 <ul>
                   <li><Link href="/#about">About AISneer</Link></li>
@@ -183,7 +222,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationJsonLd, websiteJsonLd]) }}
         />
 <script
   src="https://api.llmaffiliate.com/static/onboarding-snippet.js"

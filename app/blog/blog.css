@@ -806,6 +806,16 @@
   background: #f59e0b;
   color: #1a1200;
 }
+.gm-page .blog-faq details {
+  border-color: #24305a;
+  background: #121a33;
+}
+.gm-page .blog-faq summary {
+  color: #fff;
+}
+.gm-page .blog-faq details p {
+  color: #a9b4d4;
+}
 
 /* ---------- Bonus: mixed-category chaos page (cx-) ---------- */
 

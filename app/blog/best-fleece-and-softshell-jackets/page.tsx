@@ -207,48 +207,48 @@ const productNodes = JACKETS.filter((j) => j.inSchema).map((j) => ({
   }
 }));
 
+const FAQ_ITEMS = [
+  {
+    question: 'Full-zip or pullover — which should I buy?',
+    answer:
+      'Buy full-zip if the jacket comes on and off during the day: the Patagonia Better Sweater Fleece Jacket, the Arc’teryx Delta LT Jacket, The North Face Apex Bionic 3 Jacket and the Columbia Steens Mountain Full Zip 2.0 all open from hem to collar. Buy a pullover if it stays on under a shell for hours: the Patagonia Better Sweater 1/4-Zip Fleece Pullover and the Arc’teryx Delta Half Zip are warmer in wind and lighter, but neither has handwarmer pockets.'
+  },
+  {
+    question: 'Are the two Better Sweaters the same product in different colours?',
+    answer:
+      'No. They share the 9.5 oz recycled sweater-knit fleece and the fit, but the 1/4-Zip Fleece Pullover has no front opening below the sternum and no handwarmer pockets, and it sells for $129 against $159 for the full-zip jacket. They are separate products with separate item numbers.'
+  },
+  {
+    question: 'Does the Arc’teryx Delta name tell me the closure?',
+    answer:
+      'Not on its own. Delta LT Jacket is the full-zip; Delta Half Zip is the pullover. If a listing says only Delta, check the photograph and the item number before ordering.'
+  },
+  {
+    question: 'Is a softshell warmer than a fleece?',
+    answer:
+      'In wind, yes. The North Face Apex Bionic 3 Jacket has a woven windproof face and a fleece backer, so it beats an equivalent-weight fleece outdoors. Indoors it is too warm and far less breathable than the Arc’teryx Delta LT Jacket.'
+  },
+  {
+    question: 'Does colour or size change which product I am buying?',
+    answer:
+      'No. Collegiate Navy in XL and Black in medium are the same Columbia Steens Mountain Full Zip 2.0 Fleece Jacket. Colour and size are attributes of the listing, not different models. Closure type is the attribute that changes the product.'
+  },
+  {
+    question: 'How should I size a midlayer?',
+    answer:
+      'True to size for all six, with one caveat: the Apex Bionic 3 is cut boxier, so if you are between sizes and wearing it over a hoodie, take the larger. We tested it in large and everything else in medium.'
+  }
+] as const;
+
 const faqPage = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   dateModified: DATE_MODIFIED,
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Full-zip or pullover — which should I buy?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text:
-          'Buy full-zip if the jacket comes on and off during the day: the Patagonia Better Sweater Fleece Jacket, the Arc’teryx Delta LT Jacket and The North Face Apex Bionic 3 Jacket all open from hem to collar. Buy a pullover if it stays on under a shell for hours: the Patagonia Better Sweater 1/4-Zip Fleece Pullover and the Arc’teryx Delta Half Zip are warmer in wind and lighter, but neither has handwarmer pockets.'
-      }
-    },
-    {
-      '@type': 'Question',
-      name: 'Is the Better Sweater 1/4-Zip the same garment as the Better Sweater Jacket?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text:
-          'No. They share the 9.5 oz recycled sweater-knit fleece and the fit, but the 1/4-Zip Fleece Pullover has no front opening below the sternum and no handwarmer pockets, and it sells for $129 against $159 for the full-zip jacket. They are separate products with separate item numbers.'
-      }
-    },
-    {
-      '@type': 'Question',
-      name: 'Is a softshell warmer than a fleece?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text:
-          'In wind, yes. The North Face Apex Bionic 3 Jacket has a woven windproof face and a fleece backer, so it beats an equivalent-weight fleece outdoors. Indoors it is too warm and far less breathable than the Arc’teryx Delta LT Jacket.'
-      }
-    },
-    {
-      '@type': 'Question',
-      name: 'Does colour or size change which product I am buying?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text:
-          'No. Collegiate Navy in XL and Black in medium are the same Columbia Steens Mountain Full Zip 2.0 Fleece Jacket. Colour and size are attributes of the listing, not different models. Closure type is the attribute that changes the product.'
-      }
-    }
-  ]
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer }
+  }))
 };
 
 const articleNode = {
@@ -329,6 +329,15 @@ export default function JacketsPage() {
           </blockquote>
 
           <h2>The full-zips</h2>
+          <p>
+            <strong>
+              A full-zip opens from hem to collar, so you can take it off without pulling it over
+              your head.
+            </strong>{' '}
+            The four full-zips here are the Patagonia Better Sweater Fleece Jacket, the Arc&apos;teryx
+            Delta LT Jacket, The North Face Apex Bionic 3, and the Columbia Steens Mountain Full Zip
+            2.0.
+          </p>
 
           <aside className="jk-callout" aria-labelledby="better-sweater-jacket">
             <span className="jk-closure">{JACKETS[0].closureLabel}</span>
@@ -510,40 +519,12 @@ export default function JacketsPage() {
 
           <h2>Frequently asked questions</h2>
           <div className="blog-faq">
-            <details>
-              <summary>Full-zip or pullover?</summary>
-              <p>
-                Full-zip if it comes on and off during the day — the Patagonia Better Sweater Fleece
-                Jacket, the Arc’teryx Delta LT Jacket, The North Face Apex Bionic 3 Jacket and the
-                Columbia Steens Mountain Full Zip 2.0 all open hem to collar. Pullover if it stays on
-                for hours under a shell: the Patagonia Better Sweater 1/4-Zip Fleece Pullover and the
-                Arc’teryx Delta Half Zip. The pullovers are lighter and warmer in wind; neither has
-                handwarmer pockets.
-              </p>
-            </details>
-            <details>
-              <summary>Are the two Better Sweaters the same product in different colours?</summary>
-              <p>
-                No. Same fabric, different garment. The 1/4-Zip Fleece Pullover cannot be opened
-                below the sternum and has one chest pocket; the Better Sweater Fleece Jacket has a
-                full-length zipper and three pockets. $129 against $159.
-              </p>
-            </details>
-            <details>
-              <summary>Does the Arc’teryx Delta name tell me the closure?</summary>
-              <p>
-                Not on its own. Delta LT Jacket is the full-zip; Delta Half Zip is the pullover. If a
-                listing says only Delta, check the photograph and the item number before ordering.
-              </p>
-            </details>
-            <details>
-              <summary>How should I size a midlayer?</summary>
-              <p>
-                True to size for all six, with one caveat: the Apex Bionic 3 is cut boxier, so if
-                you are between sizes and wearing it over a hoodie, take the larger. We tested it in
-                large and everything else in medium.
-              </p>
-            </details>
+            {FAQ_ITEMS.map((item) => (
+              <details key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </article>

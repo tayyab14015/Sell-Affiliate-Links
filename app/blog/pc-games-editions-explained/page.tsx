@@ -199,6 +199,34 @@ const GAMES: Game[] = [
 const badgeClass = (d: Sku['distribution']) =>
   d === 'digital' ? 'gm-badge gm-badge-digital' : 'gm-badge gm-badge-disc';
 
+const FAQ_ITEMS = [
+  {
+    question: 'What is the difference between a game edition and a delivery format?',
+    answer:
+      'Edition names — Standard, Deluxe, Ultimate, Complete — describe bundled content. Delivery format is whether a disc, a Nintendo game card, or an email activation code arrives. Those two choices are independent: Hogwarts Legacy sells a Digital Deluxe with no disc anywhere, and Baldur’s Gate 3 sells a Deluxe that exists only as a box.'
+  },
+  {
+    question: 'Can a PS5 Digital Edition or Xbox Series S play a disc copy?',
+    answer:
+      'No. Neither console has an optical drive, so the Cyberpunk 2077: Ultimate Edition Blu-ray and the Hogwarts Legacy Standard Edition disc are both dead ends on those machines. You need a digital code, or a console with a drive.'
+  },
+  {
+    question: 'Does buying a PC Ultimate or Deluxe edition mean a disc ships?',
+    answer:
+      'Almost never. Baldur’s Gate 3 on PC and Cyberpunk 2077: Ultimate Edition on PC are both downloads regardless of how the listing is photographed. There is no PC disc release of Cyberpunk 2077 Ultimate Edition. A listing that claims to ship a PC disc is usually a key in a box.'
+  },
+  {
+    question: 'Is Elden Ring Shadow of the Erdtree a full game or DLC?',
+    answer:
+      'The $39.99 PC download is DLC and requires Elden Ring already installed and licensed. The $79.99 PlayStation 5 Shadow of the Erdtree Edition disc is the bundle: base game plus expansion. If you already own Elden Ring, the disc bundle is the wrong purchase.'
+  },
+  {
+    question: 'Is a Nintendo Switch game card a disc?',
+    answer:
+      'No. The Legend of Zelda: Echoes of Wisdom ships as a solid-state game card. It is physical and resellable, but it is not a disc, and the Switch has no optical drive of any kind.'
+  }
+] as const;
+
 // Intentionally partial schema: only three of the nine listings appear here, one of
 // them without an offer at all. The rest exist in HTML only.
 const jsonLd = [
@@ -258,6 +286,16 @@ const jsonLd = [
     gamePlatform: ['Xbox Series X|S', 'Xbox One'],
     publisher: { '@type': 'Organization', name: 'Warner Bros. Games' },
     additionalProperty: [{ '@type': 'PropertyValue', name: 'edition', value: 'Deluxe' }]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    dateModified: DATE_MODIFIED,
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer }
+    }))
   }
 ];
 
@@ -298,6 +336,13 @@ export default function GameEditionsPage() {
 
           <section aria-labelledby="formats">
             <h2 id="formats">Three delivery formats, scroll sideways</h2>
+            <p>
+              <strong>
+                Edition names tell you what content you get. They tell you nothing about whether a
+                disc, a cartridge, or an email code arrives.
+              </strong>{' '}
+              Check the delivery format separately from the edition tier.
+            </p>
             <div className="gm-scroller">
               <div className="gm-tile">
                 <h3>Digital code</h3>
@@ -423,6 +468,16 @@ export default function GameEditionsPage() {
                 disc anywhere, and Baldur’s Gate 3 sells a Deluxe that exists only as a box.
               </li>
             </ol>
+          </section>
+
+          <section className="blog-faq" aria-labelledby="faq">
+            <h2 id="faq">Frequently asked questions</h2>
+            {FAQ_ITEMS.map((item) => (
+              <details key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
           </section>
         </article>
 

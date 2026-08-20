@@ -53,6 +53,61 @@ export default function HomePage() {
     }))
   };
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Do you actually sell laptops, or do you just link to other stores?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "AISneer is a curation store. We hand-pick laptops we'd recommend, then link you to the manufacturer (Apple, Dell, Lenovo, HP, ASUS, MSI, Microsoft, Samsung, Acer) or a major retailer where you complete the purchase. We may earn a commission, at no extra cost to you."
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'How do you choose which laptops to list?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "We only list laptops that (a) have current, verifiable manufacturer spec pages, (b) compete strongly in their category on price/performance/build, and (c) we'd recommend to a friend. When a newer generation replaces a model, we update or retire the listing."
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Are the specs on your listings accurate?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Specs are pulled directly from manufacturer product pages. Because laptop models ship in many SKUs, we note where the CPU tier, panel, GPU TGP, or memory depends on the exact configuration — always double-check the specific part number before you buy.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Which laptop is best overall for beginners?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "For mainstream ease of use, Apple's 14-inch MacBook Pro with M3 Pro combines long battery life with strong everyday performance — see Apple's published battery and tech specs for the configuration you choose."
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'What’s the best budget laptop you list?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "In our current catalog, the Acer Aspire 5 (A515 family) is typically the lowest-cost Windows option with a current Core i5 H-class CPU. Compare the exact model code and RAM type (DDR4 vs LPDDR5) on Acer's site."
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Is HP EliteBook 840 G11 good for business use?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. HP EliteBook 840 G11 is a solid business laptop with dependable performance, professional build quality, and enterprise-grade security features. Verify vPro and graphics branding on the specific SKU.'
+        }
+      }
+    ]
+  };
+
   return (
     <>
       {/* HERO */}
@@ -352,6 +407,55 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* GUIDES — internal links for crawler discovery */}
+      <section className="container section" aria-labelledby="guides-heading">
+        <div className="section-head">
+          <h2 id="guides-heading" className="section-title">Buying guides</h2>
+          <p className="section-sub">
+            Spec explainers and comparisons that match exact model numbers to the listing you
+            should actually buy.
+          </p>
+        </div>
+        <div className="guide-grid">
+          <div className="guide-card">
+            <h3>
+              <Link href="/blog/blackzero-bzd-01t-ps">Blackzero BZD-01T-PS</Link>
+            </h3>
+            <p>
+              Live fastener-kit drill (ASIN B0D5CJRL8X): 16V brushless, 5 modes, and how it differs
+              from the PH hand-tool kit.
+            </p>
+          </div>
+          <div className="guide-card">
+            <h3>
+              <Link href="/blog/blackzero-bzd-01t-ph-a1">Blackzero BZD-01T-PH-A1</Link>
+            </h3>
+            <p>
+              Former A1 listing mapped to the live BZD-01T-PH hand-tool kit, with the five working
+              modes explained.
+            </p>
+          </div>
+          <div className="guide-card">
+            <h3>
+              <Link href="/blog/creator-laptops-under-1500">Creator laptops under $1,500</Link>
+            </h3>
+            <p>
+              Six notebooks compared on CPU, GPU, memory, panel and weight, including the part
+              numbers that separate configs.
+            </p>
+          </div>
+          <div className="guide-card">
+            <h3>
+              <Link href="/blog">All buying guides</Link>
+            </h3>
+            <p>
+              Headphones, jackets, CAD books, game editions, and the rest of the AISneer field
+              tests.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA STRIP */}
       <section className="cta-strip">
         <div className="container cta-strip-inner">
@@ -370,7 +474,7 @@ export default function HomePage() {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([itemListJsonLd, faqJsonLd]) }}
       />
     </>
   );

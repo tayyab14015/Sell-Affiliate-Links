@@ -12,6 +12,46 @@ export const metadata: Metadata = {
   alternates: { canonical: PAGE_URL }
 };
 
+const blogIndexJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'AISneer Blog',
+  url: PAGE_URL,
+  isPartOf: { '@type': 'WebSite', name: 'AISneer', url: SITE_URL },
+  hasPart: [
+    {
+      '@type': 'ItemList',
+      name: 'Buying guides and field tests',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          url: `${SITE_URL}/blog/blackzero-bzd-01t-ph-a1`,
+          name: 'Blackzero BZD-01T-PH-A1 Explained'
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          url: `${SITE_URL}/blog/blackzero-bzd-01t-ps`,
+          name: 'Blackzero BZD-01T-PS Explained'
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          url: `${SITE_URL}/blog/best-wireless-headphones-2026`,
+          name: 'Best Wireless Headphones of 2026'
+        },
+        {
+          '@type': 'ListItem',
+          position: 4,
+          url: `${SITE_URL}/blog/creator-laptops-under-1500`,
+          name: 'Creator Laptops Under $1,500'
+        }
+      ]
+    }
+  ]
+};
+
 type Post = {
   href: string;
   badge: string;
@@ -41,7 +81,7 @@ const POSTS: Post[] = [
     summary:
       'Exact specs for the live Blackzero BZD-01T-PS (ASIN B0D5CJRL8X): same 16V 5-mode drill as PH/A1, but a stainless fastener tier instead of hand tools.',
     layout: 'Spec explainer with availability note, kit split, comparison table and sourced FAQ',
-    updated: 'August 13, 2026',
+    updated: 'August 20, 2026',
     notes:
       'Owns the PS query and keeps it distinct from PH/A1. Schema offers.url points at B0D5CJRL8X; cross-links the A1 explainer for the hand-tool kit.'
   },
@@ -151,6 +191,10 @@ export default function BlogIndexPage() {
           </li>
         ))}
       </ul>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogIndexJsonLd) }}
+      />
     </div>
   );
 }

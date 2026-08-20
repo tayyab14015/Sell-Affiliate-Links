@@ -41,6 +41,7 @@ const bookNode = {
   datePublished: '2026-06-16',
   publisher: { '@type': 'Organization', name: 'Independently published' },
   category: 'Books > Engineering & Transportation > Engineering > Design',
+  image: `${SITE_URL}/images/books/master-fusion-360-mit-ki-2026.png`,
   about: ['Autodesk Fusion 360', 'CAD', 'CAM', 'CNC', '3D printing', 'AI-assisted design'],
   additionalProperty: [
     { '@type': 'PropertyValue', name: 'book_binding', value: 'paperback' },
@@ -187,6 +188,14 @@ export default function CadBooksPage() {
 
           <div className="bk-hero">
             <h3>Master Fusion 360 Mit KI 2026</h3>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/books/master-fusion-360-mit-ki-2026.png"
+              alt="Cover of MASTER FUSION 360 MIT KI 2026 by Stephen Dave, German Edition paperback"
+              width={400}
+              height={600}
+              style={{ maxWidth: 220, height: 'auto', margin: '12px 0' }}
+            />
             <p className="muted">
               <em>
                 MASTER FUSION 360 MIT KI 2026: CAD, CAM, CNC, 3D-Druck- und Produktdesign Workflows

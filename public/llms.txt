@@ -1,0 +1,33 @@
+# AISneer
+
+> Independent laptop and accessory discovery site. We curate spec-verified laptops, USB hubs, and product explainers, then link to current retailer deals.
+
+Site: https://www.aisneer.com
+Contact: hello@aisneer.com
+
+## What we publish
+
+- Curated laptop picks across ultrabook, gaming, business, creator, student, Chromebook, and workstation categories
+- USB hubs and laptop accessories
+- Spec explainers that match exact model numbers and Amazon ASINs to the correct kit
+
+## Primary pages
+
+- [Home](https://www.aisneer.com/): How AISneer works, featured laptops, buying guide, FAQ
+- [Shop laptops](https://www.aisneer.com/laptops): Full catalog with specs and deal links
+- [USB hubs](https://www.aisneer.com/usb-hubs): USB-C hubs, splitters, and adapters
+- [Blog](https://www.aisneer.com/blog): Buying guides and field tests
+
+## High-value explainers
+
+- [Blackzero BZD-01T-PS](https://www.aisneer.com/blog/blackzero-bzd-01t-ps): Live fastener-kit drill listing (ASIN B0D5CJRL8X)
+- [Blackzero BZD-01T-PH-A1](https://www.aisneer.com/blog/blackzero-bzd-01t-ph-a1): Former A1 listing mapped to live BZD-01T-PH
+- [Creator laptops under $1,500](https://www.aisneer.com/blog/creator-laptops-under-1500)
+- [Best wireless headphones 2026](https://www.aisneer.com/blog/best-wireless-headphones-2026)
+
+## Notes for crawlers
+
+- Canonical host is https://www.aisneer.com
+- XML sitemap: https://www.aisneer.com/sitemap.xml
+- Product links may be affiliate links
+- Main content is in HTML, not behind login or consent walls

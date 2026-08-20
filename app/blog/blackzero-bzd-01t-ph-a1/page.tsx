@@ -279,7 +279,15 @@ const blogPostingJsonLd = {
     description:
       'Writes tool and hardware explainers for AISneer, focusing on matching exact model numbers and ASINs to the correct specs.'
   },
-  publisher: { '@type': 'Organization', name: 'AISneer', url: SITE_URL },
+  publisher: {
+    '@type': 'Organization',
+    name: 'AISneer',
+    url: SITE_URL,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/logo.svg`
+    }
+  },
   about: `${BRAND} ${MODEL} cordless drill`
 };
 
