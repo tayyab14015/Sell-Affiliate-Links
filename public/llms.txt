@@ -25,7 +25,8 @@ Canonical host: https://www.aisneer.com
 - [Business laptops](https://www.aisneer.com/laptops/category/business)
 - [Student laptops](https://www.aisneer.com/laptops/category/student)
 - [USB hubs](https://www.aisneer.com/usb-hubs)
-- [Blog](https://www.aisneer.com/blog): Laptop buying guides only in the public cluster
+- [Blog](https://www.aisneer.com/blog): Laptop buying guides and editorial process
+- [Dell XPS 13 9340](https://www.aisneer.com/laptops/dell-xps-13-9340)
 
 ## High-value explainers
 

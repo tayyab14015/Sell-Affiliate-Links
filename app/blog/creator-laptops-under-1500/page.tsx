@@ -450,13 +450,13 @@ export default function CreatorLaptopsPage() {
           <h3>Related posts</h3>
           <ul>
             <li>
-              <Link href="/blog/best-wireless-headphones-2026">Best wireless headphones of 2026</Link>
+              <Link href="/laptops/category/creator">Creator laptop hub</Link>
             </li>
             <li>
-              <Link href="/blog/blackzero-bzd-01t-ph-a1">Blackzero BZD-01T-PH-A1 drill kit specs</Link>
+              <Link href="/laptops/dell-xps-13-9340">Dell XPS 13 9340 specs</Link>
             </li>
             <li>
-              <Link href="/blog/mixed-category-stress">Our messiest gear notes</Link>
+              <Link href="/about">How AISneer picks laptops</Link>
             </li>
           </ul>
         </div>

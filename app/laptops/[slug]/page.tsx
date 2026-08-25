@@ -197,7 +197,14 @@ export default async function LaptopPdpPage({
                 <h2 className="widget-title">Also consider</h2>
                 <ul className="side-list">
                   <li className="side-list-item">
-                    <img src={item.image} alt="" width={64} height={40} className="thumb" loading="lazy" />
+                    <img
+                      src={item.image}
+                      alt={`${item.company} ${item.model}`}
+                      width={64}
+                      height={40}
+                      className="thumb"
+                      loading="lazy"
+                    />
                     <span className="side-list-text">
                       <Link href={`/laptops/${item.slug}`} className="side-list-name">
                         {item.company} {item.model}

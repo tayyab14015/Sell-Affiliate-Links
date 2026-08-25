@@ -13,9 +13,12 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(dest, 301);
   }
 
-  if (url.pathname === '/laptops/dell-xp-13-9348') {
+  if (
+    url.pathname === '/laptops/dell-xp-13-9348' ||
+    url.pathname === '/laptops/dell-xps-13-9348'
+  ) {
     const dest = url.clone();
-    dest.pathname = '/laptops/dell-xps-13-9348';
+    dest.pathname = '/laptops/dell-xps-13-9340';
     dest.search = '';
     return NextResponse.redirect(dest, 301);
   }

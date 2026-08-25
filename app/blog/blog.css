@@ -70,6 +70,30 @@
   max-width: 70ch;
 }
 
+.blog-index-copy {
+  max-width: 70ch;
+  margin: 28px 0 8px;
+}
+.blog-index-copy h2 {
+  font-size: 1.25rem;
+  margin: 28px 0 10px;
+}
+.blog-index-copy p,
+.blog-index-copy li {
+  line-height: 1.65;
+  color: var(--text);
+}
+.blog-index-copy p {
+  margin: 0 0 1em;
+}
+.blog-index-copy ul {
+  margin: 0 0 1.25em;
+  padding-left: 1.2em;
+}
+.blog-index-copy li + li {
+  margin-top: 0.45em;
+}
+
 .blog-section {
   margin: 40px 0 0;
 }

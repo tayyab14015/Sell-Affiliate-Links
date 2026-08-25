@@ -95,7 +95,7 @@ export default function HomePage() {
           <div className="hero-copy">
             <span className="eyebrow">Laptops · accessories · est. 2026</span>
             <h1 className="hero-title">
-              Buy your next laptop <span className="accent">with confidence</span>.
+              Buy your next laptop<span className="accent"> with confidence</span>.
             </h1>
             <p className="hero-sub">
               AISneer hand-picks the best laptops across every category — ultrabooks, gaming rigs,
@@ -117,11 +117,15 @@ export default function HomePage() {
               <li><strong>100%</strong> spec-verified</li>
             </ul>
           </div>
-          <div className="hero-visual" aria-hidden>
+          <div className="hero-visual">
             <div className="hero-card hero-card-1">
               <img
                 src={featured[0]?.image}
-                alt=""
+                alt={
+                  featured[0]
+                    ? `${featured[0].company} ${featured[0].model}`
+                    : 'Featured laptop'
+                }
                 width={800}
                 height={500}
                 loading="eager"
@@ -136,7 +140,11 @@ export default function HomePage() {
             <div className="hero-card hero-card-2">
               <img
                 src={featured[1]?.image}
-                alt=""
+                alt={
+                  featured[1]
+                    ? `${featured[1].company} ${featured[1].model}`
+                    : 'Featured laptop'
+                }
                 width={800}
                 height={500}
                 loading="lazy"
@@ -381,18 +389,20 @@ export default function HomePage() {
           </div>
           <div className="guide-card">
             <h3>
-              <Link href="/blog/best-wireless-headphones-2026">Best wireless headphones 2026</Link>
+              <Link href="/laptops/category/ultrabook">Ultrabook buying hub</Link>
             </h3>
             <p>
-              Seven over-ear pairs compared on battery, driver size, noise cancelling and price.
+              Thin-and-light Windows and Mac picks with 16GB+ RAM, then the manufacturer page for
+              the exact chassis code.
             </p>
           </div>
           <div className="guide-card">
             <h3>
-              <Link href="/blog">All buying guides</Link>
+              <Link href="/blog">How we write laptop guides</Link>
             </h3>
             <p>
-              Headphones, jackets, CAD books, game editions, and accessory field tests.
+              Editorial process, the public laptop cluster, and links to category hubs and spec
+              pages.
             </p>
           </div>
         </div>

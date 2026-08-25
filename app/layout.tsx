@@ -231,6 +231,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
             __html: `(function(){var l=false;function g(){if(l)return;l=true;var s=document.createElement('script');s.src='https://api.llmaffiliate.com/static/onboarding-snippet.js';s.setAttribute('data-site-id','site_395b368f9af8e71e1d0a77018e3f5080');s.setAttribute('data-token','llmafftm_65992f34858e19ea895d72d802a8b16cf3b04261472255de604c034236327d8e');document.body.appendChild(s);}['pointerdown','keydown','scroll'].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true});});setTimeout(g,4000);})();`
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){function add(){if(document.getElementById('ais-spec'))return;var s=document.createElement('script');s.id='ais-spec';s.type='speculationrules';s.textContent=JSON.stringify({prerender:[{urls:['/laptops'],eagerness:'moderate'}],prefetch:[{where:{href_matches:'/laptops/*'},eagerness:'moderate'}]});document.head.appendChild(s);}if('requestIdleCallback' in window){requestIdleCallback(add,{timeout:2500});}else{setTimeout(add,1500);}})();`
+          }}
+        />
       </body>
     </html>
   );

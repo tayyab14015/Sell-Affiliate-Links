@@ -6,14 +6,14 @@ export type LaptopGuide = {
 };
 
 export const LAPTOP_GUIDES: Record<string, LaptopGuide> = {
-  'dell-xps-13-9348': {
+  'dell-xps-13-9340': {
     whoThisIsFor:
-      'Buy the Dell XPS 13 9348 if you want a 13.4-inch Windows ultrabook for travel, consulting, and all-day browser work, and you are willing to confirm the exact panel and Core Ultra SKU on Dell’s configure page before you pay.',
+      'Buy the Dell XPS 13 9340 if you want a 13.4-inch Windows ultrabook for travel, consulting, and all-day browser work, and you are willing to confirm the exact panel and Core Ultra SKU on Dell’s configure page before you pay.',
     verdict:
-      'This is the ultrabook we would put in a backpack five days a week. It is not a gaming laptop and it is not a creator workstation. Match the 9348 family, then match the CPU, RAM, and display line on the Dell listing — those three fields change the machine more than the lid photo.',
+      'This is the ultrabook we would put in a backpack five days a week. It is not a gaming laptop and it is not a creator workstation. Match the 9340 family, then match the CPU, RAM, and display line on the Dell listing — those three fields change the machine more than the lid photo.',
     relatedSlug: 'lenovo-thinkpad-x1-carbon-gen-12-14',
     paragraphs: [
-      'The XPS 13 9348 is Dell’s current small Windows clamshell in the XPS line. AISneer does not stock it. You buy from Dell or a partner. Typical street pricing for a Core Ultra 7 155H, 16GB LPDDR5x, and 512GB NVMe configuration starts around $1,199 in the US, but Dell’s CTO page will show other panels and memory sizes under the same marketing name. Treat “XPS 13” without 9348 as a different generation.',
+      'The XPS 13 9340 is Dell’s Intel Core Ultra (Meteor Lake) 13.4-inch clamshell. AISneer does not stock it. You buy from Dell or a partner. Typical street pricing for a Core Ultra 7 155H, 16GB LPDDR5x, and 512GB NVMe configuration starts around $1,199 in the US, but Dell’s CTO page will show other panels and memory sizes under the same marketing name. Do not confuse it with XPS 13 9345 (Snapdragon X Elite) or XPS 13 9350 (Core Ultra Series 2). Treat “XPS 13” without a four-digit chassis code as a different generation.',
       'Start with the panel. Dell sells FHD+ 1920×1200 non-touch, QHD+, and OLED options on this chassis. A matte FHD+ panel is the commuting default; OLED looks better indoors and picks up fingerprints and reflections on a train. Touch vs non-touch is a SKU checkbox, not a software toggle. If the listing photo is OLED and the SKU string says FHD+ non-touch, believe the string.',
       'Memory is soldered LPDDR5x. 16GB is the floor we will recommend for 2026 browser-heavy work. 8GB configurations exist in the wider XPS family and age badly once Teams, a dozen tabs, and a local IDE share the same pool. You cannot add a SODIMM later. Storage is easier: 512GB NVMe is acceptable if you keep photos on a drive; bump the SSD at purchase if you keep VMs.',
       'Ports are the usual ultrabook trade. Expect Thunderbolt/USB-C and a headphone jack, not a full-size HDMI and USB-A row. If your dock or projector is HDMI-only, budget a USB-C hub from our accessory catalog rather than buying a thicker 15-inch chassis you will resent. Battery claims are SKU-dependent; use Dell’s published number for the exact processor and panel, not a generic “all-day” slide.',
@@ -53,7 +53,7 @@ export const LAPTOP_GUIDES: Record<string, LaptopGuide> = {
       'Buy the 14-inch MacBook Pro with M3 Pro if your work is Final Cut, Logic, Xcode, or a color-critical panel, and you can commit to the unified memory size at purchase because it is not upgradable later.',
     verdict:
       'This is the creator reference in the AISneer catalog: 18GB unified memory on the base M3 Pro config, a 14.2-inch Liquid Retina XDR 3024×1964 panel, and ProMotion up to 120Hz, from $1,999 US MSRP when introduced. Higher M3 Pro/Max configs change CPU and GPU core counts. We do not stock MacBooks; Apple and authorized resellers do.',
-    relatedSlug: 'dell-xps-13-9348',
+    relatedSlug: 'dell-xps-13-9340',
     paragraphs: [
       'Specifications follow Apple’s published tech specs for the 14-inch MacBook Pro with M3 Pro introduced November 2023. The 11-core CPU and 14-core GPU describe the base M3 Pro tier; 18-core GPU and higher memory options exist on other configs. “MacBook Pro 14” without M3 Pro in the string can be M3, M4, or Max — those are different machines for battery and GPU.',
       'Unified memory is the buying decision. 18GB is the base we list. If you keep 4K timelines, large Lightroom catalogs, or several Xcode simulators, buy 36GB now. There is no SODIMM later. 512GB SSD is acceptable with iCloud and an external disk; bump storage if you keep raw camera cards local. Apple’s battery and display numbers are tied to the exact chip and panel — read the tech specs sheet for the config in the cart.',

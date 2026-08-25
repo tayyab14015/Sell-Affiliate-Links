@@ -30,8 +30,8 @@ const raw: Omit<Laptop, 'slug'>[] = [
   {
     category: 'Ultrabook',
     company: 'Dell',
-    model: 'XPS 13 9348',
-    cpu: 'Intel Core Ultra 7 155H (Meteor Lake, Intel Arc Graphics) — option on XPS 13 9348',
+    model: 'XPS 13 9340',
+    cpu: 'Intel Core Ultra 7 155H (Meteor Lake, Intel Arc Graphics) — option on XPS 13 9340',
     ram: '16GB LPDDR5x (soldered; other capacities offered)',
     storage: '512GB PCIe Gen4 NVMe SSD (other capacities offered)',
     screen: '13.4" FHD+ 1920×1200 non-touch (QHD+ / OLED options on other SKUs)',
@@ -39,7 +39,7 @@ const raw: Omit<Laptop, 'slug'>[] = [
     os: 'Windows 11 Home or Pro (SKU-dependent)',
     price: 'From ~$1,199 (MSRP varies by config; Dell USA)',
     priceFrom: '$1,199',
-    availability: 'Sold by Dell and partners (region-dependent)',
+    availability: 'Sold by Dell and partners (region-dependent; 9340 may redirect to a similar XPS 13 when stock is gone)',
     rating: '4.5 / 5',
     ratingStars: 4.5,
     highlights: [
@@ -48,9 +48,9 @@ const raw: Omit<Laptop, 'slug'>[] = [
       '13.4" FHD+ · Intel Arc iGPU'
     ],
     description:
-      'Dell XPS 13 9348 is a current-generation XPS ultrabook line with Core Ultra processors; exact ports, battery, and panel depend on the SKU you configure.',
+      'Dell XPS 13 9340 is the Intel Core Ultra (Meteor Lake) 13.4-inch XPS clamshell. Exact ports, battery, and panel depend on the SKU you configure. It is not the Snapdragon 9345 or the Series 2 9350.',
     image: '/images/laptops/dell-xps-13-9348.jpg',
-    buyUrl: 'https://www.dell.com/en-us/shop/dell-laptops/xps-13-laptop/spd/xps-13-9345-laptop'
+    buyUrl: 'https://www.dell.com/en-us/shop/dell-laptops/xps-13-laptop/spd/xps-13-9340-laptop'
   },
   {
     category: 'Gaming',

@@ -187,7 +187,14 @@ export default function UsbHubsPage() {
             <ul className="side-list">
               {bestValueUsbHubPicks.map((item) => (
                 <li key={`${item.slug}-value`} className="side-list-item">
-                  <img src={item.image} alt="" width={64} height={40} className="thumb" loading="lazy" />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    width={64}
+                    height={40}
+                    className="thumb"
+                    loading="lazy"
+                  />
                   <span className="side-list-text">
                     <a href={`#${item.slug}`} className="side-list-name">{item.title}</a>
                     <span className="side-list-meta">{item.priceFrom}</span>

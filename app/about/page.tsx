@@ -53,7 +53,7 @@ const jsonLd = {
       name: 'Daniel Kessler',
       jobTitle: 'Product explainer editor',
       worksFor: { '@id': `${SITE_URL}/#organization` },
-      url: `${SITE_URL}/blog/blackzero-bzd-01t-ps`
+      url: `${SITE_URL}/about`
     }
   ]
 };
