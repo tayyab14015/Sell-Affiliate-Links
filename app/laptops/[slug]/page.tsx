@@ -1,9 +1,17 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getLaptopBySlug, laptops, laptopsInCategory, parsePrice } from '../../data/laptops';
+import { getLaptopBySlug, laptops, parsePrice } from '../../data/laptops';
+import { getLaptopGuide } from '../../data/laptop-guides';
 import { getCategoryCopy } from '../../data/laptop-categories';
-import { SITE_NAME, SITE_URL, categoryToSlug, laptopCategoryUrl, laptopUrl } from '../../site';
+import {
+  SITE_NAME,
+  SITE_URL,
+  absoluteUrl,
+  categoryToSlug,
+  laptopCategoryUrl,
+  laptopUrl
+} from '../../site';
 
 export const dynamic = 'force-static';
 
@@ -23,6 +31,7 @@ export async function generateMetadata({
   const title = `${laptop.company} ${laptop.model} Specs and Deals`;
   const description = `${laptop.company} ${laptop.model} specs on AISneer. ${laptop.highlights[0]}. Compare the configuration and open a current retailer deal.`;
   const url = laptopUrl(laptop.slug);
+  const image = absoluteUrl(laptop.image);
 
   return {
     title,
@@ -34,13 +43,13 @@ export async function generateMetadata({
       siteName: SITE_NAME,
       title,
       description,
-      images: [{ url: laptop.image, width: 800, height: 500, alt: `${laptop.company} ${laptop.model}` }]
+      images: [{ url: image, width: 1200, height: 800, alt: `${laptop.company} ${laptop.model}` }]
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [laptop.image]
+      images: [image]
     }
   };
 }
@@ -54,9 +63,13 @@ export default async function LaptopPdpPage({
   const laptop = getLaptopBySlug(slug);
   if (!laptop) notFound();
 
+  const guide = getLaptopGuide(laptop.slug);
   const categoryCopy = getCategoryCopy(laptop.category);
-  const related = laptopsInCategory(laptop.category).filter((l) => l.slug !== laptop.slug).slice(0, 3);
+  const related = guide
+    ? laptops.filter((l) => l.slug === guide.relatedSlug)
+    : [];
   const pageUrl = laptopUrl(laptop.slug);
+  const image = absoluteUrl(laptop.image);
   const price = parsePrice(laptop.priceFrom);
 
   const jsonLd = [
@@ -81,8 +94,8 @@ export default async function LaptopPdpPage({
       name: `${laptop.company} ${laptop.model}`,
       brand: { '@type': 'Brand', name: laptop.company },
       category: laptop.category,
-      description: laptop.description,
-      image: laptop.image,
+      description: guide?.verdict ?? laptop.description,
+      image,
       url: pageUrl,
       sku: laptop.slug,
       offers: {
@@ -90,11 +103,7 @@ export default async function LaptopPdpPage({
         url: laptop.buyUrl,
         priceCurrency: 'USD',
         price,
-        priceSpecification: {
-          '@type': 'UnitPriceSpecification',
-          priceCurrency: 'USD',
-          price
-        }
+        seller: { '@type': 'Organization', name: laptop.company }
       }
     }
   ];
@@ -114,81 +123,80 @@ export default async function LaptopPdpPage({
           </nav>
           <p className="eyebrow">{laptop.company}</p>
           <h1 className="catalog-title">{laptop.company} {laptop.model}</h1>
-          <p className="catalog-sub">{laptop.description}</p>
+          <p className="catalog-sub">{guide?.whoThisIsFor ?? laptop.description}</p>
         </div>
       </section>
 
-      <div className="container catalog-layout">
-        <article className="product-card product-card-lg pdp-card">
-          <div className="product-media">
-            <img
-              src={laptop.image}
-              alt={`${laptop.company} ${laptop.model}`}
-              width={800}
-              height={500}
-              loading="eager"
-            />
-            <span className="product-badge">{laptop.category}</span>
-          </div>
-          <div className="product-body">
-            <ul className="product-highlights">
-              {laptop.highlights.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
+      <article className="container section pdp-article">
+        <div className="catalog-layout">
+          <div className="product-card product-card-lg pdp-card">
+            <div className="product-media">
+              <img
+                src={laptop.image}
+                alt={`${laptop.company} ${laptop.model}`}
+                width={1200}
+                height={800}
+                loading="eager"
+              />
+              <span className="product-badge">{laptop.category}</span>
+            </div>
+            <div className="product-body">
+              <ul className="product-highlights">
+                {laptop.highlights.map((h) => (
+                  <li key={h}>{h}</li>
+                ))}
+              </ul>
 
-            <p className="product-desc">
-              AISneer does not stock this laptop. The price below is a typical street starting point;
-              you complete the purchase with the manufacturer or a retailer. Always match the exact
-              SKU on the listing you open.
-            </p>
+              <p className="product-desc">
+                <strong>Who this is for.</strong> {guide?.whoThisIsFor ?? categoryCopy?.whoFor}
+              </p>
+              {guide ? <p className="product-desc">{guide.verdict}</p> : null}
 
-            <h2>Specifications</h2>
-            <dl className="spec-list">
-              <div><dt>CPU</dt><dd>{laptop.cpu}</dd></div>
-              <div><dt>RAM</dt><dd>{laptop.ram}</dd></div>
-              <div><dt>Storage</dt><dd>{laptop.storage}</dd></div>
-              <div><dt>GPU</dt><dd>{laptop.gpu}</dd></div>
-              <div><dt>Display</dt><dd>{laptop.screen}</dd></div>
-              <div><dt>OS</dt><dd>{laptop.os}</dd></div>
-              <div><dt>Availability</dt><dd>{laptop.availability}</dd></div>
-              <div><dt>Typical price</dt><dd>{laptop.price}</dd></div>
-            </dl>
+              <h2>Specifications</h2>
+              <dl className="spec-list">
+                <div><dt>CPU</dt><dd>{laptop.cpu}</dd></div>
+                <div><dt>RAM</dt><dd>{laptop.ram}</dd></div>
+                <div><dt>Storage</dt><dd>{laptop.storage}</dd></div>
+                <div><dt>GPU</dt><dd>{laptop.gpu}</dd></div>
+                <div><dt>Display</dt><dd>{laptop.screen}</dd></div>
+                <div><dt>OS</dt><dd>{laptop.os}</dd></div>
+                <div><dt>Sold by</dt><dd>{laptop.availability}</dd></div>
+                <div><dt>Typical price</dt><dd>{laptop.price}</dd></div>
+              </dl>
 
-            <div className="product-foot">
-              <div className="product-price">
-                <span className="price-label">From</span>
-                <span className="price">{laptop.priceFrom}</span>
+              <div className="product-foot">
+                <div className="product-price">
+                  <span className="price-label">From</span>
+                  <span className="price">{laptop.priceFrom}</span>
+                </div>
+                <a
+                  className="btn btn-primary"
+                  href={laptop.buyUrl}
+                  target="_blank"
+                  rel="sponsored noopener noreferrer"
+                >
+                  View {laptop.company} listing →
+                </a>
               </div>
-              <a
-                className="btn btn-primary"
-                href={laptop.buyUrl}
-                target="_blank"
-                rel="nofollow sponsored noopener"
-              >
-                View retailer deal →
-              </a>
             </div>
           </div>
-        </article>
 
-        <aside className="sidebar">
-          <section className="widget">
-            <h2 className="widget-title">Who this is for</h2>
-            <p className="widget-body">{categoryCopy?.whoFor ?? laptop.category}</p>
-            <Link
-              href={`/laptops/category/${categoryToSlug(laptop.category)}`}
-              className="btn btn-ghost btn-sm widget-cta"
-            >
-              More {laptop.category.toLowerCase()} laptops →
-            </Link>
-          </section>
-          {related.length > 0 ? (
+          <aside className="sidebar">
             <section className="widget">
-              <h2 className="widget-title">Related picks</h2>
-              <ul className="side-list">
-                {related.map((item) => (
-                  <li key={item.slug} className="side-list-item">
+              <h2 className="widget-title">Category</h2>
+              <p className="widget-body">{categoryCopy?.whoFor ?? laptop.category}</p>
+              <Link
+                href={`/laptops/category/${categoryToSlug(laptop.category)}`}
+                className="btn btn-ghost btn-sm widget-cta"
+              >
+                More {laptop.category.toLowerCase()} laptops →
+              </Link>
+            </section>
+            {related.map((item) => (
+              <section className="widget" key={item.slug}>
+                <h2 className="widget-title">Also consider</h2>
+                <ul className="side-list">
+                  <li className="side-list-item">
                     <img src={item.image} alt="" width={64} height={40} className="thumb" loading="lazy" />
                     <span className="side-list-text">
                       <Link href={`/laptops/${item.slug}`} className="side-list-name">
@@ -197,12 +205,21 @@ export default async function LaptopPdpPage({
                       <span className="side-list-meta">{item.priceFrom}</span>
                     </span>
                   </li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
-        </aside>
-      </div>
+                </ul>
+              </section>
+            ))}
+          </aside>
+        </div>
+
+        {guide ? (
+          <section className="pdp-prose">
+            <h2>Buying notes for the {laptop.company} {laptop.model}</h2>
+            {guide.paragraphs.map((p) => (
+              <p key={p.slice(0, 48)}>{p}</p>
+            ))}
+          </section>
+        ) : null}
+      </article>
 
       <script
         type="application/ld+json"

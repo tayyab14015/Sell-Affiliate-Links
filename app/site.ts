@@ -7,10 +7,10 @@ export const HOME_DESCRIPTION =
   'AISneer curates spec-verified laptops and USB hubs across ultrabook, gaming, business, and creator categories, then links you to current retailer deals.';
 
 export const DEFAULT_OG_IMAGE = {
-  url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1200&h=630&q=80',
+  url: '/images/og-home.jpg',
   width: 1200,
   height: 630,
-  alt: 'A laptop on a desk — AISneer curated laptop picks'
+  alt: 'AISneer curated laptop picks'
 };
 
 export function absoluteUrl(path = '/'): string {

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description:
     'Six fleece and softshell jackets tested, with the zipper question answered: full-zip, quarter-zip or pullover. Includes the Patagonia Better Sweater in both closures and the Arc’teryx Delta line.',
   alternates: { canonical: PAGE_URL },
+  robots: { index: false, follow: true },
   openGraph: {
     type: 'article',
     url: PAGE_URL,
@@ -202,7 +203,6 @@ const productNodes = JACKETS.filter((j) => j.inSchema).map((j) => ({
     '@type': 'Offer',
     priceCurrency: 'USD',
     ...(j.price ? { price: j.price } : {}),
-    availability: 'https://schema.org/InStock',
     ...(j.amazonQuery ? { url: amazonSearchUrl(j.amazonQuery) } : {})
   }
 }));

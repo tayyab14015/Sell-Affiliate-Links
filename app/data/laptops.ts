@@ -20,19 +20,13 @@ export type Laptop = {
   buyUrl: string;
 };
 
-// Affiliate / deal destination. We deep-link to a Google Shopping search
-// by brand + model which works as a real, clickable "View Deal" target
-// until real affiliate URLs are wired in per product.
-const dealLink = (brand: string, model: string) =>
-  `https://www.google.com/search?tbm=shop&q=${encodeURIComponent(`${brand} ${model}`)}`;
-
 const slugify = (brand: string, model: string) =>
   `${brand}-${model}`
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
+const raw: Omit<Laptop, 'slug'>[] = [
   {
     category: 'Ultrabook',
     company: 'Dell',
@@ -55,8 +49,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'Dell XPS 13 9348 is a current-generation XPS ultrabook line with Core Ultra processors; exact ports, battery, and panel depend on the SKU you configure.',
-    image:
-      'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/dell-xps-13-9348.jpg',
+    buyUrl: 'https://www.dell.com/en-us/shop/dell-laptops/xps-13-laptop/spd/xps-13-9345-laptop'
   },
   {
     category: 'Gaming',
@@ -80,8 +74,9 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'Named to match commonly sold "Legion Slim 5 Gen 9 16" configs pairing Ryzen 7 8845HS with RTX 4070. "Legion 5 Pro" is a different chassis line—always verify the exact MTM on Lenovo PSREF or the listing.',
-    image:
-      'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/lenovo-legion-slim-5.jpg',
+    buyUrl:
+      'https://www.lenovo.com/us/en/p/laptops/legion-laptops/legion-slim-series/legion-slim-5-gen-9-16-inch-amd/len101g0027'
   },
   {
     category: 'Business',
@@ -105,8 +100,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'HP EliteBook 840 G11 is a current business-class 14" notebook with Core Ultra options and enterprise manageability features; vPro and graphics branding depend on the exact part number.',
-    image:
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/hp-elitebook-840.jpg',
+    buyUrl: 'https://www.hp.com/us-en/shop/pdp/hp-elitebook-840-14-inch-g11-notebook-pc'
   },
   {
     category: 'Creator',
@@ -130,8 +125,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'Specifications follow Apple\u2019s published tech specs for the 14-inch MacBook Pro with M3 Pro (introduced November 2023). Higher-end M3 Pro/Max configs change CPU/GPU core counts and memory options.',
-    image:
-      'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/macbook-pro-14.jpg',
+    buyUrl: 'https://www.apple.com/shop/buy-mac/macbook-pro/14-inch'
   },
   {
     category: 'Student',
@@ -155,8 +150,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'Aspire 5 is a long-running Acer family; the i5-13420H + 16GB + 512GB + FHD pattern matches multiple current A515 listings—confirm exact model code (e.g. A515-xxxxx) on Acer\u2019s product page before buying.',
-    image:
-      'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/acer-aspire-5.jpg',
+    buyUrl: 'https://www.acer.com/us-en/laptops/aspire/aspire-5'
   },
   {
     category: '2-in-1',
@@ -180,8 +175,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'Microsoft\u2019s convertible "studio" form factor with discrete RTX graphics; exact weight, battery, and bundle vary—see Microsoft\u2019s official spec page for the precise configuration you select.',
-    image:
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/surface-laptop-studio-2.jpg',
+    buyUrl: 'https://www.microsoft.com/en-us/surface/devices/surface-laptop-studio-2'
   },
   {
     category: 'Gaming',
@@ -205,8 +200,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       '2024 Zephyrus G14 uses AMD Ryzen 8000-class HS processors and RTX 40-series GPUs; display and TGP can differ—check the exact GA403xx model on ASUS / PSREF.',
-    image:
-      'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/asus-zephyrus-g14.jpg',
+    buyUrl: 'https://www.asus.com/us/laptops/for-gaming/rog-zephyrus/rog-zephyrus-g14-2024/'
   },
   {
     category: 'Business',
@@ -230,8 +225,9 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'Lenovo documents Core Ultra U/H series choices, LPDDR5x memory, and multiple 14" display options for X1 Carbon Gen 12; WWAN, vPro, and exact panel are SKU-specific.',
-    image:
-      'https://images.unsplash.com/photo-1484788984921-03950022c9ef?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/thinkpad-x1-carbon.jpg',
+    buyUrl:
+      'https://www.lenovo.com/us/en/p/laptops/thinkpad/thinkpadx1/thinkpad-x1-carbon-gen-12-14-inch-intel/len101t0071'
   },
   {
     category: 'Budget Gaming',
@@ -255,8 +251,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'MSI publishes Katana 15 B13 family specs including i7-13620H and RTX 4060 combinations; panel may be FHD 144Hz or QHD on different part numbers—confirm the full model suffix.',
-    image:
-      'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/msi-katana-15.jpg',
+    buyUrl: 'https://www.msi.com/Laptop/Katana-15-B13V'
   },
   {
     category: 'Chromebook',
@@ -280,8 +276,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'Samsung\u2019s "Galaxy Chromebook Plus" line has been updated; memory/storage and CPU branding differ by region—always verify the exact XE… model number on samsung.com for your country.',
-    image:
-      'https://images.unsplash.com/photo-1611078489935-0cb964de46d6?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/galaxy-chromebook-plus.jpg',
+    buyUrl: 'https://www.samsung.com/us/computing/chromebooks/'
   },
   {
     category: 'Workstation',
@@ -305,15 +301,15 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
     ],
     description:
       'Dell\u2019s Precision 5680 tech materials document Core i9 H-class CPUs, ISV certifications, and professional RTX Ada/B-series GPUs; exact TGP, display, and VRAM depend on the selected configuration.',
-    image:
-      'https://images.unsplash.com/photo-1511385348-a52b4a160dc2?auto=format&fit=crop&w=800&q=80'
+    image: '/images/laptops/dell-precision-5680.jpg',
+    buyUrl:
+      'https://www.dell.com/en-us/shop/workstations-isv-certified/precision-16-5680-workstation/spd/precision-16-5680-laptop'
   }
 ];
 
 export const laptops: Laptop[] = raw.map((l) => ({
   ...l,
-  slug: slugify(l.company, l.model),
-  buyUrl: dealLink(l.company, l.model)
+  slug: slugify(l.company, l.model)
 }));
 
 export const categories = Array.from(new Set(laptops.map((l) => l.category)));

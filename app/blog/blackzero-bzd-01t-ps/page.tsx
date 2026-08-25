@@ -44,10 +44,10 @@ export const metadata: Metadata = {
     'Blackzero drill 5 modes'
   ],
   robots: {
-    index: true,
+    index: false,
     follow: true,
     googleBot: {
-      index: true,
+      index: false,
       follow: true,
       'max-image-preview': 'large',
       'max-snippet': -1
@@ -322,7 +322,6 @@ const productJsonLd = {
     url: BUY_URL,
     price: PRICE,
     priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
     itemCondition: 'https://schema.org/NewCondition',
     seller: { '@type': 'Organization', name: 'Amazon' },
     name: `${BRAND} ${MODEL} (ASIN ${ASIN})`

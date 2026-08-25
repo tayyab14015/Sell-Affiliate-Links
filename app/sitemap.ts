@@ -5,15 +5,6 @@ import { SITE_URL } from './site';
 
 const SITE_LAST_MODIFIED = '2026-08-25';
 
-const LAPTOP_FIRST_POSTS: Array<{ slug: string; lastModified: string; priority: number }> = [
-  { slug: 'best-wireless-headphones-2026', lastModified: '2026-07-28', priority: 0.6 },
-  { slug: 'best-fleece-and-softshell-jackets', lastModified: '2026-07-30', priority: 0.55 },
-  { slug: 'fusion-360-and-cad-books', lastModified: '2026-08-01', priority: 0.55 },
-  { slug: 'pc-games-editions-explained', lastModified: '2026-07-15', priority: 0.55 },
-  { slug: 'blackzero-bzd-01t-ps', lastModified: '2026-08-20', priority: 0.45 },
-  { slug: 'blackzero-bzd-01t-ph-a1', lastModified: '2026-08-06', priority: 0.45 }
-];
-
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
@@ -41,6 +32,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8
     },
     {
+      url: `${SITE_URL}/privacy`,
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'yearly',
+      priority: 0.3
+    },
+    {
+      url: `${SITE_URL}/terms`,
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'yearly',
+      priority: 0.3
+    },
+    {
       url: `${SITE_URL}/blog`,
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: 'weekly',
@@ -63,12 +66,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: 'weekly' as const,
       priority: 0.7
-    })),
-    ...LAPTOP_FIRST_POSTS.map((post) => ({
-      url: `${SITE_URL}/blog/${post.slug}`,
-      lastModified: post.lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: post.priority
     }))
   ];
 }

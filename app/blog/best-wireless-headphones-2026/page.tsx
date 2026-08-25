@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description:
     'Spec-by-spec comparison of seven wireless headphones for 2026, including Sony WH-1000XM5 vs WH-1000XM4, Bose QuietComfort Ultra, Sennheiser Momentum 4 and Apple AirPods Max.',
   alternates: { canonical: PAGE_URL },
+  robots: { index: false, follow: true },
   openGraph: {
     type: 'article',
     url: PAGE_URL,
@@ -207,8 +208,7 @@ const jsonLd = [
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
       { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
-      { '@type': 'ListItem', position: 3, name: 'Audio', item: `${SITE_URL}/blog?topic=audio` },
-      { '@type': 'ListItem', position: 4, name: 'Best Wireless Headphones 2026', item: PAGE_URL }
+      { '@type': 'ListItem', position: 3, name: 'Best Wireless Headphones 2026', item: PAGE_URL }
     ]
   },
   {
@@ -237,7 +237,6 @@ const jsonLd = [
           '@type': 'Offer',
           price: p.price,
           priceCurrency: 'USD',
-          availability: 'https://schema.org/InStock',
           ...(p.amazonQuery ? { url: amazonSearchUrl(p.amazonQuery) } : {})
         }
       }

@@ -1,6 +1,6 @@
 # AISneer
 
-> Independent laptop discovery site. We curate spec-verified laptops and USB hubs, then link to current retailer deals. We do not hold inventory.
+> Independent laptop discovery site. We curate spec-verified laptops and USB hubs, then link to manufacturer or retailer listings. We do not hold inventory.
 
 Site: https://www.aisneer.com
 Contact: hello@aisneer.com
@@ -9,34 +9,34 @@ Canonical host: https://www.aisneer.com
 ## What we publish
 
 - Curated laptop picks across ultrabook, gaming, business, creator, student, Chromebook, and workstation categories
-- Individual laptop spec pages at /laptops/{slug}
-- Category hubs (gaming, business, student, ultrabook, creator)
-- USB hubs and laptop accessories
-- Buying guides, led by creator laptops under $1,500
+- Individual laptop spec pages at /laptops/{slug} (400+ words, manufacturer deal URL)
+- Category hubs (gaming, business, student, ultrabook, creator, and others)
+- USB-C hubs and laptop accessories
+- Laptop buying guides, led by creator laptops under $1,500
 
 ## Primary pages
 
 - [Home](https://www.aisneer.com/): How AISneer works, featured laptops, buying guide, FAQ
-- [Shop laptops](https://www.aisneer.com/laptops): Full catalog with specs and deal links
+- [Shop laptops](https://www.aisneer.com/laptops): Full catalog with spec URLs
 - [About](https://www.aisneer.com/about): Editors, how we pick laptops, affiliate disclosure
+- [Privacy](https://www.aisneer.com/privacy)
+- [Terms](https://www.aisneer.com/terms)
 - [Gaming laptops](https://www.aisneer.com/laptops/category/gaming)
 - [Business laptops](https://www.aisneer.com/laptops/category/business)
 - [Student laptops](https://www.aisneer.com/laptops/category/student)
-- [USB hubs](https://www.aisneer.com/usb-hubs): USB-C hubs, splitters, and adapters
-- [Blog](https://www.aisneer.com/blog): Buying guides and field tests
+- [USB hubs](https://www.aisneer.com/usb-hubs)
+- [Blog](https://www.aisneer.com/blog): Laptop buying guides only in the public cluster
 
 ## High-value explainers
 
 - [Creator laptops under $1,500](https://www.aisneer.com/blog/creator-laptops-under-1500)
-- [Best wireless headphones 2026](https://www.aisneer.com/blog/best-wireless-headphones-2026)
-- [Blackzero BZD-01T-PS](https://www.aisneer.com/blog/blackzero-bzd-01t-ps): Accessory explainer (ASIN B0D5CJRL8X)
 
 ## Notes for crawlers
 
 - Canonical host is https://www.aisneer.com (apex 301s here)
 - XML sitemap: https://www.aisneer.com/sitemap.xml
 - IndexNow key: https://www.aisneer.com/7b3e9c4a1f8d2e6b0c5a9d4f1e8b3c7a.txt
-- Product links may be affiliate links
+- Product links may be affiliate links (rel=sponsored)
 - Main content is in HTML, not behind login or consent walls
 - FAQ answers are visible in page HTML
-- /blog/mixed-category-stress is a non-indexable fixture
+- Off-topic accessory posts are noindex and omitted from this file

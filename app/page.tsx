@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { laptops, categories } from './data/laptops';
-import { HOME_DESCRIPTION, SITE_NAME, SITE_URL, categoryToSlug } from './site';
+import { HOME_DESCRIPTION, SITE_NAME, SITE_URL, categoryToSlug, DEFAULT_OG_IMAGE } from './site';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -17,12 +17,14 @@ export const metadata: Metadata = {
     url: PAGE_URL,
     siteName: SITE_NAME,
     title: `${SITE_NAME} — Curated Laptops & Accessories`,
-    description: HOME_DESCRIPTION
+    description: HOME_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE]
   },
   twitter: {
     card: 'summary_large_image',
     title: `${SITE_NAME} — Curated Laptops & Accessories`,
-    description: HOME_DESCRIPTION
+    description: HOME_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE.url]
   }
 };
 
@@ -93,7 +95,7 @@ export default function HomePage() {
           <div className="hero-copy">
             <span className="eyebrow">Laptops · accessories · est. 2026</span>
             <h1 className="hero-title">
-              Buy your next laptop with <span className="accent">confidence</span>.
+              Buy your next laptop <span className="accent">with confidence</span>.
             </h1>
             <p className="hero-sub">
               AISneer hand-picks the best laptops across every category — ultrabooks, gaming rigs,

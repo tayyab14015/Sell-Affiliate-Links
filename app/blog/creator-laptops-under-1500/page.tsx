@@ -20,7 +20,8 @@ export const metadata: Metadata = {
     url: PAGE_URL,
     title: 'Creator Laptops Under $1,500 (2026)',
     description:
-      'CPU, GPU, RAM, storage, panel and weight for six creator notebooks under $1,500.'
+      'CPU, GPU, RAM, storage, panel and weight for six creator notebooks under $1,500.',
+    images: [{ url: '/images/og-home.jpg', width: 1200, height: 630, alt: 'AISneer creator laptop guide' }]
   }
 };
 
@@ -186,7 +187,6 @@ const productNodes = LAPTOPS.filter((l) => l.inSchema).map((l) => ({
     '@type': 'Offer',
     priceCurrency: 'USD',
     ...(l.price ? { price: l.price } : {}),
-    availability: 'https://schema.org/InStock',
     ...(l.amazonQuery ? { url: amazonSearchUrl(l.amazonQuery) } : {})
   }
 }));
@@ -209,7 +209,6 @@ const vivobookOneTerabyte = {
     '@type': 'Offer',
     price: 869,
     priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
     url: amazonSearchUrl('ASUS Vivobook 16 OLED M1605YA-ES96 Ryzen 7 7730U 16GB 1TB')
   }
 };
@@ -255,9 +254,8 @@ const jsonLd = {
       '@id': `${PAGE_URL}#breadcrumbs`,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-        { '@type': 'ListItem', position: 2, name: 'Electronics', item: `${SITE_URL}/blog?topic=electronics` },
-        { '@type': 'ListItem', position: 3, name: 'Computers', item: `${SITE_URL}/blog?topic=computers` },
-        { '@type': 'ListItem', position: 4, name: 'Laptops', item: PAGE_URL }
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+        { '@type': 'ListItem', position: 3, name: 'Creator laptops under $1,500', item: PAGE_URL }
       ]
     },
     ...productNodes,

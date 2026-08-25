@@ -6,7 +6,7 @@ import {
   bestValueUsbHubPicks,
   type UsbHub
 } from '../data/usb-hubs';
-import { SITE_NAME, SITE_URL, categoryToSlug } from '../site';
+import { SITE_NAME, SITE_URL, categoryToSlug, DEFAULT_OG_IMAGE } from '../site';
 
 const PAGE_URL = `${SITE_URL}/usb-hubs`;
 const TITLE = 'USB-C Hubs, Splitters, and OTG Adapters';
@@ -24,12 +24,14 @@ export const metadata: Metadata = {
     url: PAGE_URL,
     siteName: SITE_NAME,
     title: TITLE,
-    description: DESCRIPTION
+    description: DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE]
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
-    description: DESCRIPTION
+    description: DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE.url]
   }
 };
 
@@ -84,7 +86,7 @@ function ProductCard({ hub }: { hub: UsbHub }) {
             className="btn btn-primary"
             href={hub.searchUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="sponsored noopener noreferrer"
           >
             Search prices →
           </a>

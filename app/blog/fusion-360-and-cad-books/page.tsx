@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   description:
     'A long-form guide to four Fusion 360 and CAD reference books, including the German-edition paperback Master Fusion 360 Mit KI 2026 by Stephen Dave, with page counts, language, binding and edition for each.',
   alternates: { canonical: PAGE_URL },
+  robots: { index: false, follow: true },
   openGraph: {
     type: 'article',
     url: PAGE_URL,
@@ -53,7 +54,6 @@ const bookNode = {
     url: amazonProductUrl(HERO_ASIN),
     price: 20.0,
     priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
     itemCondition: 'https://schema.org/NewCondition',
     seller: { '@type': 'Organization', name: 'Amazon.com' }
   }

@@ -187,21 +187,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   <li>
                     <Link href="/blog/creator-laptops-under-1500">Creator laptops under $1,500</Link>
                   </li>
-                  <li><Link href="/blog">All guides</Link></li>
-                  <li>
-                    <Link href="/blog/best-wireless-headphones-2026">Wireless headphones 2026</Link>
-                  </li>
-                  <li>
-                    <Link href="/blog/blackzero-bzd-01t-ps">Blackzero BZD-01T-PS</Link>
-                  </li>
+                  <li><Link href="/blog">Laptop guides</Link></li>
+                  <li><Link href="/laptops/category/gaming">Gaming hub</Link></li>
+                  <li><Link href="/usb-hubs">USB hubs</Link></li>
                 </ul>
               </div>
               <div>
                 <h4>Company</h4>
                 <ul>
                   <li><Link href="/about">About AISneer</Link></li>
-                  <li><Link href="/#why-us">Why shop with us</Link></li>
-                  <li><Link href="/blog">Blog</Link></li>
+                  <li><Link href="/privacy">Privacy</Link></li>
+                  <li><Link href="/terms">Terms</Link></li>
                   <li><Link href="/#faq">FAQ</Link></li>
                 </ul>
               </div>
@@ -218,7 +214,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} {SITE_NAME}. All prices and availability subject to change.</span>
             <span className="muted">
-              Disclosure: Product links may be affiliate links. We may earn a commission on qualifying purchases.
+              Disclosure: Product links may be affiliate links. We may earn a commission on qualifying purchases.{' '}
+              <Link href="/privacy">Privacy</Link>
+              {' · '}
+              <Link href="/terms">Terms</Link>
             </span>
           </div>
         </footer>
