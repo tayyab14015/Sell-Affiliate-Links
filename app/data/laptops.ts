@@ -36,8 +36,8 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
   {
     category: 'Ultrabook',
     company: 'Dell',
-    model: 'XP 13 9348',
-    cpu: 'Intel Core Ultra 7 155H (Meteor Lake, Intel Arc Graphics) — option on XP 13 9348',
+    model: 'XPS 13 9348',
+    cpu: 'Intel Core Ultra 7 155H (Meteor Lake, Intel Arc Graphics) — option on XPS 13 9348',
     ram: '16GB LPDDR5x (soldered; other capacities offered)',
     storage: '512GB PCIe Gen4 NVMe SSD (other capacities offered)',
     screen: '13.4" FHD+ 1920×1200 non-touch (QHD+ / OLED options on other SKUs)',
@@ -54,7 +54,7 @@ const raw: Omit<Laptop, 'slug' | 'buyUrl'>[] = [
       '13.4" FHD+ · Intel Arc iGPU'
     ],
     description:
-      'Dell XP 13 9348 is a current-generation XPS ultrabook line with Core Ultra processors; exact ports, battery, and panel depend on the SKU you configure.',
+      'Dell XPS 13 9348 is a current-generation XPS ultrabook line with Core Ultra processors; exact ports, battery, and panel depend on the SKU you configure.',
     image:
       'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80'
   },
@@ -317,3 +317,15 @@ export const laptops: Laptop[] = raw.map((l) => ({
 }));
 
 export const categories = Array.from(new Set(laptops.map((l) => l.category)));
+
+export function getLaptopBySlug(slug: string): Laptop | undefined {
+  return laptops.find((l) => l.slug === slug);
+}
+
+export function laptopsInCategory(category: string): Laptop[] {
+  return laptops.filter((l) => l.category === category);
+}
+
+export function parsePrice(priceFrom: string): number {
+  return Number(priceFrom.replace(/[^0-9.]/g, '')) || 0;
+}

@@ -2,12 +2,14 @@ import './globals.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-
-const SITE_NAME = 'AISneer';
-const SITE_TAGLINE = 'Curated laptop picks and honest deals';
-const SITE_URL = 'https://www.aisneer.com';
-
-const DEFAULT_OG_IMAGE = `${SITE_URL}/logo.svg`;
+import {
+  DEFAULT_OG_IMAGE,
+  HOME_DESCRIPTION,
+  SITE_EMAIL,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL
+} from './site';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -15,8 +17,7 @@ export const metadata: Metadata = {
     default: `${SITE_NAME} — ${SITE_TAGLINE}`,
     template: `%s · ${SITE_NAME}`
   },
-  description:
-    'AISneer helps you buy the right laptop. Hand-picked ultrabooks, gaming rigs, business notebooks, creator machines, and student laptops with transparent specs and current deal links.',
+  description: HOME_DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
     'laptops',
@@ -36,19 +37,16 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: SITE_URL,
-    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
-    description:
-      'Hand-picked laptops for work, play, study, and creators. Compare real specs and jump straight to the best current deal.',
     siteName: SITE_NAME,
-    images: [{ url: DEFAULT_OG_IMAGE, width: 512, height: 512, alt: SITE_NAME }]
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    description: HOME_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE]
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
-    description:
-      'Hand-picked laptops for work, play, study, and creators. Compare real specs and jump straight to the best current deal.',
-    images: [DEFAULT_OG_IMAGE]
+    description: HOME_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE.url]
   },
   robots: {
     index: true,
@@ -74,7 +72,7 @@ type RootLayoutProps = {
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'OnlineStore',
+  '@type': 'Organization',
   '@id': `${SITE_URL}/#organization`,
   name: SITE_NAME,
   url: SITE_URL,
@@ -85,9 +83,9 @@ const organizationJsonLd = {
     height: 512
   },
   image: `${SITE_URL}/logo.svg`,
-  email: 'hello@aisneer.com',
+  email: SITE_EMAIL,
   description:
-    'AISneer is an independent laptop discovery store. We curate laptops across ultrabook, gaming, business, creator, student, and workstation categories and link you to current retailer deals.',
+    'AISneer is an independent laptop discovery site. We curate laptops across ultrabook, gaming, business, creator, student, and workstation categories and link you to current retailer deals. We do not hold inventory.',
   slogan: SITE_TAGLINE,
   areaServed: 'Worldwide',
   knowsAbout: [
@@ -99,8 +97,7 @@ const organizationJsonLd = {
     'Creator laptops',
     'Chromebooks',
     'Mobile workstations',
-    'USB hubs',
-    'Cordless drills'
+    'USB hubs'
   ]
 };
 
@@ -112,7 +109,7 @@ const websiteJsonLd = {
   url: SITE_URL,
   inLanguage: 'en',
   description:
-    'Hand-picked laptops, USB hubs, and spec-accurate buying guides with current retailer deal links.',
+    'Hand-picked laptops and USB hubs with spec-accurate buying guides and current retailer deal links.',
   publisher: { '@id': `${SITE_URL}/#organization` }
 };
 
@@ -141,9 +138,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <Link href="/laptops">Shop Laptops</Link>
               <Link href="/usb-hubs">USB Hubs</Link>
               <Link href="/blog">Blog</Link>
-              <Link href="/#categories">Categories</Link>
-              <Link href="/#about">About</Link>
-              <Link href="/#faq">FAQ</Link>
+              <Link href="/laptops/category/gaming">Gaming</Link>
+              <Link href="/about">About</Link>
             </nav>
 
             <Link href="/laptops" className="btn btn-primary btn-sm header-cta">
@@ -167,8 +163,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 </span>
               </div>
               <p className="footer-blurb">
-                AISneer is an independent laptop store that curates the best-selling and best-reviewed
-                laptops across every category, then links you straight to the current deal.
+                AISneer is an independent laptop discovery site that curates spec-verified
+                laptops across every category, then links you straight to the current retailer deal.
               </p>
             </div>
 
@@ -178,25 +174,32 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <ul>
                   <li><Link href="/laptops">All laptops</Link></li>
                   <li><Link href="/usb-hubs">USB hubs</Link></li>
-                  <li><Link href="/laptops?category=Gaming">Gaming</Link></li>
-                  <li><Link href="/laptops?category=Ultrabook">Ultrabooks</Link></li>
-                  <li><Link href="/laptops?category=Business">Business</Link></li>
-                  <li><Link href="/laptops?category=Creator">Creator</Link></li>
+                  <li><Link href="/laptops/category/gaming">Gaming</Link></li>
+                  <li><Link href="/laptops/category/ultrabook">Ultrabooks</Link></li>
+                  <li><Link href="/laptops/category/business">Business</Link></li>
+                  <li><Link href="/laptops/category/student">Student</Link></li>
+                  <li><Link href="/laptops/category/creator">Creator</Link></li>
                 </ul>
               </div>
               <div>
                 <h4>Guides</h4>
                 <ul>
+                  <li>
+                    <Link href="/blog/creator-laptops-under-1500">Creator laptops under $1,500</Link>
+                  </li>
                   <li><Link href="/blog">All guides</Link></li>
-                  <li><Link href="/blog/blackzero-bzd-01t-ps">Blackzero BZD-01T-PS</Link></li>
-                  <li><Link href="/blog/blackzero-bzd-01t-ph-a1">Blackzero BZD-01T-PH-A1</Link></li>
-                  <li><Link href="/blog/creator-laptops-under-1500">Creator laptops under $1,500</Link></li>
+                  <li>
+                    <Link href="/blog/best-wireless-headphones-2026">Wireless headphones 2026</Link>
+                  </li>
+                  <li>
+                    <Link href="/blog/blackzero-bzd-01t-ps">Blackzero BZD-01T-PS</Link>
+                  </li>
                 </ul>
               </div>
               <div>
                 <h4>Company</h4>
                 <ul>
-                  <li><Link href="/#about">About AISneer</Link></li>
+                  <li><Link href="/about">About AISneer</Link></li>
                   <li><Link href="/#why-us">Why shop with us</Link></li>
                   <li><Link href="/blog">Blog</Link></li>
                   <li><Link href="/#faq">FAQ</Link></li>
@@ -205,7 +208,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <div>
                 <h4>Help</h4>
                 <ul>
-                  <li><a href="mailto:hello@aisneer.com">Contact</a></li>
+                  <li><a href={`mailto:${SITE_EMAIL}`}>Contact</a></li>
                   <li><Link href="/#buying-guide">Buying guide</Link></li>
                 </ul>
               </div>
@@ -224,11 +227,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationJsonLd, websiteJsonLd]) }}
         />
-<script
-  src="https://api.llmaffiliate.com/static/onboarding-snippet.js"
-  data-site-id="site_395b368f9af8e71e1d0a77018e3f5080"
-  data-token="llmafftm_65992f34858e19ea895d72d802a8b16cf3b04261472255de604c034236327d8e">
-</script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=false;function g(){if(l)return;l=true;var s=document.createElement('script');s.src='https://api.llmaffiliate.com/static/onboarding-snippet.js';s.setAttribute('data-site-id','site_395b368f9af8e71e1d0a77018e3f5080');s.setAttribute('data-token','llmafftm_65992f34858e19ea895d72d802a8b16cf3b04261472255de604c034236327d8e');document.body.appendChild(s);}['pointerdown','keydown','scroll'].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true});});setTimeout(g,4000);})();`
+          }}
+        />
       </body>
     </html>
   );

@@ -1,23 +1,28 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { laptops, categories } from './data/laptops';
+import { HOME_DESCRIPTION, SITE_NAME, SITE_URL, categoryToSlug } from './site';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
 
-const SITE_URL = 'https://www.aisneer.com';
+const PAGE_URL = `${SITE_URL}/`;
 
-export const metadata = {
-  title: 'AISneer — Curated Laptops & Accessories',
-  description:
-    'AISneer curates laptops and USB hubs with real specs and direct deal links.',
-  alternates: { canonical: `${SITE_URL}/` },
+export const metadata: Metadata = {
+  title: { absolute: `${SITE_NAME} — Curated Laptops & Accessories` },
+  description: HOME_DESCRIPTION,
+  alternates: { canonical: PAGE_URL },
   openGraph: {
     type: 'website',
-    url: `${SITE_URL}/`,
-    siteName: 'AISneer',
-    title: 'AISneer — Curated Laptops & Accessories',
-    description:
-      'AISneer curates laptops and USB hubs with real specs and direct deal links.'
+    url: PAGE_URL,
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — Curated Laptops & Accessories`,
+    description: HOME_DESCRIPTION
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_NAME} — Curated Laptops & Accessories`,
+    description: HOME_DESCRIPTION
   }
 };
 
@@ -33,84 +38,56 @@ const categoryMeta: Record<string, { blurb: string; icon: string }> = {
   Workstation: { blurb: 'ISV-certified, pro-grade power', icon: '▲' }
 };
 
+const HOME_FAQS = [
+  {
+    q: 'Do you actually sell laptops, or do you just link to other stores?',
+    a: "AISneer is a curation site. We hand-pick laptops we'd recommend, then link you to the manufacturer (Apple, Dell, Lenovo, HP, ASUS, MSI, Microsoft, Samsung, Acer) or a major retailer where you complete the purchase. We may earn a commission, at no extra cost to you. We do not hold inventory."
+  },
+  {
+    q: 'How do you choose which laptops to list?',
+    a: "We only list laptops that (a) have current, verifiable manufacturer spec pages, (b) compete strongly in their category on price/performance/build, and (c) we'd recommend to a friend. When a newer generation replaces a model, we update or retire the listing."
+  },
+  {
+    q: 'Are the specs on your listings accurate?',
+    a: 'Specs are pulled directly from manufacturer product pages. Because laptop models ship in many SKUs, we note where the CPU tier, panel, GPU TGP, or memory depends on the exact configuration — always double-check the specific part number before you buy.'
+  },
+  {
+    q: 'Which laptop is best overall for beginners?',
+    a: "For mainstream ease of use, Apple's 14-inch MacBook Pro with M3 Pro combines long battery life with strong everyday performance — see Apple's published battery and tech specs for the configuration you choose."
+  },
+  {
+    q: "What's the best budget laptop you list?",
+    a: "In our current catalog, the Acer Aspire 5 (A515 family) is typically the lowest-cost Windows option with a current Core i5 H-class CPU. Compare the exact model code and RAM type (DDR4 vs LPDDR5) on Acer's site."
+  },
+  {
+    q: 'Is HP EliteBook 840 G11 good for business use?',
+    a: 'Yes. HP EliteBook 840 G11 is a solid business laptop with dependable performance, professional build quality, and enterprise-grade security features. Verify vPro and graphics branding on the specific SKU.'
+  }
+];
+
 export default function HomePage() {
   const featured = [
     laptops.find((l) => l.model.includes('MacBook Pro 14')),
     laptops.find((l) => l.model.includes('Legion Slim 5')),
     laptops.find((l) => l.model.includes('XPS 13')),
-    laptops.find((l) => l.model.includes('Zephyrus G14'))
+    laptops.find((l) => l.model.includes('ThinkPad X1 Carbon'))
   ].filter((l): l is NonNullable<typeof l> => Boolean(l));
 
   const itemListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Featured Laptops on AISneer',
+    numberOfItems: featured.length,
     itemListElement: featured.map((l, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `${SITE_URL}/laptops#${l.slug}`,
+      url: `${SITE_URL}/laptops/${l.slug}`,
       name: `${l.company} ${l.model}`
     }))
   };
 
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Do you actually sell laptops, or do you just link to other stores?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: "AISneer is a curation store. We hand-pick laptops we'd recommend, then link you to the manufacturer (Apple, Dell, Lenovo, HP, ASUS, MSI, Microsoft, Samsung, Acer) or a major retailer where you complete the purchase. We may earn a commission, at no extra cost to you."
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'How do you choose which laptops to list?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: "We only list laptops that (a) have current, verifiable manufacturer spec pages, (b) compete strongly in their category on price/performance/build, and (c) we'd recommend to a friend. When a newer generation replaces a model, we update or retire the listing."
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'Are the specs on your listings accurate?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Specs are pulled directly from manufacturer product pages. Because laptop models ship in many SKUs, we note where the CPU tier, panel, GPU TGP, or memory depends on the exact configuration — always double-check the specific part number before you buy.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'Which laptop is best overall for beginners?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: "For mainstream ease of use, Apple's 14-inch MacBook Pro with M3 Pro combines long battery life with strong everyday performance — see Apple's published battery and tech specs for the configuration you choose."
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'What’s the best budget laptop you list?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: "In our current catalog, the Acer Aspire 5 (A515 family) is typically the lowest-cost Windows option with a current Core i5 H-class CPU. Compare the exact model code and RAM type (DDR4 vs LPDDR5) on Acer's site."
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'Is HP EliteBook 840 G11 good for business use?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Yes. HP EliteBook 840 G11 is a solid business laptop with dependable performance, professional build quality, and enterprise-grade security features. Verify vPro and graphics branding on the specific SKU.'
-        }
-      }
-    ]
-  };
-
   return (
     <>
-      {/* HERO */}
       <section className="hero">
         <div className="container hero-inner">
           <div className="hero-copy">
@@ -143,7 +120,10 @@ export default function HomePage() {
               <img
                 src={featured[0]?.image}
                 alt=""
+                width={800}
+                height={500}
                 loading="eager"
+                fetchPriority="high"
               />
               <div className="hero-card-body">
                 <span className="badge">{featured[0]?.category}</span>
@@ -152,7 +132,13 @@ export default function HomePage() {
               </div>
             </div>
             <div className="hero-card hero-card-2">
-              <img src={featured[1]?.image} alt="" loading="eager" />
+              <img
+                src={featured[1]?.image}
+                alt=""
+                width={800}
+                height={500}
+                loading="lazy"
+              />
               <div className="hero-card-body">
                 <span className="badge">{featured[1]?.category}</span>
                 <p>{featured[1]?.company} {featured[1]?.model}</p>
@@ -163,7 +149,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* VALUE STRIP */}
       <section className="value-strip">
         <div className="container value-strip-inner">
           <div><strong>Spec-verified</strong><span>Every laptop cross-checked against official product pages.</span></div>
@@ -173,7 +158,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CATEGORIES */}
       <section id="categories" className="container section">
         <div className="section-head">
           <h2 className="section-title">Shop by category</h2>
@@ -189,7 +173,7 @@ export default function HomePage() {
             return (
               <Link
                 key={cat}
-                href={`/laptops?category=${encodeURIComponent(cat)}`}
+                href={`/laptops/category/${categoryToSlug(cat)}`}
                 className="category-card"
               >
                 <span className="category-icon" aria-hidden>{meta.icon}</span>
@@ -202,26 +186,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED PRODUCTS */}
       <section id="featured" className="container section">
         <div className="section-head">
           <h2 className="section-title">This week&apos;s featured picks</h2>
           <p className="section-sub">
-            Four machines we&apos;d recommend right now — one MacBook, one gaming rig, one
-            ultrabook, and one creator laptop.
+            Four machines we&apos;d recommend right now — a MacBook Pro, a Legion gaming laptop,
+            a Dell XPS 13 ultrabook, and a ThinkPad X1 Carbon for work.
           </p>
         </div>
         <div className="featured-grid">
           {featured.map((l) => (
             <article key={l.slug} className="product-card">
-              <div className="product-media">
-                <img src={l.image} alt={`${l.company} ${l.model}`} loading="lazy" />
+              <Link href={`/laptops/${l.slug}`} className="product-media">
+                <img
+                  src={l.image}
+                  alt={`${l.company} ${l.model}`}
+                  width={800}
+                  height={500}
+                  loading="lazy"
+                />
                 <span className="product-badge">{l.category}</span>
-              </div>
+              </Link>
               <div className="product-body">
                 <div className="product-title">
                   <span className="product-brand">{l.company}</span>
-                  <h3>{l.model}</h3>
+                  <h3>
+                    <Link href={`/laptops/${l.slug}`}>{l.model}</Link>
+                  </h3>
                 </div>
                 <ul className="product-highlights">
                   {l.highlights.map((h) => (
@@ -233,14 +224,9 @@ export default function HomePage() {
                     <span className="price-label">From</span>
                     <span className="price">{l.priceFrom}</span>
                   </div>
-                  <a
-                    className="btn btn-primary btn-sm"
-                    href={l.buyUrl}
-                    target="_blank"
-                    rel="nofollow sponsored noopener"
-                  >
-                    View deal
-                  </a>
+                  <Link href={`/laptops/${l.slug}`} className="btn btn-primary btn-sm">
+                    View specs
+                  </Link>
                 </div>
               </div>
             </article>
@@ -253,7 +239,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ABOUT */}
       <section id="about" className="about">
         <div className="container about-inner">
           <div className="about-copy">
@@ -268,7 +253,8 @@ export default function HomePage() {
               We&apos;re a small, independent team that does the boring work for you: we read the
               official product pages, verify the CPU / GPU / RAM / panel specs, and only list
               machines we&apos;d recommend to a friend. When you click a product, you go straight
-              to a retailer where you can buy it today.
+              to a retailer where you can buy it today. Named editors and the full story live on
+              our <Link href="/about">About page</Link>.
             </p>
             <p>
               We cover ultrabooks, gaming laptops, MacBooks, ThinkPads, EliteBooks, Surface devices,
@@ -277,7 +263,7 @@ export default function HomePage() {
             </p>
             <div className="hero-cta">
               <Link href="/laptops" className="btn btn-primary">Start shopping</Link>
-              <a href="mailto:hello@aisneer.com" className="btn btn-ghost">Contact us</a>
+              <Link href="/about" className="btn btn-ghost">Meet the editors</Link>
             </div>
           </div>
           <aside id="why-us" className="about-stats">
@@ -304,7 +290,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BUYING GUIDE */}
       <section id="buying-guide" className="container section">
         <div className="section-head">
           <h2 className="section-title">Quick buying guide</h2>
@@ -316,98 +301,56 @@ export default function HomePage() {
           <div className="guide-card">
             <h3>For work &amp; productivity</h3>
             <p>
-              Prioritize a comfortable 14" WUXGA+ panel, 16GB+ RAM, Intel Core Ultra or Apple
-              Silicon, and all-day battery. Look at the <Link href="/laptops?category=Ultrabook">Ultrabook</Link>,
-              {' '}<Link href="/laptops?category=Business">Business</Link>, and Creator categories.
+              Prioritize a comfortable 14&quot; WUXGA+ panel, 16GB+ RAM, Intel Core Ultra or Apple
+              Silicon, and all-day battery. Look at the{' '}
+              <Link href="/laptops/category/ultrabook">Ultrabook</Link>,{' '}
+              <Link href="/laptops/category/business">Business</Link>, and{' '}
+              <Link href="/laptops/category/creator">Creator</Link> categories.
             </p>
           </div>
           <div className="guide-card">
             <h3>For gaming</h3>
             <p>
               RTX 4060 is the sweet spot; RTX 4070 if you want QHD+ high-refresh. 16GB DDR5 minimum,
-              1TB NVMe strongly recommended. Browse our <Link href="/laptops?category=Gaming">Gaming</Link> and
-              {' '}<Link href="/laptops?category=Budget%20Gaming">Budget Gaming</Link> picks.
+              1TB NVMe strongly recommended. Browse our{' '}
+              <Link href="/laptops/category/gaming">Gaming</Link> and{' '}
+              <Link href="/laptops/category/budget-gaming">Budget Gaming</Link> picks.
             </p>
           </div>
           <div className="guide-card">
             <h3>For students</h3>
             <p>
-              15.6" FHD IPS with Core i5 / Ryzen 5, 16GB RAM, 512GB SSD is the comfort zone under
-              $800. See our <Link href="/laptops?category=Student">Student</Link> and
-              {' '}<Link href="/laptops?category=Chromebook">Chromebook</Link> picks.
+              15.6&quot; FHD IPS with Core i5 / Ryzen 5, 16GB RAM, 512GB SSD is the comfort zone under
+              $800. See our <Link href="/laptops/category/student">Student</Link> and{' '}
+              <Link href="/laptops/category/chromebook">Chromebook</Link> picks.
             </p>
           </div>
           <div className="guide-card">
             <h3>For creators &amp; pros</h3>
             <p>
               Color-accurate displays (OLED or mini-LED), 32GB+ RAM, and a discrete GPU or Apple
-              M-series Pro/Max. See our <Link href="/laptops?category=Creator">Creator</Link> and
-              {' '}<Link href="/laptops?category=Workstation">Workstation</Link> picks.
+              M-series Pro/Max. See our <Link href="/laptops/category/creator">Creator</Link> and{' '}
+              <Link href="/laptops/category/workstation">Workstation</Link> picks, plus the{' '}
+              <Link href="/blog/creator-laptops-under-1500">2026 creator guide</Link>.
             </p>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
       <section id="faq" className="container section">
         <div className="section-head">
           <h2 className="section-title">Frequently asked questions</h2>
         </div>
         <div className="faq">
-          <details>
-            <summary>Do you actually sell laptops, or do you just link to other stores?</summary>
-            <p>
-              AISneer is a curation store. We hand-pick laptops we&apos;d recommend, then link you
-              to the manufacturer (Apple, Dell, Lenovo, HP, ASUS, MSI, Microsoft, Samsung, Acer) or
-              a major retailer where you complete the purchase. We may earn a commission, at no
-              extra cost to you.
-            </p>
-          </details>
-          <details>
-            <summary>How do you choose which laptops to list?</summary>
-            <p>
-              We only list laptops that (a) have current, verifiable manufacturer spec pages, (b)
-              compete strongly in their category on price/performance/build, and (c) we&apos;d
-              recommend to a friend. When a newer generation replaces a model, we update or retire
-              the listing.
-            </p>
-          </details>
-          <details>
-            <summary>Are the specs on your listings accurate?</summary>
-            <p>
-              Specs are pulled directly from manufacturer product pages. Because laptop models ship
-              in many SKUs, we note where the CPU tier, panel, GPU TGP, or memory depends on the
-              exact configuration — always double-check the specific part number before you buy.
-            </p>
-          </details>
-          <details>
-            <summary>Which laptop is best overall for beginners?</summary>
-            <p>
-              For mainstream ease of use, Apple&apos;s 14-inch MacBook Pro with M3 Pro combines
-              long battery life with strong everyday performance — see Apple&apos;s published
-              battery and tech specs for the configuration you choose.
-            </p>
-          </details>
-          <details>
-            <summary>What&apos;s the best budget laptop you list?</summary>
-            <p>
-              In our current catalog, the Acer Aspire 5 (A515 family) is typically the lowest-cost
-              Windows option with a current Core i5 H-class CPU. Compare the exact model code and
-              RAM type (DDR4 vs LPDDR5) on Acer&apos;s site.
-            </p>
-          </details>
-          <details>
-            <summary>Is HP EliteBook 840 G11 good for business use?</summary>
-            <p>
-              Yes. HP EliteBook 840 G11 is a solid business laptop with dependable performance,
-              professional build quality, and enterprise-grade security features. Verify vPro and
-              graphics branding on the specific SKU.
-            </p>
-          </details>
+          {HOME_FAQS.map((item) => (
+            <article className="faq-item" key={item.q}>
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* GUIDES — internal links for crawler discovery */}
       <section className="container section" aria-labelledby="guides-heading">
         <div className="section-head">
           <h2 id="guides-heading" className="section-title">Buying guides</h2>
@@ -419,24 +362,6 @@ export default function HomePage() {
         <div className="guide-grid">
           <div className="guide-card">
             <h3>
-              <Link href="/blog/blackzero-bzd-01t-ps">Blackzero BZD-01T-PS</Link>
-            </h3>
-            <p>
-              Live fastener-kit drill (ASIN B0D5CJRL8X): 16V brushless, 5 modes, and how it differs
-              from the PH hand-tool kit.
-            </p>
-          </div>
-          <div className="guide-card">
-            <h3>
-              <Link href="/blog/blackzero-bzd-01t-ph-a1">Blackzero BZD-01T-PH-A1</Link>
-            </h3>
-            <p>
-              Former A1 listing mapped to the live BZD-01T-PH hand-tool kit, with the five working
-              modes explained.
-            </p>
-          </div>
-          <div className="guide-card">
-            <h3>
               <Link href="/blog/creator-laptops-under-1500">Creator laptops under $1,500</Link>
             </h3>
             <p>
@@ -446,17 +371,31 @@ export default function HomePage() {
           </div>
           <div className="guide-card">
             <h3>
+              <Link href="/laptops">Shop all curated laptops</Link>
+            </h3>
+            <p>
+              Ultrabook, gaming, business, student, and workstation picks with their own spec URLs.
+            </p>
+          </div>
+          <div className="guide-card">
+            <h3>
+              <Link href="/blog/best-wireless-headphones-2026">Best wireless headphones 2026</Link>
+            </h3>
+            <p>
+              Seven over-ear pairs compared on battery, driver size, noise cancelling and price.
+            </p>
+          </div>
+          <div className="guide-card">
+            <h3>
               <Link href="/blog">All buying guides</Link>
             </h3>
             <p>
-              Headphones, jackets, CAD books, game editions, and the rest of the AISneer field
-              tests.
+              Headphones, jackets, CAD books, game editions, and accessory field tests.
             </p>
           </div>
         </div>
       </section>
 
-      {/* CTA STRIP */}
       <section className="cta-strip">
         <div className="container cta-strip-inner">
           <div>
@@ -474,7 +413,7 @@ export default function HomePage() {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([itemListJsonLd, faqJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
     </>
   );

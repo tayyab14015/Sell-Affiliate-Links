@@ -6,10 +6,17 @@ const SITE_URL = 'https://www.aisneer.com';
 const PAGE_URL = `${SITE_URL}/blog`;
 
 export const metadata: Metadata = {
-  title: 'Blog — Buying Guides and Field Tests',
+  title: 'Laptop Buying Guides and Field Tests',
   description:
-    'Buying guides and field tests from AISneer: Blackzero drill kits, wireless headphones, creator laptops, fleece and softshell jackets, CAD books and game editions.',
-  alternates: { canonical: PAGE_URL }
+    'Laptop buying guides from AISneer, led by creator notebooks under $1,500, plus accessory field tests for headphones, jackets, CAD books, and game editions.',
+  alternates: { canonical: PAGE_URL },
+  openGraph: {
+    type: 'website',
+    url: PAGE_URL,
+    title: 'Laptop Buying Guides and Field Tests',
+    description:
+      'Laptop buying guides from AISneer, led by creator notebooks under $1,500, plus accessory field tests.'
+  }
 };
 
 const blogIndexJsonLd = {
@@ -26,26 +33,26 @@ const blogIndexJsonLd = {
         {
           '@type': 'ListItem',
           position: 1,
-          url: `${SITE_URL}/blog/blackzero-bzd-01t-ph-a1`,
-          name: 'Blackzero BZD-01T-PH-A1 Explained'
+          url: `${SITE_URL}/blog/creator-laptops-under-1500`,
+          name: 'Creator Laptops Under $1,500'
         },
         {
           '@type': 'ListItem',
           position: 2,
-          url: `${SITE_URL}/blog/blackzero-bzd-01t-ps`,
-          name: 'Blackzero BZD-01T-PS Explained'
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
           url: `${SITE_URL}/blog/best-wireless-headphones-2026`,
           name: 'Best Wireless Headphones of 2026'
         },
         {
           '@type': 'ListItem',
+          position: 3,
+          url: `${SITE_URL}/blog/blackzero-bzd-01t-ps`,
+          name: 'Blackzero BZD-01T-PS Explained'
+        },
+        {
+          '@type': 'ListItem',
           position: 4,
-          url: `${SITE_URL}/blog/creator-laptops-under-1500`,
-          name: 'Creator Laptops Under $1,500'
+          url: `${SITE_URL}/blog/blackzero-bzd-01t-ph-a1`,
+          name: 'Blackzero BZD-01T-PH-A1 Explained'
         }
       ]
     }
@@ -64,26 +71,15 @@ type Post = {
 
 const POSTS: Post[] = [
   {
-    href: '/blog/blackzero-bzd-01t-ph-a1',
-    badge: 'Tools',
-    title: 'Blackzero BZD-01T-PH-A1 Explained: Exact Specs, Five Modes and Model Differences',
+    href: '/blog/creator-laptops-under-1500',
+    badge: 'Computers',
+    title: 'Creator Laptops Under $1,500: The Six We Would Actually Buy',
     summary:
-      'Exact specs for the Blackzero BZD-01T-PH-A1 (former ASIN B0DBQMQMMW), five modes explained, and the intentional map to the live BZD-01T-PH buy listing (ASIN B0D5CLZ1ZT).',
-    layout: 'Spec explainer with availability note, product gallery, comparison table and sourced FAQ',
-    updated: 'August 6, 2026',
+      'CPU, GPU, memory, storage, panel and weight for six creator notebooks, plus the part numbers that tell configurations apart.',
+    layout: 'Card grid with spec chips',
+    updated: 'July 21, 2026',
     notes:
-      'Owns the rare A1 query while clearly resolving buyers to the live PH ASIN. Schema offers.url points at B0D5CLZ1ZT; B0DBQMQMMW kept as historical/former ASIN only.'
-  },
-  {
-    href: '/blog/blackzero-bzd-01t-ps',
-    badge: 'Tools',
-    title: 'Blackzero BZD-01T-PS Explained: Exact Specs, Fastener Kit and Model Differences',
-    summary:
-      'Exact specs for the live Blackzero BZD-01T-PS (ASIN B0D5CJRL8X): same 16V 5-mode drill as PH/A1, but a stainless fastener tier instead of hand tools.',
-    layout: 'Spec explainer with availability note, kit split, comparison table and sourced FAQ',
-    updated: 'August 20, 2026',
-    notes:
-      'Owns the PS query and keeps it distinct from PH/A1. Schema offers.url points at B0D5CJRL8X; cross-links the A1 explainer for the hand-tool kit.'
+      '6 products. CPU and GPU names sit next to model names on purpose, one card omits the manufacturer from its heading, one storage variant exists only in schema, one laptop has no listing at all. Schema: @graph.'
   },
   {
     href: '/blog/best-wireless-headphones-2026',
@@ -97,15 +93,26 @@ const POSTS: Post[] = [
       '7 products, specs live only in table cells, two Sony generations side by side, one extra model (WH-CH720N) appears only in the FAQ. Schema: ItemList of Product/IndividualProduct nodes.'
   },
   {
-    href: '/blog/creator-laptops-under-1500',
-    badge: 'Computers',
-    title: 'Creator Laptops Under $1,500: The Six We Would Actually Buy',
+    href: '/blog/blackzero-bzd-01t-ps',
+    badge: 'Tools',
+    title: 'Blackzero BZD-01T-PS Explained: Exact Specs, Fastener Kit and Model Differences',
     summary:
-      'CPU, GPU, memory, storage, panel and weight for six creator notebooks, plus the part numbers that tell configurations apart.',
-    layout: 'Card grid with spec chips',
-    updated: 'July 21, 2026',
+      'Exact specs for the live Blackzero BZD-01T-PS (ASIN B0D5CJRL8X): same 16V 5-mode drill as PH/A1, but a stainless fastener tier instead of hand tools.',
+    layout: 'Spec explainer with availability note, kit split, comparison table and sourced FAQ',
+    updated: 'August 20, 2026',
     notes:
-      '6 products. CPU and GPU names sit next to model names on purpose, one card omits the manufacturer from its heading, one storage variant exists only in schema, one laptop has no listing at all. Schema: @graph.'
+      'Owns the PS query and keeps it distinct from PH/A1. Schema offers.url points at B0D5CJRL8X; cross-links the A1 explainer for the hand-tool kit.'
+  },
+  {
+    href: '/blog/blackzero-bzd-01t-ph-a1',
+    badge: 'Tools',
+    title: 'Blackzero BZD-01T-PH-A1 Explained: Exact Specs, Five Modes and Model Differences',
+    summary:
+      'Exact specs for the Blackzero BZD-01T-PH-A1 (former ASIN B0DBQMQMMW), five modes explained, and the intentional map to the live BZD-01T-PH buy listing (ASIN B0D5CLZ1ZT).',
+    layout: 'Spec explainer with availability note, product gallery, comparison table and sourced FAQ',
+    updated: 'August 6, 2026',
+    notes:
+      'Owns the rare A1 query while clearly resolving buyers to the live PH ASIN. Schema offers.url points at B0D5CLZ1ZT; B0DBQMQMMW kept as historical/former ASIN only.'
   },
   {
     href: '/blog/best-fleece-and-softshell-jackets',
@@ -169,8 +176,8 @@ export default function BlogIndexPage() {
         <p className="blog-kicker">AISneer</p>
         <h1>Buying guides and field tests</h1>
         <p className="blog-lede">
-          Eight posts. Each one covers a single category in depth, lists the exact configuration or
-          model number, and links to the listing it&apos;s based on.
+          Laptop buying guides lead this index, starting with creator notebooks under $1,500.
+          Accessory field tests follow. Each post lists exact configurations or model numbers.
         </p>
       </header>
 

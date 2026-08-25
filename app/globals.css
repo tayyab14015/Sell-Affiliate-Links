@@ -967,6 +967,72 @@ h1, h2, h3, h4 {
   color: var(--text-muted);
   font-size: 14.5px;
 }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+}
+.faq-item:last-child {
+  border-bottom: 0;
+}
+.faq-item h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.faq-item p {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  font-size: 14.5px;
+}
+
+a.product-media {
+  display: block;
+  color: inherit;
+}
+
+.category-prose {
+  max-width: 72ch;
+  color: var(--text-muted);
+  font-size: 16px;
+  margin: 0 0 16px;
+}
+
+.about-page {
+  max-width: 72ch;
+}
+.about-page p,
+.about-page li {
+  color: var(--text-muted);
+  font-size: 16.5px;
+}
+.about-page h2 {
+  margin-top: 32px;
+}
+.about-page .bullet-list {
+  margin: 12px 0 24px;
+  padding-left: 18px;
+}
+.about-page .bullet-list li {
+  margin: 8px 0;
+}
+
+.usb-category-block {
+  margin-bottom: 40px;
+  scroll-margin-top: 140px;
+}
+.usb-category-block .section-title {
+  margin: 0 0 16px;
+}
+
+.pdp-card {
+  margin-bottom: 32px;
+}
+.pdp-card .spec-list {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 24px;
+}
 
 /* ---------- CTA strip ---------- */
 

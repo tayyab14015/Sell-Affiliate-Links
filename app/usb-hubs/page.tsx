@@ -4,56 +4,67 @@ import {
   usbHubs,
   usbHubCategories,
   bestValueUsbHubPicks,
-  withFeaturedFirst,
   type UsbHub
 } from '../data/usb-hubs';
+import { SITE_NAME, SITE_URL, categoryToSlug } from '../site';
 
-export const runtime = 'edge';
+const PAGE_URL = `${SITE_URL}/usb-hubs`;
+const TITLE = 'USB-C Hubs, Splitters, and OTG Adapters';
+const DESCRIPTION =
+  'USB-C hubs, USB 3.0 splitters, and OTG adapters for laptops and phones. Compare budget picks and search current Google Shopping prices.';
 
 export const metadata: Metadata = {
-  title: 'Shop USB Hubs — AISneer',
-  description:
-    'Browse USB-C hubs, USB 3.0 splitters, and OTG adapters for laptops, MacBooks, phones, and desktops. Compare options under $5 and search current prices on Google.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: {
-    canonical: 'https://www.aisneer.com/usb-hubs'
+    canonical: PAGE_URL
+  },
+  openGraph: {
+    type: 'website',
+    url: PAGE_URL,
+    siteName: SITE_NAME,
+    title: TITLE,
+    description: DESCRIPTION
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION
   }
 };
 
-type SearchParams = {
-  category?: string;
-  sort?: string;
-};
-
-function Stars({ value }: { value: number }) {
-  const full = Math.floor(value);
-  const half = value - full >= 0.25 && value - full < 0.75;
-  const empty = 5 - full - (half ? 1 : 0);
-  return (
-    <span className="stars" aria-label={`${value} out of 5 stars`} title={`${value} / 5`}>
-      {'★'.repeat(full)}
-      {half ? '☆' : ''}
-      {'·'.repeat(empty)}
-    </span>
-  );
-}
+const USB_FAQS = [
+  {
+    q: 'Do I need a USB-C hub or a USB 3.0 hub?',
+    a: 'If your laptop or tablet only has USB-C ports, pick a USB-C hub or adapter. If you still have full-size USB-A ports, a USB 3.0 splitter is usually the cheaper option.'
+  },
+  {
+    q: 'What is the best budget USB hub in this list?',
+    a: 'The USB 3.0 Hub 4-Port Splitter Expander at $3.90 is the lowest-priced option here — good for keyboards, mice, flash drives, and printers on a tight budget.'
+  },
+  {
+    q: 'Are these good for MacBook and iPhone?',
+    a: 'Yes. Several picks explicitly support MacBook Pro/Air, iPad, and recent iPhones via USB-C OTG adapters. Always confirm your exact port type (USB-C vs USB-A) before buying.'
+  },
+  {
+    q: 'Why does the buy button open Google Shopping?',
+    a: 'We link to Google Shopping search results so you can compare current prices across retailers yourself. AISneer does not stock these hubs.'
+  }
+];
 
 function ProductCard({ hub }: { hub: UsbHub }) {
+  const imageSrc = hub.image.startsWith('http') ? hub.image : hub.image;
   return (
     <article id={hub.slug} className="product-card product-card-lg">
       <div className="product-media">
-        <img src={hub.image} alt={hub.title} loading="lazy" />
+        <img src={imageSrc} alt={hub.title} width={800} height={500} loading="lazy" />
         <span className="product-badge">{hub.category}</span>
       </div>
 
       <div className="product-body">
         <div className="product-title">
           <span className="product-brand">{hub.brand}</span>
-          <h2>{hub.title}</h2>
-        </div>
-
-        <div className="product-rating">
-          <Stars value={hub.ratingStars} />
-          <span className="muted">{hub.rating}</span>
+          <h3>{hub.title}</h3>
         </div>
 
         <ul className="product-highlights">
@@ -63,16 +74,6 @@ function ProductCard({ hub }: { hub: UsbHub }) {
         </ul>
 
         <p className="product-desc">{hub.description}</p>
-
-        <details className="spec-toggle">
-          <summary>Product details</summary>
-          <dl className="spec-list">
-            <div><dt>Category</dt><dd>{hub.category}</dd></div>
-            <div><dt>Brand</dt><dd>{hub.brand}</dd></div>
-            <div><dt>Typical price</dt><dd>{hub.priceFrom}</dd></div>
-            <div><dt>Currency</dt><dd>{hub.currency}</dd></div>
-          </dl>
-        </details>
 
         <div className="product-foot">
           <div className="product-price">
@@ -93,100 +94,24 @@ function ProductCard({ hub }: { hub: UsbHub }) {
   );
 }
 
-export default async function UsbHubsPage({
-  searchParams
-}: {
-  searchParams: Promise<SearchParams>;
-}) {
-  const params = (await searchParams) ?? {};
-  const activeCategory =
-    params.category && usbHubCategories.includes(params.category) ? params.category : null;
-  const sort = params.sort ?? 'featured';
-
-  let visible = activeCategory
-    ? usbHubs.filter((h) => h.category === activeCategory)
-    : usbHubs;
-
-  if (sort === 'price-asc') {
-    visible = [...visible].sort((a, b) => a.price - b.price);
-  } else if (sort === 'price-desc') {
-    visible = [...visible].sort((a, b) => b.price - a.price);
-  } else if (sort === 'rating') {
-    visible = [...visible].sort((a, b) => b.ratingStars - a.ratingStars);
-  } else {
-    visible = withFeaturedFirst(visible);
-  }
+export default function UsbHubsPage() {
+  const grouped = usbHubCategories.map((cat) => ({
+    cat,
+    slug: categoryToSlug(cat),
+    hubs: usbHubs.filter((h) => h.category === cat)
+  }));
 
   const productListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: activeCategory ? `${activeCategory} on AISneer` : 'USB hubs and adapters on AISneer',
-    numberOfItems: visible.length,
-    itemListElement: visible.map((h, i) => ({
+    name: 'USB hubs and adapters on AISneer',
+    numberOfItems: usbHubs.length,
+    itemListElement: usbHubs.map((h, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      item: {
-        '@type': 'Product',
-        name: h.title,
-        brand: { '@type': 'Brand', name: h.brand },
-        category: h.category,
-        description: h.description,
-        image: h.image.startsWith('http') ? h.image : `https://www.aisneer.com${h.image}`,
-        url: `https://www.aisneer.com/usb-hubs#${h.slug}`,
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: h.ratingStars,
-          bestRating: 5,
-          ratingCount: 1
-        },
-        offers: {
-          '@type': 'Offer',
-          priceCurrency: h.currency,
-          price: h.price,
-          availability: 'https://schema.org/InStock',
-          url: h.searchUrl
-        }
-      }
+      url: `${PAGE_URL}#${h.slug}`,
+      name: h.title
     }))
-  };
-
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Do I need a USB-C hub or a USB 3.0 hub?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'If your laptop or tablet only has USB-C ports, pick a USB-C hub or adapter. If you still have full-size USB-A ports, a USB 3.0 splitter is usually the cheaper option.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'What is the best budget USB hub in this list?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'The USB 3.0 Hub 4-Port Splitter Expander at $3.90 is the lowest-priced option here — good for keyboards, mice, flash drives, and printers on a tight budget.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'Are these good for MacBook and iPhone?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Yes. Several picks explicitly support MacBook Pro/Air, iPad, and recent iPhones via USB-C OTG adapters. Always confirm your exact port type (USB-C vs USB-A) before buying.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'Why does the buy button open Google Shopping?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'We link to Google Shopping search results so you can compare current prices across retailers yourself — no affiliate redirects from this page.'
-        }
-      }
-    ]
   };
 
   return (
@@ -197,24 +122,16 @@ export default async function UsbHubsPage({
             <Link href="/">Home</Link>
             <span aria-hidden>/</span>
             <span>USB Hubs</span>
-            {activeCategory ? (
-              <>
-                <span aria-hidden>/</span>
-                <span>{activeCategory}</span>
-              </>
-            ) : null}
           </nav>
-          <h1 className="catalog-title">
-            {activeCategory ? `${activeCategory}` : 'Shop USB hubs & adapters'}
-          </h1>
+          <h1 className="catalog-title">Shop USB hubs &amp; adapters</h1>
           <p className="catalog-sub">
-            {activeCategory
-              ? `Curated ${activeCategory.toLowerCase()} picks for laptops, MacBooks, phones, and desktops.`
-              : 'USB-C hubs, USB 3.0 splitters, and OTG adapters from budget picks to 10 Gbps multiport hubs. Compare features and search current prices on Google Shopping.'}
+            USB-C hubs, USB 3.0 splitters, and OTG adapters from budget picks to 10 Gbps multiport
+            hubs. Compare features and search current prices on Google Shopping. AISneer does not
+            stock these products.
           </p>
 
           <div className="catalog-meta">
-            <span><strong>{visible.length}</strong> {visible.length === 1 ? 'product' : 'products'}</span>
+            <span><strong>{usbHubs.length}</strong> products</span>
             <span aria-hidden>·</span>
             <span>Budget-friendly</span>
             <span aria-hidden>·</span>
@@ -225,64 +142,35 @@ export default async function UsbHubsPage({
 
       <section className="filter-bar">
         <div className="container filter-bar-inner">
-          <div className="chip-row" role="tablist" aria-label="Filter by category">
-            <Link
-              href="/usb-hubs"
-              className={`chip ${!activeCategory ? 'chip-active' : ''}`}
-            >
-              All ({usbHubs.length})
-            </Link>
-            {usbHubCategories.map((cat) => {
-              const count = usbHubs.filter((h) => h.category === cat).length;
-              const active = activeCategory === cat;
-              return (
-                <Link
-                  key={cat}
-                  href={`/usb-hubs?category=${encodeURIComponent(cat)}`}
-                  className={`chip ${active ? 'chip-active' : ''}`}
-                >
-                  {cat} ({count})
-                </Link>
-              );
-            })}
+          <div className="chip-row" role="navigation" aria-label="Jump to category">
+            {grouped.map(({ cat, slug, hubs }) => (
+              <a key={cat} href={`#${slug}`} className="chip">
+                {cat} ({hubs.length})
+              </a>
+            ))}
           </div>
-
-          <form className="sort-form" method="get">
-            {activeCategory ? (
-              <input type="hidden" name="category" value={activeCategory} />
-            ) : null}
-            <label htmlFor="sort" className="muted">Sort:</label>
-            <select id="sort" name="sort" defaultValue={sort}>
-              <option value="featured">Featured</option>
-              <option value="price-asc">Price: low → high</option>
-              <option value="price-desc">Price: high → low</option>
-              <option value="rating">Top rated</option>
-            </select>
-            <button type="submit" className="btn btn-ghost btn-sm">Apply</button>
-          </form>
         </div>
       </section>
 
       <div className="container catalog-layout">
         <div>
-          {visible.length === 0 ? (
-            <p className="empty">
-              No products match this filter yet. <Link href="/usb-hubs">See all USB hubs</Link>.
-            </p>
-          ) : (
-            <ul className="product-grid">
-              {visible.map((hub) => (
-                <li key={hub.slug}>
-                  <ProductCard hub={hub} />
-                </li>
-              ))}
-            </ul>
-          )}
+          {grouped.map(({ cat, slug, hubs }) => (
+            <section key={cat} id={slug} className="usb-category-block">
+              <h2 className="section-title">{cat}</h2>
+              <ul className="product-grid">
+                {hubs.map((hub) => (
+                  <li key={hub.slug}>
+                    <ProductCard hub={hub} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </div>
 
         <aside className="sidebar">
           <section className="widget">
-            <h3 className="widget-title">Need a laptop too?</h3>
+            <h2 className="widget-title">Need a laptop too?</h2>
             <p className="widget-body">
               Pair your new hub with a curated laptop from our main catalog — ultrabooks, gaming,
               business, and student picks.
@@ -293,30 +181,28 @@ export default async function UsbHubsPage({
           </section>
 
           <section className="widget">
-            <h3 className="widget-title">Best value this week</h3>
+            <h2 className="widget-title">Best value this week</h2>
             <ul className="side-list">
               {bestValueUsbHubPicks.map((item) => (
-                  <li key={`${item.slug}-value`} className="side-list-item">
-                    <img src={item.image} alt="" className="thumb" loading="lazy" />
-                    <span className="side-list-text">
-                      <span className="side-list-name">{item.title}</span>
-                      <span className="side-list-meta">
-                        {item.priceFrom} · <Stars value={item.ratingStars} />
-                      </span>
-                    </span>
-                  </li>
-                ))}
+                <li key={`${item.slug}-value`} className="side-list-item">
+                  <img src={item.image} alt="" width={64} height={40} className="thumb" loading="lazy" />
+                  <span className="side-list-text">
+                    <a href={`#${item.slug}`} className="side-list-name">{item.title}</a>
+                    <span className="side-list-meta">{item.priceFrom}</span>
+                  </span>
+                </li>
+              ))}
             </ul>
           </section>
 
           <section className="widget widget-cta-card">
-            <h3 className="widget-title">How we link</h3>
+            <h2 className="widget-title">How we link</h2>
             <ul className="bullet-list">
-              <li>No affiliate checkout links</li>
+              <li>We do not hold inventory</li>
               <li>Google Shopping price search</li>
               <li>Compare before you buy</li>
             </ul>
-            <Link href="/#about" className="btn btn-primary btn-sm widget-cta">
+            <Link href="/about" className="btn btn-primary btn-sm widget-cta">
               About us →
             </Link>
           </section>
@@ -328,40 +214,18 @@ export default async function UsbHubsPage({
           <h2 className="section-title">USB hub buying FAQ</h2>
         </div>
         <div className="faq">
-          <details>
-            <summary>Do I need a USB-C hub or a USB 3.0 hub?</summary>
-            <p>
-              If your laptop or tablet only has USB-C ports, pick a USB-C hub or adapter. If you still
-              have full-size USB-A ports, a USB 3.0 splitter is usually the cheaper option.
-            </p>
-          </details>
-          <details>
-            <summary>What is the best budget USB hub in this list?</summary>
-            <p>
-              The USB 3.0 Hub 4-Port Splitter Expander at $3.90 is the lowest-priced option here —
-              good for keyboards, mice, flash drives, and printers on a tight budget.
-            </p>
-          </details>
-          <details>
-            <summary>Are these good for MacBook and iPhone?</summary>
-            <p>
-              Yes. Several picks explicitly support MacBook Pro/Air, iPad, and recent iPhones via
-              USB-C OTG adapters. Always confirm your exact port type (USB-C vs USB-A) before buying.
-            </p>
-          </details>
-          <details>
-            <summary>Why does the buy button open Google Shopping?</summary>
-            <p>
-              We link to Google Shopping search results so you can compare current prices across
-              retailers yourself — no affiliate redirects from this page.
-            </p>
-          </details>
+          {USB_FAQS.map((item) => (
+            <article className="faq-item" key={item.q}>
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </article>
+          ))}
         </div>
       </section>
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([productListJsonLd, faqJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productListJsonLd) }}
       />
     </>
   );

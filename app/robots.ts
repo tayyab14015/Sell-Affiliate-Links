@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next';
-
-const SITE_URL = 'https://www.aisneer.com';
+import { SITE_URL } from './site';
 
 /**
  * Allow the full public site for search, AI, and social crawlers.
@@ -62,32 +61,11 @@ const CRAWLERS = [
   'YandexBot'
 ] as const;
 
-/** Every public route and asset prefix, listed explicitly. `/` remains the catch-all. */
-const ALLOW_PATHS = [
-  '/',
-  '/laptops',
-  '/usb-hubs',
-  '/blog',
-  '/blog/',
-  '/blog/blackzero-bzd-01t-ph-a1',
-  '/blog/blackzero-bzd-01t-ps',
-  '/blog/best-wireless-headphones-2026',
-  '/blog/creator-laptops-under-1500',
-  '/blog/best-fleece-and-softshell-jackets',
-  '/blog/fusion-360-and-cad-books',
-  '/blog/pc-games-editions-explained',
-  '/blog/mixed-category-stress',
-  '/images',
-  '/images/',
-  '/logo.svg',
-  '/llms.txt',
-];
-
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: CRAWLERS.map((userAgent) => ({
       userAgent,
-      allow: ALLOW_PATHS
+      allow: '/'
     })),
     sitemap: [`${SITE_URL}/sitemap.xml`],
     host: SITE_URL
