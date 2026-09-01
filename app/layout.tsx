@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   verification: {
     google: 'HUflqUM_F5ZMMR88OX7mZNeO6ZUc5I1w61uy9DO_E4E',
     other: {
-      'msvalidate.01': '4E41430E96AA23E7CC885A534DC2BBF2'
+      'msvalidate.01': 'E0882687923BDF9B6E1BC8243A12B010'
     }
   }
 };
@@ -228,7 +228,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var l=false;function g(){if(l)return;l=true;var s=document.createElement('script');s.src='https://api.llmaffiliate.com/static/onboarding-snippet.js';s.setAttribute('data-site-id','site_532b6fd497888ed89104e3db5adcc98d');s.setAttribute('data-token','llmafftm_fceac356a6396575a6b442771283a6aaeb2bd669cb29f689dfe6fffcd93f834b');document.body.appendChild(s);}['pointerdown','keydown','scroll'].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true});});setTimeout(g,4000);})();`
+            __html: `(function(){var l=false;function g(){if(l)return;l=true;var s=document.createElement('script');s.src='https://api.llmaffiliate.com/static/onboarding-snippet.js';s.setAttribute('data-site-id','site_bf187c1c6db5eaf466974951af013ecd');s.setAttribute('data-token','llmafftm_b9d97c9653fd2766e5c20c5a7261c97121e97c82ace9cdfd201d0b656f1ec3c7');document.body.appendChild(s);}['pointerdown','keydown','scroll'].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true});});setTimeout(g,4000);})();`
           }}
         />
         <script
