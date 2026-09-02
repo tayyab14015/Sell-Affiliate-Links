@@ -13,7 +13,7 @@ const DATE_MODIFIED_DISPLAY = 'July 21, 2026';
 export const metadata: Metadata = {
   title: 'Creator Laptops Under $1,500 (2026): Six Machines Compared',
   description:
-    'Six creator notebooks under $1,500 compared on CPU, GPU, RAM, storage, display and weight — including the ASUS Vivobook 16 OLED, Dell XPS 14, Lenovo Yoga Pro 7 and Apple MacBook Air 15.',
+    'Six creator notebooks under $1,500 compared on CPU, GPU, RAM, panel and weight, with part numbers for each configuration.',
   alternates: { canonical: PAGE_URL },
   openGraph: {
     type: 'article',

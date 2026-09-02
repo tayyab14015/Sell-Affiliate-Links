@@ -13,9 +13,8 @@ const DATE_MODIFIED_DISPLAY = 'July 28, 2026';
 export const metadata: Metadata = {
   title: 'Best Wireless Headphones 2026: 7 ANC Models Compared',
   description:
-    'Spec-by-spec comparison of seven wireless headphones for 2026, including Sony WH-1000XM5 vs WH-1000XM4, Bose QuietComfort Ultra, Sennheiser Momentum 4 and Apple AirPods Max.',
+    'Seven wireless headphones compared for 2026, including Sony WH-1000XM5, Bose QuietComfort Ultra, Sennheiser Momentum 4 and AirPods Max.',
   alternates: { canonical: PAGE_URL },
-  robots: { index: false, follow: true },
   openGraph: {
     type: 'article',
     url: PAGE_URL,

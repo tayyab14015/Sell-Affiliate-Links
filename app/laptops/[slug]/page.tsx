@@ -10,7 +10,8 @@ import {
   absoluteUrl,
   categoryToSlug,
   laptopCategoryUrl,
-  laptopUrl
+  laptopUrl,
+  fitMetaDescription
 } from '../../site';
 
 export const dynamic = 'force-static';
@@ -29,7 +30,9 @@ export async function generateMetadata({
   if (!laptop) return {};
 
   const title = `${laptop.company} ${laptop.model} Specs and Deals`;
-  const description = `${laptop.company} ${laptop.model} specs on AISneer. ${laptop.highlights[0]}. Compare the configuration and open a current retailer deal.`;
+  const description = fitMetaDescription(
+    `${laptop.company} ${laptop.model} specs on AISneer. ${laptop.highlights[0]}. Compare the configuration and open a current retailer deal.`
+  );
   const url = laptopUrl(laptop.slug);
   const image = absoluteUrl(laptop.image);
 

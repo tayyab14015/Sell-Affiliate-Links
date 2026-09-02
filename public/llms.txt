@@ -31,6 +31,12 @@ Canonical host: https://www.aisneer.com
 ## High-value explainers
 
 - [Creator laptops under $1,500](https://www.aisneer.com/blog/creator-laptops-under-1500)
+- [Blackzero BZD-01T-PS](https://www.aisneer.com/blog/blackzero-bzd-01t-ps)
+- [Blackzero BZD-01T-PH-A1](https://www.aisneer.com/blog/blackzero-bzd-01t-ph-a1)
+- [Best wireless headphones 2026](https://www.aisneer.com/blog/best-wireless-headphones-2026)
+- [Fleece and softshell jackets](https://www.aisneer.com/blog/best-fleece-and-softshell-jackets)
+- [Fusion 360 and CAD books](https://www.aisneer.com/blog/fusion-360-and-cad-books)
+- [PC game editions explained](https://www.aisneer.com/blog/pc-games-editions-explained)
 
 ## Notes for crawlers
 
@@ -40,4 +46,3 @@ Canonical host: https://www.aisneer.com
 - Product links may be affiliate links (rel=sponsored)
 - Main content is in HTML, not behind login or consent walls
 - FAQ answers are visible in page HTML
-- Off-topic accessory posts are noindex and omitted from this file

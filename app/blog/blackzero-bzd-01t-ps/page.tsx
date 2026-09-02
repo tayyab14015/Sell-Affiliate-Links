@@ -27,7 +27,7 @@ const TITLE =
   'Blackzero BZD-01T-PS Explained: Exact Specifications, Fastener Kit and Model Differences';
 const META_TITLE = 'Blackzero BZD-01T-PS: Specs, Fastener Kit & Differences';
 const META_DESCRIPTION =
-  'Exact specs for the Blackzero BZD-01T-PS (ASIN B0D5CJRL8X): 16V brushless drill, 5 modes, stainless fastener tier, and how it differs from BZD-01T-PH and BZD-01T-PH-A1.';
+  'Blackzero BZD-01T-PS specs: 16V brushless drill, 5 modes, stainless fastener kit, and how it differs from PH and PH-A1.';
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -44,10 +44,10 @@ export const metadata: Metadata = {
     'Blackzero drill 5 modes'
   ],
   robots: {
-    index: false,
+    index: true,
     follow: true,
     googleBot: {
-      index: false,
+      index: true,
       follow: true,
       'max-image-preview': 'large',
       'max-snippet': -1

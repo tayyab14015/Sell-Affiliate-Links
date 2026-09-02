@@ -13,9 +13,8 @@ const DATE_MODIFIED_DISPLAY = 'July 30, 2026';
 export const metadata: Metadata = {
   title: 'The Best Fleece and Softshell Jackets: Full-Zip vs Pullover',
   description:
-    'Six fleece and softshell jackets tested, with the zipper question answered: full-zip, quarter-zip or pullover. Includes the Patagonia Better Sweater in both closures and the Arc’teryx Delta line.',
+    'Six fleece and softshell jackets compared: full-zip vs pullover, including Patagonia Better Sweater and Arc’teryx Delta.',
   alternates: { canonical: PAGE_URL },
-  robots: { index: false, follow: true },
   openGraph: {
     type: 'article',
     url: PAGE_URL,

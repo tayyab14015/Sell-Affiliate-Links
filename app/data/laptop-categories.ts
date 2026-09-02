@@ -15,7 +15,7 @@ export const LAPTOP_CATEGORY_COPY: LaptopCategoryCopy[] = [
     slug: 'ultrabook',
     title: 'Ultrabook Laptops for Travel and All-Day Work',
     description:
-      'Thin-and-light ultrabooks on AISneer with Core Ultra or Apple Silicon, 16GB+ RAM, and all-day battery. Compare XPS and similar picks, then open the current retailer deal.',
+      'Thin-and-light ultrabooks with Core Ultra or Apple Silicon, 16GB+ RAM, and all-day battery. Compare XPS-class picks and retailer deals.',
     h1: 'Ultrabook laptops',
     intro:
       'Ultrabooks are the machines we recommend when the laptop has to live in a bag five days a week. The useful bar is a 13–14 inch 16:10 panel, 16GB of memory, and a battery the manufacturer quotes in hours rather than “up to” marketing slides.',
@@ -51,7 +51,7 @@ export const LAPTOP_CATEGORY_COPY: LaptopCategoryCopy[] = [
     slug: 'business',
     title: 'Business Laptops: ThinkPad, EliteBook, and Manageability',
     description:
-      'Business laptops on AISneer including HP EliteBook 840 G11 and Lenovo ThinkPad X1 Carbon Gen 12. Compare vPro, Windows 11 Pro, and panel options before you request a quote.',
+      'Business laptops including HP EliteBook 840 G11 and ThinkPad X1 Carbon Gen 12. Compare vPro, Windows 11 Pro, and panel options.',
     h1: 'Business laptops',
     intro:
       'Business notebooks are bought for keyboards, manageability, and a three-year parts story — not for RGB. EliteBook and ThinkPad SKUs in this list are current Core Ultra machines; vPro and WWAN are still checkbox options, not defaults.',
@@ -69,7 +69,7 @@ export const LAPTOP_CATEGORY_COPY: LaptopCategoryCopy[] = [
     slug: 'creator',
     title: 'Creator Laptops with Color-Accurate Panels',
     description:
-      'Creator laptops on AISneer, led by the 14-inch MacBook Pro with M3 Pro. Compare unified memory, Liquid Retina XDR, and Windows creator alternatives under and over $1,500.',
+      'Creator laptops led by the 14-inch MacBook Pro with M3 Pro. Compare unified memory, Liquid Retina XDR, and Windows alternatives.',
     h1: 'Creator laptops',
     intro:
       'Creator machines are defined by the panel and the memory pool, not by a “creator” sticker. If you grade photo or timeline in a NLE, you want color volume and enough RAM that the project does not page to disk.',
@@ -87,7 +87,7 @@ export const LAPTOP_CATEGORY_COPY: LaptopCategoryCopy[] = [
     slug: 'student',
     title: 'Student Laptops Under $800 with 16GB RAM',
     description:
-      'Student laptops on AISneer, including the Acer Aspire 5 A515 with Core i5, 16GB RAM, and a 15.6-inch FHD IPS panel. Compare Chromebooks when the work is browser-first.',
+      'Student laptops including the Acer Aspire 5 A515 with Core i5, 16GB RAM, and a 15.6-inch FHD IPS panel. Compare Chromebooks too.',
     h1: 'Student laptops',
     intro:
       'The student comfort zone is still a 15.6-inch FHD IPS panel, a current Core i5 or Ryzen 5, 16GB of RAM, and 512GB of SSD — usually under $800 street if you ignore last year’s 8GB SKUs.',
@@ -139,7 +139,7 @@ export const LAPTOP_CATEGORY_COPY: LaptopCategoryCopy[] = [
     slug: 'chromebook',
     title: 'Chromebooks with AMOLED Displays',
     description:
-      'Chromebooks on AISneer, including Samsung Galaxy Chromebook Plus 15.6-inch AMOLED models. Compare RAM, storage, and the exact XE model number for your country.',
+      'Chromebooks including Samsung Galaxy Chromebook Plus 15.6-inch AMOLED models. Compare RAM, storage, and the XE model number.',
     h1: 'Chromebooks',
     intro:
       'A Chromebook is the right call when the work is the browser. It is the wrong call when a professor ships a Windows VM or you need local CUDA.',

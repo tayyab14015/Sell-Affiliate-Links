@@ -26,6 +26,48 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9
     },
     {
+      url: `${SITE_URL}/blog/blackzero-bzd-01t-ps`,
+      lastModified: '2026-08-20',
+      changeFrequency: 'monthly',
+      priority: 0.7
+    },
+    {
+      url: `${SITE_URL}/blog/blackzero-bzd-01t-ph-a1`,
+      lastModified: '2026-08-06',
+      changeFrequency: 'monthly',
+      priority: 0.65
+    },
+    {
+      url: `${SITE_URL}/blog/best-wireless-headphones-2026`,
+      lastModified: '2026-07-28',
+      changeFrequency: 'monthly',
+      priority: 0.6
+    },
+    {
+      url: `${SITE_URL}/blog/best-fleece-and-softshell-jackets`,
+      lastModified: '2026-07-30',
+      changeFrequency: 'monthly',
+      priority: 0.6
+    },
+    {
+      url: `${SITE_URL}/blog/fusion-360-and-cad-books`,
+      lastModified: '2026-08-01',
+      changeFrequency: 'monthly',
+      priority: 0.6
+    },
+    {
+      url: `${SITE_URL}/blog/pc-games-editions-explained`,
+      lastModified: '2026-07-15',
+      changeFrequency: 'monthly',
+      priority: 0.6
+    },
+    {
+      url: `${SITE_URL}/blog/mixed-category-stress`,
+      lastModified: '2026-07-12',
+      changeFrequency: 'yearly',
+      priority: 0.4
+    },
+    {
       url: `${SITE_URL}/about`,
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: 'monthly',

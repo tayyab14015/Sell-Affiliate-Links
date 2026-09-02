@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { laptops, laptopsInCategory } from '../../../data/laptops';
 import { LAPTOP_CATEGORY_COPY, getCategoryCopy } from '../../../data/laptop-categories';
-import { SITE_NAME, SITE_URL, laptopCategoryUrl, DEFAULT_OG_IMAGE } from '../../../site';
+import { SITE_NAME, SITE_URL, laptopCategoryUrl, DEFAULT_OG_IMAGE, fitMetaDescription } from '../../../site';
 
 export const dynamic = 'force-static';
 
@@ -19,23 +19,24 @@ export async function generateMetadata({
   const { category } = await params;
   const copy = getCategoryCopy(category);
   if (!copy) return {};
+  const description = fitMetaDescription(copy.description);
   const url = laptopCategoryUrl(copy.name);
   return {
     title: copy.title,
-    description: copy.description,
+    description,
     alternates: { canonical: url },
     openGraph: {
       type: 'website',
       url,
       siteName: SITE_NAME,
       title: copy.title,
-      description: copy.description,
+      description,
       images: [DEFAULT_OG_IMAGE]
     },
     twitter: {
       card: 'summary_large_image',
       title: copy.title,
-      description: copy.description,
+      description,
       images: [DEFAULT_OG_IMAGE.url]
     }
   };

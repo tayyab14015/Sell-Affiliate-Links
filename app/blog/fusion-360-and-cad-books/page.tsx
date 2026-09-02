@@ -17,9 +17,8 @@ const HERO_TITLE =
 export const metadata: Metadata = {
   title: 'Fusion 360 and CAD Books Worth Owning in 2026',
   description:
-    'A long-form guide to four Fusion 360 and CAD reference books, including the German-edition paperback Master Fusion 360 Mit KI 2026 by Stephen Dave, with page counts, language, binding and edition for each.',
+    'Four Fusion 360 and CAD books for 2026, including Master Fusion 360 Mit KI 2026, with page counts, language and binding.',
   alternates: { canonical: PAGE_URL },
-  robots: { index: false, follow: true },
   openGraph: {
     type: 'article',
     url: PAGE_URL,

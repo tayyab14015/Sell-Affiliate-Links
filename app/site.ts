@@ -6,6 +6,25 @@ export const SITE_EMAIL = 'hello@aisneer.com';
 export const HOME_DESCRIPTION =
   'AISneer curates spec-verified laptops and USB hubs across ultrabook, gaming, business, and creator categories, then links you to current retailer deals.';
 
+/** Bing Webmaster requires meta descriptions between 25 and 160 characters. */
+export const META_DESCRIPTION_MIN = 25;
+export const META_DESCRIPTION_MAX = 160;
+
+export function fitMetaDescription(text: string): string {
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= META_DESCRIPTION_MAX) return normalized;
+
+  const slice = normalized.slice(0, META_DESCRIPTION_MAX);
+  const breakAt = Math.max(
+    slice.lastIndexOf(' '),
+    slice.lastIndexOf('—'),
+    slice.lastIndexOf('–')
+  );
+  return (breakAt >= META_DESCRIPTION_MIN ? slice.slice(0, breakAt) : slice)
+    .replace(/[,;:.!?…\-–—]+$/u, '')
+    .trim();
+}
+
 export const DEFAULT_OG_IMAGE = {
   url: '/images/og-home.jpg',
   width: 1200,

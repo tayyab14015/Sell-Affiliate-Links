@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   description:
     'A short, deliberately messy notebook post covering one pair of headphones, one fleece pullover and one German-language CAD book.',
   alternates: { canonical: PAGE_URL },
-  robots: { index: false, follow: false },
   openGraph: {
     type: 'article',
     url: PAGE_URL,

@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   description:
     'Standard, Deluxe, Ultimate — and the part that actually matters, whether you are buying a download code or a disc. Five games broken down edition by edition.',
   alternates: { canonical: PAGE_URL },
-  robots: { index: false, follow: true },
   openGraph: {
     type: 'article',
     url: PAGE_URL,

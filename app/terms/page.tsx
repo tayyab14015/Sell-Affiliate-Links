@@ -5,7 +5,7 @@ import { DEFAULT_OG_IMAGE, SITE_EMAIL, SITE_NAME, SITE_URL, absoluteUrl } from '
 const PAGE_URL = absoluteUrl('/terms');
 const TITLE = 'Terms of Use';
 const DESCRIPTION =
-  'Terms for using AISneer: editorial opinions, affiliate disclosure, no inventory, and limits on liability. Purchases are completed with manufacturers and retailers.';
+  'Terms for using AISneer: editorial opinions, affiliate links, no inventory, and liability limits. Checkout is on manufacturer sites.';
 
 export const metadata: Metadata = {
   title: TITLE,

@@ -106,8 +106,9 @@ export default function AboutPage() {
         <p>
           Guides carry a byline. The laptop and creator coverage is led by <strong>Devin Oyelaran</strong>,
           who writes the <Link href="/blog/creator-laptops-under-1500">creator laptops under $1,500</Link> comparison.
-          Product explainers that are not laptops or USB-C are kept off the public search cluster
-          (<code>noindex</code>) so this site stays a laptop discovery destination.
+          Product explainers such as the{' '}
+          <Link href="/blog/blackzero-bzd-01t-ps">Blackzero BZD-01T-PS</Link> spec page are indexed
+          alongside the laptop cluster.
         </p>
 
         <h2>How we choose laptops</h2>
