@@ -228,7 +228,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var l=false;function g(){if(l)return;l=true;var s=document.createElement('script');s.src='https://api.llmaffiliate.com/static/onboarding-snippet.js';s.setAttribute('data-site-id','site_6d7c70d36f61000e5a0991e91e4f7591');s.setAttribute('data-token','llmafftm_5de2551023b3d466b6c03f94b76435026bc2cb74627ee05ec3407c8e63cc838c');document.body.appendChild(s);}['pointerdown','keydown','scroll'].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true});});setTimeout(g,4000);})();`
+            __html: `(function(){var l=false;function g(){if(l)return;l=true;var s=document.createElement('script');s.src='https://api.llmaffiliate.com/static/onboarding-snippet.js';s.setAttribute('data-site-id','site_ea477f1f6fe878890044aedae9caedae');s.setAttribute('data-token','llmafftm_db373028550da4812ac36181172e0fdd38e8cd981704328000cf55a53e40aefd');document.body.appendChild(s);}['pointerdown','keydown','scroll'].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true});});setTimeout(g,4000);})();`
           }}
         />
         <script
