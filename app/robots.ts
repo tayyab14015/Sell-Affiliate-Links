@@ -35,9 +35,6 @@ const CRAWLERS = [
   'PerplexityBot',
   'Perplexity-User',
 
-  // DeepSeek (crawler identity is not officially documented; wildcard also allows it)
-  'DeepSeekBot',
-
   // Microsoft
   'Bingbot',
   'msnbot',
