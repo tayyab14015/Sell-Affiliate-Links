@@ -50,6 +50,10 @@ const CRAWLERS = [
   // Amazon
   'Amazonbot',
 
+  
+  // DeepSeek (crawler identity is not officially documented; wildcard also allows it)
+  'DeepSeekBot',
+
   // Brave
   'Bravebot',
 
