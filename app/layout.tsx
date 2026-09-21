@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
+import Script from 'next/script';
 import {
   DEFAULT_OG_IMAGE,
   HOME_DESCRIPTION,
@@ -236,6 +237,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
             __html: `(function(){function add(){if(document.getElementById('ais-spec'))return;var s=document.createElement('script');s.id='ais-spec';s.type='speculationrules';s.textContent=JSON.stringify({prerender:[{urls:['/laptops'],eagerness:'moderate'}],prefetch:[{where:{href_matches:'/laptops/*'},eagerness:'moderate'}]});document.head.appendChild(s);}if('requestIdleCallback' in window){requestIdleCallback(add,{timeout:2500});}else{setTimeout(add,1500);}})();`
           }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-WPN2M3V3B5"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-WPN2M3V3B5');
+          `}
+        </Script>
       </body>
     </html>
   );
