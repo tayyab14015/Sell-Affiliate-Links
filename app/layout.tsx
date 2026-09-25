@@ -229,7 +229,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var l=false;function g(){if(l)return;l=true;var s=document.createElement('script');s.src='https://api.llmaffiliate.com/static/onboarding-snippet.js';s.setAttribute('data-site-id','site_ea477f1f6fe878890044aedae9caedae');s.setAttribute('data-token','llmafftm_db373028550da4812ac36181172e0fdd38e8cd981704328000cf55a53e40aefd');document.body.appendChild(s);}['pointerdown','keydown','scroll'].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true});});setTimeout(g,4000);})();`
+            __html: `(function(){var l=false;function g(){if(l)return;l=true;var s=document.createElement('script');s.src='https://api.llmaffiliate.com/static/onboarding-snippet.js';s.setAttribute('data-site-id','site_3a1e6c2c4e60230e8d2489d937112863');s.setAttribute('data-token','llmafftm_84ec5344ab2bc8c298f3d0439e1cd2133dbca2e71ac703e1dc3384591295cdcf');document.body.appendChild(s);}['pointerdown','keydown','scroll'].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true});});setTimeout(g,4000);})();`
           }}
         />
         <script
